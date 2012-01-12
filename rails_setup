@@ -1,0 +1,43 @@
+#cpaneluser=$1;
+#dbuser=$2;
+#dbname=$3;
+#dbpass=$4;
+#host=$5;
+#if ["$cpaneluser" = ""]; then
+#    echo "Syntax: rails_setup <cpaneluser> <dbuser> <dbname> <dbpass> <host>"
+#    exit
+#fi
+
+
+# setup rails app
+echo "SETTING UP A NEW RAILS APP........."
+
+mv ~/public_html ~/public_html.moved
+rails new ~/rails3test -d mysql
+ln -s ~/rails3test/public ~/public_html
+rm -f ~/rails3test/public/index.html
+echo -e "PassengerEnabled On\nPassengerAppRoot $HOME/rails3test\n" > ~/rails3test/public/.htaccess
+
+echo "SETTING GEMFILE"
+cp ~/scripts/Gemfile ~/rails3test/Gemfile
+cd ~/rails3test/
+bundle install --path vendor/bundle
+cd ~/scripts
+
+# setup db
+#mysql -u $cpaneluser -e "create database $dbname";
+#mysql -u $cpaneluser -e "GRANT ALL PRIVILEGES ON $dbname.* TO $dbuser@localhost IDENTIFIED BY $dbpass"; 
+
+echo "SETTING UP A DATABASE"
+mysql --user="kingpang"  --password=iamking123 -e "create database kingpang_db";
+echo "SETTING DB USER.."
+mysql --user="kingpang"  --password=iamking123 -e "GRANT ALL PRIVILEGES ON kingpang_db.* TO 'kingpang_db'@'localhost' IDENTIFIED BY 'iamking123db'";
+
+echo "SETTING UP DB.yml"
+cp ~/scripts/database.yml ~/rails3test/config/
+
+echo "SETTINGUP environment"
+cp ~/scripts/production.rb ~/rails3test/config/environments/production.rb
+
+echo "RESTARTING...."
+touch ~/rails3test/tmp/restart.txt

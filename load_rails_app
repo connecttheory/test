@@ -1,0 +1,68 @@
+cpaneluser=$1;
+dbuser=$2;
+dbname=$3;
+dbpass=$4;
+host=$5;
+if ["$cpaneluser" = ""]; then
+    echo "Syntax: rails_setup <cpaneluser> <dbuser> <dbname> <dbpass> <host>"
+    exit
+fi
+
+
+# setup rails app
+echo "SETTING UP A NEW RAILS APP........."
+
+mv ~/public_html ~/public_html.moved
+
+echo "settingup rails app for use....."
+mkdir ~/activedesigns/
+cp ~/scripts/repos/rail_app.tar ~/activedesigns/
+cd ~/activedesigns/
+
+echo "extracting....."
+tar -xvzf rail_app.tar
+rm ~/scripts/repos/rail_app.tar
+
+echo "settingup LINKS....."
+ln -s ~/activedesigns/public ~/public_html/
+rm -f ~/activedesigns/public/index.html
+
+echo "settingup htaccess....."
+echo -e "PassengerEnabled On\nPassengerAppRoot $HOME/activedesigns\n" > ~/activedesigns/public/.htaccess
+
+cd ~/scripts
+
+echo "SETTING GEMFILE"
+cp ~/scripts/Gemfile ~/activedesigns/Gemfile
+cd ~/activedesigns/
+bundle install --path vendor/bundle
+cd ~/scripts
+
+# setup db
+#mysql -u $cpaneluser -e "create database $dbname";
+#mysql -u $cpaneluser -e "GRANT ALL PRIVILEGES ON $dbname.* TO $dbuser@localhost IDENTIFIED BY $dbpass"; 
+
+echo "SETTING UP A DATABASE"
+mysql --user="kingpang"  --password=iamking123 -e "create database kingpang_db";
+echo "SETTING DB USER.."
+mysql --user="kingpang"  --password=iamking123 -e "GRANT ALL PRIVILEGES ON kingpang_db.* TO 'kingpang_db'@'localhost' IDENTIFIED BY 'iamking123db'";
+
+echo "SETTING UP Database"
+cp ~/scripts/database.yml ~/activedesigns/config/
+
+echo "SETTING UP routes"
+cp ~/scripts/routes.rb ~/activedesigns/config/
+
+#subdirectory setup
+cd ~/scripts
+echo "ENV['RAILS_RELATIVE_URL_ROOT'] = \"/~kingpang\"" > static_elem_fix.txt
+cat static_elem_fix.txt ~/activedesigns/config/environment.rb > environment.rb
+cp environment.rb ~/activedesigns/config/
+rm ~/scripts/static_elem_fix.txt
+rm ~/scripts/environment.rb
+
+echo "SETTINGUP environment"
+cp ~/scripts/production.rb ~/activedesigns/config/environments/production.rb
+
+echo "restarting SERVER...."
+touch ~/activedesigns/tmp/restart.txt
