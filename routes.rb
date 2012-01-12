@@ -15,6 +15,7 @@ Activedesigns::Application.routes.draw do
     resources :settings
     resources :projects
     resources :personalize
+    resources :password_resets
     
     #resources :users
     #resources :projects
