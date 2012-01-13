@@ -58,7 +58,7 @@ echo "SETTING UP routes"
 cp ~/setup/test/routes.rb ~/activedesigns/config/
 
 #subdirectory setup
-cd ~/scripts
+cd ~/setup/test/
 echo "ENV['RAILS_RELATIVE_URL_ROOT'] = \"/~kingpang\"" > static_elem_fix.txt
 cat static_elem_fix.txt ~/activedesigns/config/environment.rb > environment.rb
 cp environment.rb ~/activedesigns/config/
