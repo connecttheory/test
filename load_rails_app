@@ -65,6 +65,7 @@ cp environment.rb ~/activedesigns/config/
 rm ~/setup/test/static_elem_fix.txt
 rm ~/setup/test/environment.rb
 
+
 echo "SETTINGUP environment"
 #cp ~/setup/test/production.rb ~/activedesigns/config/environments/production.rb
 
