@@ -1,0 +1,71 @@
+
+/*
+	root element for the scrollable.
+	when scrolling occurs this element stays still.
+*/
+.scrollable {
+	/* required settings */
+	position:absolute;
+	overflow:hidden;
+	width: 672px; /*865*/
+	height:56px;
+	top: 530px; /*378px*/
+	/* custom decorations */
+	left: 43px;
+	z-index: 8000;
+	/*background:url(h300.png) repeat-x;*/
+	
+}
+
+/* Slide Show CSS
+#slideshow-structures {
+	display: none;
+}*/
+
+.scroll_bg {
+	width:  780px; /*946*/
+	height:56px;
+	position: absolute;
+	background: #000;
+	opacity: 0.4;
+	filter: alpha(opacity = 40);
+	top: 530px; /*378px*/
+	left: 0px;
+	/*border: 1px solid red;*/
+}
+
+/*
+	root element for scrollable items. Must be absolutely positioned
+	and it should have a extremely large width to accomodate scrollable items.
+	it's enough that you set the width and height for the root element and
+	not for this element.
+*/
+.scrollable .items {
+	/* this cannot be too large */
+	width:20000em;
+	position:absolute;
+	clear:both;
+}
+
+/* single scrollable item */
+.scrollable img {
+	float:left;
+	margin:5px 2px 0px 2px;
+	/*background-color:#ccc;*/
+	padding:2px;
+	border:1px solid #666;
+	cursor:pointer;
+	width:86px;
+	height:40px;
+	/*-moz-border-radius:4px;
+	-webkit-border-radius:4px;*/
+}
+
+/* active item */
+.scrollable .active {
+	border:1px solid #fff;
+	z-index:7999;
+	position:relative;
+}
+
+

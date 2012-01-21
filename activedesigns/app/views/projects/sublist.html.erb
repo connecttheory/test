@@ -1,0 +1,212 @@
+<% @page_title = "View Project: #{@project.title}" %>
+<% content_for(:head) do %>
+<%= stylesheet_link_tag "proj_style" %>
+<%= stylesheet_link_tag "porfolio_view" %>
+<%= stylesheet_link_tag "styles/proj_style_auto.css" %>
+
+  <% if @project.layout_name == 'Default' %>
+    <%= stylesheet_link_tag "styles/proj_style_defaul.css" %>
+  <% elsif @project.layout_name == 'Layout 2' %>
+    <%= stylesheet_link_tag "styles/proj_style_l2.css" %>
+    
+    <%= render(:partial => 'project_template_long' ) %>
+    
+	<% content_for(:foot) do %>
+
+	<% end %>
+    
+  <% elsif @project.layout_name == 'Layout 3' %>
+  
+    <%= stylesheet_link_tag "styles/proj_style_l3.css" %>
+    
+	<%= javascript_include_tag 'project_js/template3add-gallery/jquery.ad-gallery.js' %>
+	
+	<%= stylesheet_link_tag "project_js/template3add-gallery/jquery.ad-gallery.css" %>
+
+    <script type="text/javascript">
+    $(function() {
+      //$('img.image1').data('ad-desc', 'Whoa! This description is set through elm.data("ad-desc") instead of using the longdesc attribute.<br>And it contains <strong>H</strong>ow <strong>T</strong>o <strong>M</strong>eet <strong>L</strong>adies... <em>What?</em> That aint what HTML stands for? Man...');
+      //$('img.image1').data('ad-title', 'Title through $.data');
+      //$('img.image4').data('ad-desc', 'This image is wider than the wrapper, so it has been scaled down');
+      //$('img.image5').data('ad-desc', 'This image is higher than the wrapper, so it has been scaled down');
+      var galleries = $('.ad-gallery').adGallery();
+      $('#switch-effect').change(
+        function() {
+          galleries[0].settings.effect = $(this).val();
+          return false;
+        }
+      );
+      $('#toggle-slideshow').click(
+        function() {
+          galleries[0].slideshow.toggle();
+          return false;
+        }
+      );
+      $('#toggle-description').click(
+        function() {
+          if(!galleries[0].settings.description_wrapper) {
+            galleries[0].settings.description_wrapper = $('#descriptions');
+          } else {
+            galleries[0].settings.description_wrapper = false;
+          }
+          return false;
+        }
+      );
+    });
+    </script>
+  
+    <style type="text/css">
+      .ad-gallery {
+        background: #000000;
+        padding: 5px 30px 15px 30px;
+        margin: 0 0 30px 0;
+	    -webkit-border-radius: 0 0 10px 10px;
+	    -moz-border-radius: 0 0 10px 10px;
+	    border-radius: 0 0 10px 10px;
+      }
+    </style>
+  
+  <% elsif @project.layout_name == 'Layout 4' %>
+    <%= stylesheet_link_tag "styles/proj_style_l4.css" %>
+  <% end %>  
+
+  
+<% end %>
+
+<% content_for(:in_header_wrap) do %>
+  <%= render(:partial => 'in_header_wrap' ) %>
+<% end %>
+
+
+  
+  <% if @project.layout_name == 'Default' # only show this area if layout 1/default isset %>
+
+    <div id="images-container">
+    	<% @project_images.each do |image| %>
+    	  <div class="image-block">
+    	  	<div class="image-holder-thumb">
+    	  		<center><%= image_tag( image.carimage_url.to_s ) %></center>
+    	  	</div>
+    	  	<%= image.caption %>
+    	  </div>
+    	<% end %>
+    	<br style="clear: both;" />
+    </div>
+    
+    <div id="project-description">
+    	<h2>Title: <%= @project.title %></h2>
+    	<h2>Website: <%= @project.project_url %></h2>
+    	<h2>Client: <%= @project.client %></h2>
+    	<h2>Tags: <%= @project.project_category %></h2>
+    </div>
+    
+  <% end %>
+  
+  
+  <% if @project.layout_name == 'Layout 2' # only show this area if layout 2 isset %>
+
+	<!--Thumbnail Navigation-->
+	<div id="prevthumb"></div>
+	<div id="nextthumb"></div>
+	
+	<!--Arrow Navigation-->
+	<a id="prevslide" class="load-item"></a>
+	<a id="nextslide" class="load-item"></a>
+	
+	<div id="thumb-tray" class="load-item">
+		<div id="thumb-back"></div>
+		<div id="thumb-forward"></div>
+	</div>
+	
+	<!--Time Bar-->
+	<div id="progress-back" class="load-item">
+		<div id="progress-bar"></div>
+	</div>
+	
+	<!--Control Bar-->
+	<div id="controls-wrapper" class="load-item">
+		<div id="controls">
+			
+			<a id="play-button"><%= image_tag("supersized/img/pause.png", :id => "pauseplay") %> <!-- <img id="pauseplay" src="img/pause.png"/> --></a>
+		
+			<!--Slide counter-->
+			<div id="slidecounter">
+				<span class="slidenumber"></span> / <span class="totalslides"></span>
+			</div>
+			
+			<!--Slide captions displayed here-->
+			<!-- <div id="slidecaption">Image</div> -->
+			
+			<!--Thumb Tray button-->
+			<a id="tray-button"><%= image_tag("supersized/img/button-tray-up.png", :id => "tray-arrow") %> <!-- <img id="tray-arrow" src="img/button-tray-up.png"/> --></a>
+			
+			<!--Navigation-->
+			<ul id="slide-list"></ul>
+			
+		</div>
+	</div>
+  <% end %>
+  
+  
+  
+  
+  
+  <% if @project.layout_name == 'Layout 3' # only show this area if layout 3 isset %>
+    <div>
+	    <h1 id="project_title"><%= @project.title %></h1>
+		<div id="gallery" class="ad-gallery">
+		  <div class="ad-image-wrapper">
+		  </div>
+		  <div class="ad-controls">
+		  </div>
+		  <div class="ad-nav">
+		    <div class="ad-thumbs">
+		      <ul class="ad-thumb-list">
+		      	<% @project_images.each_with_index do |image, index| %>
+		          <li>
+		            <a href="<%= image.carimage_url.to_s %>">
+		              <%= image_tag( image.carimage_url.to_s, :class => "slider-thumb image" + index.to_s, :alt => "#{image.caption}") %>
+		            </a>
+		          </li>
+		        <% end %>
+		      </ul>
+		    </div>
+		  </div>
+		</div>
+	</div> <!-- div -->
+	
+	<div id="project-details">
+		
+	  <% if @project.description.present? %>
+	  <!-- project description -->
+	  <span class="row description">
+		<label>Description</label>
+		<span class="content"><p><%= @project.description %></p></span>
+		<div class="clear"></div>
+	  </span>
+	  <% end %>
+	  
+	  <!--  client for this project -->
+	  <% if @project.client.present? %>
+	  <!-- project site -->
+	  <span class="row description">
+		<label>Client</label>
+		<span class="content"><p><%= @project.client %></p></span>
+		<div class="clear"></div>
+	  </span>
+	  <% end %>
+	  
+	  <% if @project.project_url.present? %>
+	  <!-- project site -->
+	  <span class="row description">
+		<label>Website</label>		
+		<span class="content"><p><%= link_to(@project.project_url, validate_url(@project.project_url) ) %></p></span>
+		<div class="clear"></div>
+	  </span>
+	  <% end %> 
+	  
+	</div><!-- END project-details  -->
+	
+  
+
+  <% end %>

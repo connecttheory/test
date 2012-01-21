@@ -1,0 +1,70 @@
+body {
+
+  background: #774488;
+
+}
+.slider-thumb {
+  max-height: 66px;
+}
+
+div#header {
+  background: none repeat scroll 0 0 #1E1E1E;
+  color: #EFEFEF;
+}
+.porfolio-nav li a {
+  color: #888888;
+}
+body {
+  background: none repeat scroll 0 0 #1E1E1E;
+  color: #EFEFEF;
+}
+body a {
+  color: #6CC3F4;
+}
+#container {
+  width: 840px;
+  background: none;
+}
+h1#project_title {
+  color: #CCC;
+  text-align: center;
+  font: normal normal normal 24px/50px Georgia, 'Times New Roman', Times, serif;
+  letter-spacing: -.05px;
+  text-transform: uppercase;
+  background: #111111;
+  margin: 0;
+  padding: 0;
+  -webkit-border-radius: 10px 10px 0 0;
+  -moz-border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
+}
+#project-details {
+  width: 780px;
+  margin: 20px auto 0;
+  padding: 0;
+}
+#project-details .row {
+  display: block;
+  border-bottom: 1px solid #191919;
+  padding: 10px 0;
+}
+#project-details .row label {
+  display: block;
+  float: left;
+  width: 180px;
+  color: #555;
+  font-size: 11px;
+  line-height: 21px;
+}
+#project-details .row span {
+  display: block;
+  float: left;
+  width: 600px;
+}
+#project-details .row span p {
+  color: #BBB;
+}
+
+#main-footer {
+  margin: 25px 0 15px;
+}

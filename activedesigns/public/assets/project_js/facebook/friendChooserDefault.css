@@ -1,0 +1,202 @@
+div.friend-selector-container {
+    font-family: Arial,Verdana,Helvetica,sans-serif;
+    font-size: 12px;
+    width: 400px;
+    background-color: rgb(82, 82, 82);
+    background-color: rgba(82, 82, 82, 0.7);
+    border-radius: 8px 8px 8px 8px;
+    margin: 0px auto;
+    padding: 7px;  
+    color: #000000;    
+}
+
+div.friend-selector-container a.submit {
+    background: #5B74A8 url('../img/btn-submit.png') no-repeat top left;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #29447E #29447E #1A356E;
+    font-weight: bold;
+    font-size: 11px;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 3px 6px;
+}
+
+div.friend-selector-container a.cancel {
+    background: #EEEEEE url('../img/btn-cancel.png') no-repeat top left;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #999999 #999999 #888888;
+    font-weight: bold;
+    font-size: 11px;
+    color: #333333;
+    text-decoration: none;
+    padding: 3px 6px;
+}
+
+div.friend-selector-container a.submit:active,
+div.friend-selector-container a.cancel:active {
+    background-image: none;
+}
+
+div.friend-selector-container a.disabled,
+div.friend-selector-container a.disabled:active {
+    background: #EEEEEE url('../img/btn-cancel.png') no-repeat top left;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #999999 #999999 #888888;
+    color: #888888;
+    opacity: 0.8;
+}
+
+div.friend-selector {
+    background-color: #ffffff;
+    overflow: auto;
+    height: 272px;
+    position: relative;
+}              
+
+div.friend-selector div.friend-selector-loading {
+    background: transparent url('../img/friends-loader.gif') no-repeat center;
+    height: 100%;    
+}
+
+div.friend-selector div.fb-friend {
+    float: left;
+    width: 123px;   
+    margin: 1px;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+}
+
+div.friend-selector div.fb-friend:hover {
+    background-color: #ECEFF5;
+    border: 1px solid #ECEFF5;
+}
+
+div.friend-selector div.fb-friend.selected-friend {
+    background-color: #D8DFEA;
+    border: 1px solid #C3CCE1;
+}
+
+div.friend-selector div.cant-select {
+    -moz-opacity: .30; filter: alpha(opacity=30); opacity: .30;   
+}
+
+div.fb-friend table {
+    border: none;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+div.fb-friend table td {
+    text-align: left;
+    vertical-align: middle;
+    font-size: 10px;  
+    height: 30px;
+    padding: 0px;
+}
+
+div.fb-friend table td.fb-friend-photo {
+    width: 30px;
+    text-align: center;
+    background: transparent url('../img/img-loader.gif') no-repeat center;
+}
+
+div.fb-friend table td.fb-friend-photo img {
+    width: 25px;
+    height: 25px;
+    position: relative;
+    top: 1px;
+}
+
+div.fb-friend table td.fb-friend-name {
+    padding-right: 5px;  
+    line-height: 11px; 
+}
+
+div.friend-selector-head {
+    background-color: #6D84B4;
+    border: 1px solid #3B5998;   
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 3px 5px; 
+    text-align: left; 
+}
+
+div.friend-selector-search {
+    padding: 6px; 
+    border-bottom: 1px solid #CCCCCC;
+    background-color: #F2F2F2; 
+    position: relative; 
+}
+
+div.friend-selector-search label {
+    position: absolute;
+    top: 10px;
+    right: 9px;
+    background: transparent url('../img/btn-clear-search.png') no-repeat left 0px;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    text-indent: -5000px;
+}
+
+div.friend-selector-search label:hover {
+    background-position: left -25px;
+}
+
+div.friend-selector-search label:active {
+    background-position: left -38px;
+}
+
+div.friend-selector-search input {
+    width: 380px;
+    height: 12px;
+    font-size: 11px;
+    color: #777777;
+    outline: none;
+    border: 1px solid #BDC7D8;
+    padding: 3px 3px;
+}
+
+div.friend-selector-footer {
+    padding: 5px 6px; 
+    border-top: 1px solid #CCCCCC;
+    background-color: #F2F2F2; 
+    position: relative; 
+    font-size: 11px;
+    text-align: left;
+}
+
+div.friend-selector-footer-counter {
+    float: left;
+    width: 200px;
+    padding-top: 3px;
+}
+
+a.facebook-login-button {
+    position: relative;
+    top: 7px;
+    left: 6px;
+}
+
+a.friend-selector-footer-submit {
+    float: right;
+}
+
+a.friend-selector-footer-select-all {
+    float: right;
+    margin-right: 3px;
+    white-space: nowrap;
+}
+
+a.friend-selector-footer-cancel {
+    float: right;
+    margin-left: 3px;
+}
+
+div.clear {
+    clear: both;
+}

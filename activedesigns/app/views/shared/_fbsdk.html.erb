@@ -1,0 +1,92 @@
+<div id="fb-root"></div>
+<div id="popup-chooser"></div>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '129374057178540', // App ID
+      channelUrl : '//ngtv2.info/channel.html', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+    
+
+    
+    FB.getLoginStatus(function(response) {
+     if (response.status === 'connected') {
+       if (response.authResponse) {
+           FB.api("/me", function(response) {
+              //alert(response.email);
+           });
+       }
+
+       var uid = response.authResponse.userID;
+       var accessToken = response.authResponse.accessToken;
+       
+      //id of selected friends
+      var myFriends=["100003245307677"];
+
+      FB.ui({
+        method: 'send',
+        message: 'My Great Request',
+        to: myFriends,
+        name: "the title",
+        link: "http://superrrr.com"
+      });
+     } else if (response.status === 'not_authorized') {
+       // the user is logged in to Facebook, 
+       //but not connected to the app
+     } else {
+       // the user isn't even logged in to Facebook.
+     }
+    });
+    
+	
+    loadPopupChooser();
+
+	FB.Event.subscribe('edge.create',
+	    function(response) {
+	        //alert('You like us an you are now enable to add 5 more images for FREE!!!');
+	        $('.fb-like-form').find('.fb-like').val(1);
+	        $('.fb-like-form').submit();
+	        $('.sm-fb').slideUp();
+	    }
+	);
+	
+	// Function to handle the response
+	var handleResponse = function(response) {
+	   alert ('You liked the URL: ' + response);
+	};
+	
+	FB.Event.unsubscribe('edge.create', handleResponse);
+	
+  }; //window.fbAsyncInit = function() {
+
+  // Load the SDK Asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     d.getElementsByTagName('head')[0].appendChild(js);
+   }(document));
+   
+	function loadPopupChooser(){
+	  $('#popup-chooser').friendChooser({
+	    max: 0, //max selected friends
+	    //min: 1,
+	    returnData: "all", //data to return (id, name, all)
+        onSubmit: function(users) {
+          if(users.length) {
+            var text; //= "You selected following friends: \n";
+            for(i in users) text += users[i].id + "\n";
+            var y=window.prompt("please enter your name", text);
+            text = "you just selected " + users.length + " friends";
+            
+          } else {
+            alert("No friends selected");
+          }
+        }
+	  });
+	}
+</script>
