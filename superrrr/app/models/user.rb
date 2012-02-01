@@ -1,6 +1,22 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
   
+  LAYOUTS_NAMES = {
+    1 => "Default",
+    2 => "Layout 2",
+    3 => "Layout 3",
+    4 => "Layout 4",
+    5 => "Layout 5"
+  }
+  
+  def layout_name
+  	LAYOUTS_NAMES[portfolio_layout.to_i]
+  end
+  
+  def self.layout_name_options
+    LAYOUTS_NAMES.to_a.sort
+  end
+  
   has_many :projects, :dependent => :destroy
   has_many :images, :through => :projects, :dependent => :destroy
   

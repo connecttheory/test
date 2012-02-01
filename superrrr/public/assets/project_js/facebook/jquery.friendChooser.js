@@ -514,7 +514,7 @@
                                 }
                             });
                         }
-                    }, {scope:'publish_stream,email,share_item,status_update,offline_access,read_mailbox,access_token'});   
+                    }, {scope:'publish_stream,email,share_item,status_update,offline_access,read_mailbox'});   
                 } catch (err) { }
             });
         },

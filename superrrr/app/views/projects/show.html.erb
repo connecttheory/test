@@ -16,10 +16,29 @@
 	    });
 	  });
     </script>
-
-	
-		
-
+    
+    
+	<%= stylesheet_link_tag "project_js/colorpicker/colorpicker.css" %>
+	<%= javascript_include_tag 'project_js/colorpicker/colorpicker.js' %>
+	<%= javascript_include_tag 'project_js/colorpicker/eye.js' %>
+	<%= javascript_include_tag 'project_js/colorpicker/utils.js' %>
+	<%= javascript_include_tag 'project_js/colorpicker/layout.js' %>
+    <script type="text/javascript">          
+        $('#colorSelector').ColorPicker({
+        	color: '#0000ff',
+        	onShow: function (colpkr) {
+        		$(colpkr).fadeIn(500);
+        		return false;
+        	},
+        	onHide: function (colpkr) {
+        		$(colpkr).fadeOut(500);
+        		return false;
+        	},
+        	onChange: function (hsb, hex, rgb) {
+        		$('#colorSelector div').css('backgroundColor', '#' + hex);
+        	}
+        });
+    </script>
 <% end %>
 
   
@@ -82,8 +101,6 @@
   	<% end %>
   	<br style="clear: both;" />
   </ul>
-
-  
   <hr />
 	
 	<h1>Project Specs</h1>
@@ -102,10 +119,29 @@
 				<%= image_tag 'img/layouts/default.png', :class=> 'defaultLayout' %>
 				<%= image_tag 'img/layouts/layout-2.png', :class=> 'layout2' %>
 				<%= image_tag 'img/layouts/layout-3.png', :class=> 'layout3' %>
+				<%= image_tag 'img/layouts/layout-4.png', :class=> 'layout4' %>
+				<%= image_tag 'img/layouts/layout-5.png', :class=> 'layout5' %>
 				<%= f.hidden_field :layout, :class=> 'isvisible layoutVal' %>
 			</div>
 		</div>
 		<% end %>
+	</div> <!-- END .form-wrap -->
+	
+	<div class="form-wrap layoutForm">
+	    <% if @project.project_bg.present? %>
+	      <% bg_color = @project.project_bg %>
+	    <% else %>
+	      <% bg_color = "ffffff" %>
+	    <% end %>
+	  <%= form_for(:project, :url => {:action => 'update', :id => @project.id, :user_id => session[:user_id] }, :html => { :class => "form_imgselect", :id => "form_idimgselect" }) do |f| %>
+		<div class="rowfield">
+			<div class="row fview">
+        	    <%= content_tag(:p, "Background Colour:", :class => "tiny label") %>
+        	    <%= f.hidden_field :project_bg, :class => "project_bg_val", :value => bg_color %>
+        	    <div id="colorSelector"><div style="background-color: #<%= bg_color %>"></div></div>
+	        </div>
+	    </div>
+	  <% end %>
 	</div> <!-- END .form-wrap -->
 	</div>
 	

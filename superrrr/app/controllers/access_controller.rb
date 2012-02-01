@@ -24,7 +24,7 @@ class AccessController < ApplicationController
     @projects = @user.projects.order("projects.created_at ASC")
     @images = @user.images
     #@project_thumb = Project.lastest(@projects)
-    @cpanel_test = User.create_cpanel_acct
+    #@cpanel_test = User.create_cpanel_acct
   end
 
   def attempt_login

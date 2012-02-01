@@ -54,9 +54,6 @@ class ImageUploader < CarrierWave::Uploader::Base
     process :resize_to_fill => [240, 140]
   end
 
-  version :coolcarousel do
-    process :resize_to_fill => [700, 525]
-  end
   
   #version :wide_thumb do
   #  process :resize_to_fill => [375, 140]

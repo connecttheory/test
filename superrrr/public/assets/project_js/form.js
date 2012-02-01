@@ -53,6 +53,16 @@ $(document).ready(function() {
 	  $(this).before('<div class="fnotice_js">Saved</div>').prev().fadeOut(2000);
 	  $(this).parents('.form_imgselect').submit();
 	});
+	$('.layout4').click(function() {
+	  $(this).parent().find('.layoutVal').val(4);
+	  $(this).before('<div class="fnotice_js">Saved</div>').prev().fadeOut(2000);
+	  $(this).parents('.form_imgselect').submit();
+	});
+	$('.layout5').click(function() {
+	  $(this).parent().find('.layoutVal').val(5);
+	  $(this).before('<div class="fnotice_js">Saved</div>').prev().fadeOut(2000);
+	  $(this).parents('.form_imgselect').submit();
+	});
 	// end layout form setup
 	
 	$('.form_imgselect').submit(function() {

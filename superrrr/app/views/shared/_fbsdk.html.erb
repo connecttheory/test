@@ -5,12 +5,14 @@
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '129374057178540', // App ID
-      channelUrl : '//ngtv2.info/channel.html', // Channel File
+      //channelUrl : '//ngtv2.info/channel.html', // Channel File
       status     : true, // check login status
       cookie     : true, // enable cookies to allow the server to access the session
-      xfbml      : true  // parse XFBML
+      xfbml      : true,  // parse XFBML
+      //frictionlessRequests:true
     });
     
+    // Additional initialization code here
 
     
     FB.getLoginStatus(function(response) {
@@ -24,22 +26,13 @@
        var uid = response.authResponse.userID;
        var accessToken = response.authResponse.accessToken;
        
-      //id of selected friends
-      var myFriends=["100003245307677"];
-
-      FB.ui({
-        method: 'send',
-        message: 'My Great Request',
-        to: myFriends,
-        name: "the title",
-        link: "http://superrrr.com"
-      });
      } else if (response.status === 'not_authorized') {
        // the user is logged in to Facebook, 
        //but not connected to the app
      } else {
        // the user isn't even logged in to Facebook.
      }
+     //if (response.status === 'connected') {
     });
     
 	
@@ -64,24 +57,42 @@
   }; //window.fbAsyncInit = function() {
 
   // Load the SDK Asynchronously
-  (function(d){
-     var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-     js = d.createElement('script'); js.id = id; js.async = true;
-     js.src = "//connect.facebook.net/en_US/all.js";
-     d.getElementsByTagName('head')[0].appendChild(js);
-   }(document));
+  //(function(d){
+  //   var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+  //   js = d.createElement('script'); js.id = id; js.async = true;
+  //   js.src = "//connect.facebook.net/en_US/all.js";
+  //   d.getElementsByTagName('head')[0].appendChild(js);
+  // }(document));
    
 	function loadPopupChooser(){
 	  $('#popup-chooser').friendChooser({
 	    max: 0, //max selected friends
-	    //min: 1,
-	    returnData: "all", //data to return (id, name, all)
+	    min: 1,
+	    returnData: "id", //data to return (id, name, all)
         onSubmit: function(users) {
           if(users.length) {
             var text; //= "You selected following friends: \n";
-            for(i in users) text += users[i].id + "\n";
-            var y=window.prompt("please enter your name", text);
-            text = "you just selected " + users.length + " friends";
+            //for(i in users) text += users[i].id + "\n";
+            //var y=window.prompt("please enter your name", text);
+            //text = "you just selected " + users.length + " friends";
+            
+		      //id of selected friends
+		      var myFriends=users;
+		      
+
+	
+              FB.ui({
+                method: 'send',
+                to: myFriends,                
+                name: 'I have an awesome portfolio here http://kingpangi.ngtv2.info/',
+                link: 'http://ngtv2.info/',
+                picture: 'https://teststorage123.s3.amazonaws.com/uploads/image/carimage/410/thumb_snow_leopard.jpg',
+                description: (
+                  'A Web Application that allows you to shocase your designs in a professional way.' +
+                  'Several themes that you can choose from and allows you to publish contenst on facebook and twitter.'
+                )
+                
+              });
             
           } else {
             alert("No friends selected");

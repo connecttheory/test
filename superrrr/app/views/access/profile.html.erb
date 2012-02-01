@@ -14,14 +14,13 @@
 
 
 
-
-
 <%= link_to("Add New Project", {:controller => 'projects', :action => 'new'}, :class => 'action new') %>
 <span style="font-size: 12px;">You have <%= pluralize(@projects.size, 'project') %> (<%= User.max_proj(@user.project_capacity.to_i, @user.fb_like) %>), and <%= pluralize(@images.size, 'image') %> (<%= User.max_img(@user.image_capacity.to_i, @user.fb_like) %>)</span>
 
 <% #if !@user.fb_like %>
 <fb:like href="http://www.facebook.com/pages/King-Pangilinan/265119090210076" send="true" layout="button_count" width="50" show_faces="true" font="arial"></fb:like>
 <a href="https://twitter.com/khing251990" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" data-lang="en" data-text="Follow us on twitter">Follow @khing251990</a>
+
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 <script type="text/javascript" charset="utf-8">
@@ -34,7 +33,7 @@
 </script>
 
 <a href="#" onclick="$('#popup-chooser').friendChooser('open');">
-<b>Use facebook</b>
+<b>Use Facebook</b>
 </a>
 
 <p class="sm-fb">Like us on facebook and get extra 10 images uploads</p>
@@ -63,10 +62,19 @@
 
 
 <% content_for(:before_body_tag) do %>
-  <%= render(:partial => 'shared/fbsdk') %>
+  
 <% end %>
 
 <% content_for(:html_attr) do %>
-  <%= "xmlns=\"http://www.w3.org/1999/xhtml\" 
-      xmlns:fb=\"http://ogp.me/ns/fb#\"" %>
+  <%= "xmlns=\"http://www.facebook.com/2008/fbml\"".html_safe %>
 <% end %>
+
+  <% content_for(:head) do %>
+    <meta property="og:title" content="ngtv2.info" />
+    <meta property="og:url" content="http://ngtv2.info/access/login" />
+  <% end %>
+  
+  <% content_for(:foot) do%>
+  <script src="http://connect.facebook.net/en_US/all.js"></script>
+  <%= render(:partial => 'shared/fbsdk') %>
+  <% end %>

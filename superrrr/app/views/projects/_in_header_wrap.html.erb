@@ -1,22 +1,15 @@
-  <div class="sm-container">
-    <fb:like send="true" layout="button_count" width="100" show_faces="false" data-size="large" font="arial"></fb:like>
-  
-    <a href="https://twitter.com/share" class="twitter-share-button" data-via="ngtv2" data-lang="en" data-count="none">Tweet</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-  </div>
-  
   <!-- IF USER CUSTOM HEADER LOGO IS PRESENT -->
   <% if @user.logo.url.nil? %>
     <h1 id="porfolio-home"><a href="/"><%= @user.header_title %></a></h1>
   <% else %>
-      <a href="/"><%= image_tag( @user.logo.url(:thumb) ) %></a>
+    <h1 id="porfolio-home"><a href="/"><%= image_tag( @user.logo.url(:thumb) ) %></a></h1>
   <% end %>
   
   <ul class="porfolio-nav">
-    <li><a href="/">Work</a></li>	
-    <li><%= link_to "About", Project.subdomain_url(@user.subdomain_name, "/about") %></li>
+    <% @projects.each do |project| %>
+      <li><%= link_to project.title, Project.subdomain_url(@user.subdomain_name, "/project/?id=#{project.id}"), :class => 'thumbnail' %></li>
+    <% end %>
   </ul>
-  
   <br class="clear" />
   
   

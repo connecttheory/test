@@ -2,6 +2,28 @@
 <% content_for(:head) do %>
 	<%= javascript_include_tag 'project_js/form' %>
 	<%= stylesheet_link_tag "proj_style" %>
+	
+	<%= stylesheet_link_tag "project_js/colorpicker/colorpicker.css" %>
+	<%= javascript_include_tag 'project_js/colorpicker/colorpicker.js' %>
+	<%= javascript_include_tag 'project_js/colorpicker/eye.js' %>
+	<%= javascript_include_tag 'project_js/colorpicker/utils.js' %>
+	<%= javascript_include_tag 'project_js/colorpicker/layout.js' %>
+    <script type="text/javascript">          
+        $('#colorSelector').ColorPicker({
+        	color: '#0000ff',
+        	onShow: function (colpkr) {
+        		$(colpkr).fadeIn(500);
+        		return false;
+        	},
+        	onHide: function (colpkr) {
+        		$(colpkr).fadeOut(500);
+        		return false;
+        	},
+        	onChange: function (hsb, hex, rgb) {
+        		$('#colorSelector div').css('backgroundColor', '#' + hex);
+        	}
+        });
+    </script>
 <% end %>
 
 
@@ -98,6 +120,44 @@
     <% end # end of if @user.logo.url.nil?%>
 	
 </div> <!-- END .form-wrap -->
+
+
+	<h1>Portfolio Layout</h1>
+	<div class="info-wrap">
+  	<div class="form-wrap layoutForm">
+  		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+  		<%= error_messages_for(@user) %>
+  		<div class="rowfield">
+  			<div class="row fview">
+  				<%= content_tag(:p, "Layout:", :class => "tiny label") %>
+  				<%= image_tag 'img/layouts/default.png', :class=> 'defaultLayout' %>
+  				<%= image_tag 'img/layouts/layout-2.png', :class=> 'layout2' %>
+  				<%= image_tag 'img/layouts/layout-3.png', :class=> 'layout3' %>
+  				<%= image_tag 'img/layouts/layout-4.png', :class=> 'layout4' %>
+  				<%= image_tag 'img/layouts/layout-5.png', :class=> 'layout5' %>
+  				<%= f.hidden_field :portfolio_layout, :class=> 'isvisible layoutVal' %>
+  			</div>
+  		</div>
+  		<% end %>
+  	</div> <!-- END .form-wrap -->
+  	
+  	<div class="form-wrap layoutForm">
+  	    <% if @user.portfolio_bg.present? %>
+  	      <% portfolio_bg = @user.portfolio_bg %>
+  	    <% else %>
+  	      <% portfolio_bg = "ffffff" %>
+  	    <% end %>
+  	  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect", :id => "form_idimgselect" }) do |f| %>
+  		<div class="rowfield">
+  			<div class="row fview">
+          	    <%= content_tag(:p, "Background Colour:", :class => "tiny label") %>
+          	    <%= f.hidden_field :portfolio_bg, :class => "project_bg_val", :value => portfolio_bg %>
+          	    <div id="colorSelector"><div style="background-color: #<%= portfolio_bg %>"></div></div>
+  	        </div>
+  	    </div>
+  	  <% end %>
+  	</div> <!-- END .form-wrap -->
+	</div> <!-- END .info-wrap -->
 
 <h1>Footer</h1>
 <div class="info-wrap">

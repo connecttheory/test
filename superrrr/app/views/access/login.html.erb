@@ -38,14 +38,22 @@
   <% end %>
 </div>
 
-<% #content_for(:head) do %>
-<% #end %>
 
 
-<% # content_for(:html_attr) do %>
-  <% #= "xmlns=\"http://www.w3.org/1999/xhtml\"
-     # xmlns:og=\"http://ogp.me/ns#\"
-     # xmlns:fb=\"http://www.facebook.com/2008/fbml\"" 
+
+<% content_for(:html_attr) do %>
+  <%= "xmlns=\"http://www.facebook.com/2008/fbml\"".html_safe 
    %>
-<% # end %>
+<% end %>
 
+
+  <% content_for(:head) do %>
+    <meta property="og:title" content="ngtv2.info" />
+    <meta property="og:url" content="http://ngtv2.info/access/login" />
+  <% end %>
+  
+  <% content_for(:foot) do%>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <%= render(:partial => 'shared/fbsdk') %>
+  <% end %>
+  

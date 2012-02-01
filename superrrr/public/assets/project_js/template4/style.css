@@ -1,0 +1,306 @@
+/*----------------------------------------------------------------------------- 
+
+RAMA BASIC STYLES OF HTML DOCUMENT
+
+Screen Stylesheet 
+
+version:   	1.0 
+date:      	07/27/11 
+author:		freshline
+email:     	support@version-four.com 
+website:   	http://www.version-four.com
+-----------------------------------------------------------------------------*/
+
+/***********************
+	-	BASICS 	-
+***********************/
+.dark {
+    background: none no-repeat scroll 0 0 transparent;
+    border: none;
+    border-radius:none;
+    box-shadow: none;
+    padding: 0;
+}
+html {
+	width: 100%;
+	overflow-x:hidden;
+	margin: 0;
+	padding: 0;
+}
+
+
+
+ol, ul { 
+    list-style: none; 
+}
+
+a{
+	text-decoration:none;
+}
+
+
+/*******************************
+	-	MAIN SHADOWS AND EFFECTS -
+********************************/
+
+.bannerholder .glare{
+	background:url(../images/glare.png) no-repeat;
+	width:1400px;
+	height:700px;
+	position:absolute;
+	left: 50%;
+	margin-left: -700px;
+	top: 47px;
+}
+
+.bannerholder .bggradient{
+	background:url(../images/bgpart.png) repeat-x;
+	width:100%;
+	height:700px;
+	position:absolute;
+	left:0;
+	top: 50px;
+}
+
+.bannerholder .bannershadow{
+	background-image:url(../images/bannershadow.png);
+	margin-top:150px;
+	width:800px;
+	height:100px;
+	position:relative;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#headerlogo {
+	background-image:url(../images/headerimage.png) ;
+	width:700px;
+	height:200px;
+	position:absolute;
+	left:50%;
+	margin-left: -350px;
+	top: 0px;
+}
+
+
+/*******************************
+	-	BANNER STYLES	-	
+********************************/
+#banner-example-1{
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	width:800px;
+	height:320px;
+	top: 50px;
+	margin: 0 0 0 -35px;
+}	
+
+#banner-example-1 ul >li{
+	display:none;
+}
+
+
+/**********************************************************
+	-	CAPTION SETTINGS FOR THE PARADIGM SLIDER	-
+**********************************************************/	
+.caption_transparent{
+	font-family: 'PT Sans Narrow', sans-serif;
+	font-size:30px;
+	color:#fff;
+	background-color: rgba(0,0,0,0.5);
+	padding:5px;
+	position:absolute;
+	font-weight: 700;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+	
+}
+
+.caption_black{
+	font-family: 'PT Sans Narrow', sans-serif;
+	font-size:30px;
+	color:#fff;
+	background-color:#000;
+	padding:5px;
+	position:absolute;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+	-moz-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: 700;
+}
+
+.caption_blue{
+	font-family: 'PT Sans Narrow', sans-serif;
+	font-size:30px;
+	color:#fff;
+	background-color:#00b4ff;
+	padding:5px;
+	position:absolute;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+	-moz-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: 700;
+}
+
+.caption_green{
+	font-family: 'PT Sans Narrow', sans-serif;
+	font-size:30px;
+	color:#fff;
+	background-color:#445626;
+	padding:5px;
+	position:absolute;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+	-moz-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: 700;
+}
+
+.caption_orange{
+	font-family: 'PT Sans Narrow', sans-serif;
+	font-size:30px;
+	color:#fff;
+	background-color:#e65700;
+	padding:5px;
+	position:absolute;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+	-moz-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: 700;
+}
+
+.caption_red{
+	font-family: 'PT Sans Narrow', sans-serif;
+	font-size:30px;
+	color:#fff;
+	background-color:#c4302b;
+	padding:5px;
+	position:absolute;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+	-moz-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: 700;
+}
+
+.caption_white{
+	font-family: 'PT Sans Narrow', sans-serif;
+	font-size:30px;
+	color:#000;
+	background-color:#fff;
+	padding:5px;
+	position:absolute;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+	-moz-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	font-weight: 700;
+}
+
+.caption_grey{
+	font-family: 'PT Sans Narrow', sans-serif;
+	font-size:30px;
+	color:#fff;
+	background-color:#333;
+	padding:5px;
+	position:absolute;
+	-moz-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.75);
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+a:link, a:visited {
+	text-decoration: none;
+	color: #fff;
+}
+
+a:hover {
+	text-decoration: none;
+	cursor: pointer;
+	color: #ddd;
+}
+
+.caption_white a:link, .caption_white a:visited {
+	text-decoration: none;
+	color: #000;
+}
+
+.caption_white a:hover {
+	text-decoration: none;
+	cursor: pointer;
+	color: #555;
+}
+
+a:focus { 
+    outline: none; 
+}
+
+.minicap{
+	font-size:14px;
+	font-weight: normal;
+}
+
+.smallcap{
+	font-size:18px;
+	font-weight: normal;
+}
+
+.largecap{
+	font-size:32px;
+}
+
+.imagecap{
+	position:absolute;
+}
+
+.nobg{
+	background: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	text-shadow: #000 5px 5px 5px;
+}
+
+/****************************
+	-	BASIC DIVIDERS 	-
+*****************************/
+#small_divider {
+	margin-top:8px;
+}
+
+#big_divider {
+	margin-top:150px;
+}

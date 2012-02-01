@@ -1,0 +1,85 @@
+/*********masonry****/
+.item {
+  width: 220px;
+  margin: 10px;
+  float: left;
+}
+.box {
+  float: left;
+  padding: 10px;
+}
+#container {
+  width: 100%;
+  margin: 50px 0 51px 0;
+}
+/*masonry end*/
+
+/*layout5 style*/
+h1#porfolio-home {
+  width:  auto;
+  font-size: 26px;
+}
+div#header {
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  background: none no-repeat scroll 0 0 #ffffff;
+}
+div#header .header-wrap {
+  width: auto;
+  margin: 15px 40px 15px;
+  position: relative;
+}
+ul.porfolio-nav {
+  margin:  0;
+  padding: 0;
+  float: none;
+  position: absolute;
+  right: 0;
+  bottom: 3px;
+}
+.porfolio-nav a:hover {
+  text-decoration: underline;
+}
+ul.porfolio-nav a.current {
+  color: #111111;
+}
+#project_images_portf {
+  margin: 0 30px;
+  position: relative;
+}
+
+
+/*sm footer style*/
+#footer_sm {
+  margin: 0;
+  padding: 10px;
+  background: none no-repeat scroll 0 0 #ffffff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  width: 100%;
+  font-size: 16px;
+}
+#footer_sm a {
+  color: #000000;
+}
+#footer_sm .footer_sm_wrap {
+  margin: 5px 40px;
+  position:relative;
+  width: auto;
+}
+.smBlock {
+  margin: 0 7px;
+}
+.about_footer {
+  vertical-align: middle;
+  margin: 4px 7px 0 7px;
+}
+.superLink {
+  float: right;
+}

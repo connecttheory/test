@@ -44,19 +44,17 @@ class UsersController < ApplicationController
       elsif params[:user][:logo].present?
       	# the logo params is there then send it to crop logo
       	render :action => "crop_logo"
-      else
+      elsif params[:logo].to_i == 1 || params[:user][:portfolio_bg].present? || params[:user][:portfolio_layout].present?
       	#redirect depending on edit situation
-      	if params[:logo].to_i == 1
-		  respond_to do |format|
-			format.html { redirect_to(:controller => 'personalize' ) }
-			format.js
-		  end
+	      respond_to do |format|
+		      format.html { redirect_to(:controller => 'personalize', :action => 'index') }
+		      format.js
+		    end		  
 	    else
-		  respond_to do |format|
-			format.html { redirect_to(:controller => 'about' ) }
-			format.js
-		  end
-	    end
+		    respond_to do |format|
+			    format.html { redirect_to(:controller => 'about', :action => 'index') }
+			    format.js
+			  end
       end #if params[:user][:avatar].present?
 
     else #if failed to update user record

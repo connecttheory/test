@@ -7,10 +7,7 @@ body {
   max-height: 66px;
 }
 
-div#header {
-  background: none repeat scroll 0 0 #1E1E1E;
-  color: #EFEFEF;
-}
+
 .porfolio-nav li a {
   color: #888888;
 }
