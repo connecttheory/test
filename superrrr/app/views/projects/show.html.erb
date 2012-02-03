@@ -110,39 +110,41 @@
 	
 	<h1>Layout</h1>
 	<div class="info-wrap">
-	<div class="form-wrap layoutForm">
-		<%= form_for(:project, :url => {:action => 'update', :id => @project.id, :user_id => session[:user_id] }, :html => { :class => "form_imgselect" }) do |f| %>
-		<%= error_messages_for(@project) %>
-		<div class="rowfield">
-			<div class="row fview">
-				<%= content_tag(:p, "Layout:", :class => "tiny label") %>
-				<%= image_tag 'img/layouts/default.png', :class=> 'defaultLayout' %>
-				<%= image_tag 'img/layouts/layout-2.png', :class=> 'layout2' %>
-				<%= image_tag 'img/layouts/layout-3.png', :class=> 'layout3' %>
-				<%= image_tag 'img/layouts/layout-4.png', :class=> 'layout4' %>
-				<%= image_tag 'img/layouts/layout-5.png', :class=> 'layout5' %>
-				<%= f.hidden_field :layout, :class=> 'isvisible layoutVal' %>
-			</div>
-		</div>
-		<% end %>
-	</div> <!-- END .form-wrap -->
-	
-	<div class="form-wrap layoutForm">
-	    <% if @project.project_bg.present? %>
-	      <% bg_color = @project.project_bg %>
-	    <% else %>
-	      <% bg_color = "ffffff" %>
-	    <% end %>
-	  <%= form_for(:project, :url => {:action => 'update', :id => @project.id, :user_id => session[:user_id] }, :html => { :class => "form_imgselect", :id => "form_idimgselect" }) do |f| %>
-		<div class="rowfield">
-			<div class="row fview">
+	  
+  	<div class="form-wrap layoutForm">
+  		<%= form_for(:project, :url => {:action => 'update', :id => @project.id, :user_id => session[:user_id] }, :html => { :class => "form_imgselect" }) do |f| %>
+  		<%= error_messages_for(@project) %>
+  		<div class="rowfield">
+  			<div class="row fview">
+  				<%= content_tag(:p, "Layout:", :class => "tiny label") %>
+  				<%= image_tag 'img/layouts/default.png', :class=> 'defaultLayout' %>
+  				<%= image_tag 'img/layouts/layout-2.png', :class=> 'layout2' %>
+  				<%= image_tag 'img/layouts/layout-3.png', :class=> 'layout3' %>
+  				<%= image_tag 'img/layouts/layout-4.png', :class=> 'layout4' %>
+  				<%= image_tag 'img/layouts/layout-5.png', :class=> 'layout5' %>
+  				<%= f.hidden_field :layout, :class=> 'isvisible layoutVal' %>
+  			</div>
+  		</div>
+  		<% end %>
+  	</div> <!-- END .form-wrap -->
+  	
+  	<div class="form-wrap layoutForm">
+  	    <% if @project.project_bg.present? %>
+  	      <% bg_color = @project.project_bg %>
+  	    <% else %>
+  	      <% bg_color = "ffffff" %>
+  	    <% end %>
+  	  <%= form_for(:project, :url => {:action => 'update', :id => @project.id, :user_id => session[:user_id] }, :html => { :class => "form_imgselect", :id => "form_idimgselect" }) do |f| %>
+    		<div class="rowfield">
+    			<div class="row fview">
         	    <%= content_tag(:p, "Background Colour:", :class => "tiny label") %>
         	    <%= f.hidden_field :project_bg, :class => "project_bg_val", :value => bg_color %>
         	    <div id="colorSelector"><div style="background-color: #<%= bg_color %>"></div></div>
-	        </div>
-	    </div>
-	  <% end %>
-	</div> <!-- END .form-wrap -->
+          </div>
+        </div>
+  	  <% end %>
+  	</div> <!-- END .form-wrap -->
+	
 	</div>
 	
 	

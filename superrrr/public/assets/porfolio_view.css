@@ -1,3 +1,6 @@
+.colorpicker {
+  z-index: 1500;
+}
 body {
 
   font-family: Georgia,'Times New Roman',Times,serif;

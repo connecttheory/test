@@ -1,3 +1,37 @@
 body {
   background: #00cc77;
 }
+div#header {
+  padding: 0;
+}
+h1#porfolio-home {
+  width: 100%;
+  display: block;
+  text-align: center;
+  margin: 20px 0 15px;
+}
+.porfolio-nav {
+  float: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  display: block;
+}
+.porfolio-nav li {
+  display: inline;
+  float: none;
+}
+.porfolio-nav li a  {
+  color: #000;
+  display: inline;
+}
+#banner-example-1 {
+  margin: 5px 0 70px -35px;
+}
+#main-footer {
+  margin: 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}

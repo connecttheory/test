@@ -30,11 +30,11 @@ div#header {
 }
 .porfolio-nav li {
   float: none;
-  font-family: Helvetica,Arial,sans-serif;
+  font-family: inherit;
   margin: 0 0 2px 0;
 }
 .porfolio-nav li a {
-  font-family: Helvetica,Arial,sans-serif;
+  font-family: inherit;
   color: #000000;
   font-size: 12px;
 }
@@ -110,4 +110,5 @@ h1#porfolio-home {
 }
 body {
   background: none no-repeat scroll 0 0 #EEEEEE;
-}
+  overflow-y: scroll;
+  overflow-x: hidden;

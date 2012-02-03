@@ -5,7 +5,7 @@
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '129374057178540', // App ID
-      //channelUrl : '//ngtv2.info/channel.html', // Channel File
+      channelUrl : 'http://ngtv2.info/channel.html.erb', // Channel File
       status     : true, // check login status
       cookie     : true, // enable cookies to allow the server to access the session
       xfbml      : true,  // parse XFBML
@@ -32,7 +32,7 @@
      } else {
        // the user isn't even logged in to Facebook.
      }
-     //if (response.status === 'connected') {
+     //if (response.status === 'connected')
     });
     
 	
@@ -54,15 +54,15 @@
 	
 	FB.Event.unsubscribe('edge.create', handleResponse);
 	
-  }; //window.fbAsyncInit = function() {
-
+  }; //window.fbAsyncInit = function()
+  
   // Load the SDK Asynchronously
-  //(function(d){
-  //   var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-  //   js = d.createElement('script'); js.id = id; js.async = true;
-  //   js.src = "//connect.facebook.net/en_US/all.js";
-  //   d.getElementsByTagName('head')[0].appendChild(js);
-  // }(document));
+  (function(d){
+    var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    d.getElementsByTagName('head')[0].appendChild(js);
+  }(document));
    
 	function loadPopupChooser(){
 	  $('#popup-chooser').friendChooser({
@@ -101,3 +101,4 @@
 	  });
 	}
 </script>
+
