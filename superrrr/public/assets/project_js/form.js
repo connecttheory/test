@@ -10,46 +10,7 @@ jQuery.fn.center = function () {
 }
 
 $(document).ready(function() { 
-  //font size
-  $( "#slider" ).css({
-    padding: '1px'
-  });
   
-  $( "#slider" ).slider({
-    min: 0,
-    max: 35,
-    value: 12,
-    change: function(event, ui) {
-      $('.fontSize').text(ui.value);
-      $('#sidebar .porfolio-nav li a').css('font-size', ui.value + "px");
-    }
-  });
-  
-  //the modal
-  $("#fontFamily").change(function() {
-    $selectedFont = $(this).val();
-    $("body").css('font-family', $selectedFont);
-  });
-  $( "#accordion" ).accordion({
-    fillSpace: true
-  });
-   
-  $( "#dialog" ).hide();
-  $.fx.speeds._default = 1000;
-  $(function() {
-  	$( "#dialog" ).dialog({
-  		autoOpen: false,
-  		show: "fade",
-  		hide: "fade",
-  		zIndex: 50
-  	});
-  
-  	$( "#opener" ).click(function() {
-  		$( "#dialog" ).dialog( "open" );
-  		return false;
-  	});
-  });
-	
   $('.showhide').click(function() {
     $("#header").hoverFlow(e.type, {
       'height': 'show',
@@ -118,7 +79,6 @@ $(document).ready(function() {
 	
 	$('.form_imgselect').submit(function() {
 		$.post($(this).attr("action"), $(this).serialize(), null, "script");
-		//var $frow = $(this).find('.field').parents('.row');
 		return false;
 	});
 	
