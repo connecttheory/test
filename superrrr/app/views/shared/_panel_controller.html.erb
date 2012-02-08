@@ -1,0 +1,191 @@
+<button id="controlPanelOpen">Open the dialog</button>
+<div id="dialog" title="Theme Options">
+  <div id="accordion">
+    
+    <h3><a href="#">Design</a></h3>
+    <div>
+      
+      <div id="navSliderPanel">
+        
+        <div class="slideArea">
+          <ul>
+            <li><a href="#" class="layoutsNavPanel">Layouts</a></li>
+            <li><a href="#" class="backgroundsNavPanel">Backgrounds</a></li>
+            <li><a href="#" class="logosNavPanel">Logos</a></li>
+            <li><a href="#" class="fontsNavPanel">Fonts</a></li>
+          </ul>
+        </div>
+        
+        <div class="slideArea">
+          <a href="#" class="backNavSliderPanel">Back</a>
+      		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+      		<div class="rowfield">
+      			<div class="row fview">
+      			  <% if @user.layout_name == "Default" %>
+      			    <%= image_tag 'img/layouts/default.png', :class=> 'defaultLayout layoutIcon current' %>
+      			  <% else %>
+      			    <%= image_tag 'img/layouts/default.png', :class=> 'defaultLayout layoutIcon doReload' %>
+      			  <% end %>
+      			  
+      			  <% if @user.layout_name == "Layout 2" %>
+      				  <%= image_tag 'img/layouts/layout-2.png', :class=> 'layout2 layoutIcon current' %>
+      				<% else %>
+      				  <%= image_tag 'img/layouts/layout-2.png', :class=> 'layout2 layoutIcon doReload' %>
+      				<% end %>
+      				
+      				<% if @user.layout_name == "Layout 3" %>
+      				  <%= image_tag 'img/layouts/layout-3.png', :class=> 'layout3 layoutIcon current' %>
+      				<% else %>
+      				  <%= image_tag 'img/layouts/layout-3.png', :class=> 'layout3 layoutIcon doReload' %>
+      				<% end %>
+      				
+      				<% if @user.layout_name == "Layout 4" %>
+      				  <%= image_tag 'img/layouts/layout-4.png', :class=> 'layout4 layoutIcon current' %>
+      				<% else %>
+      				  <%= image_tag 'img/layouts/layout-4.png', :class=> 'layout4 layoutIcon doReload' %>
+      				<% end %>
+      				
+      				<% if @user.layout_name == "Layout 5" %>
+        				<%= image_tag 'img/layouts/layout-5.png', :class=> 'layout5 layoutIcon current' %>
+        			<% else%>
+        				<%= image_tag 'img/layouts/layout-5.png', :class=> 'layout5 layoutIcon doReload' %>
+        			<% end %>
+        			
+      				<%= f.hidden_field :portfolio_layout, :class=> 'isvisible layoutVal' %>
+      				<br class="clear" />
+      			</div>
+      		</div>
+      		<% end %>
+        </div>
+        
+        <div class="slideArea">
+          <a href="#" class="backNavSliderPanel">Back</a>
+    	    <% if @user.portfolio_bg.present? %>
+    	      <% portfolio_bg = @user.portfolio_bg %>
+    	    <% else %>
+    	      <% portfolio_bg = "ffffff" %>
+    	    <% end %>
+      	  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect", :id => "form_idimgselect" }) do |f| %>
+        		<div class="rowfield">
+        			<div class="row fview">
+          	    <%= content_tag(:p, "Color:", :class => "tiny label") %>
+          	    <%= f.hidden_field :portfolio_bg, :class => "project_bg_val", :value => portfolio_bg %>
+          	    <div id="colorSelector" class="cpicker"><div style="background-color: #<%= portfolio_bg %>"></div></div>            	
+              </div>
+            </div>
+      	  <% end %>
+        </div>
+        
+        <div class="slideArea">
+          <a href="#" class="backNavSliderPanel">Back</a>
+          <!-- LOGO FOR THE PORTFOLIO -->	
+          <% if @user.logo.url.nil? #if user logo is not set %>
+            <p class="label tiny">Upload Image: tempo for logo</p>
+            <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj_image" }) do |f| %>
+              <%= f.file_field :logo %>
+              	<p class="action">
+            	  <%= submit_tag("Save", :class => 'save')  %>
+            	</p>
+            <% end %>
+          <% else #if user logo is set %>
+            <div class="form-wrap image">
+            	<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj_image" }) do |f| %>
+            	  <div class="rowfield">
+            		<div class="edit-btn">Edit</div>
+            		<p class="label tiny">Custom Logo: </p>
+            		<%= image_tag(@user.logo.url(:thumb).to_s, :width => 200) %>
+            	  </div>
+            	  <div class="row fedit">
+            	  	<%= content_tag(:p, "Custom Logo /", :class => "tiny") %>
+            		<%= f.file_field :logo %>
+            		<p class="action">
+            		  <%= submit_tag("Save", :class => 'save')  %>
+            		  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+            		</p>
+            	  </div>
+            	<% end %>
+            </div> <!-- END .form-wrap -->
+          <% end # end of if @user.logo.url.nil?%>
+        </div>
+        
+        <div class="slideArea">
+          <a href="#" class="backNavSliderPanel">Back</a>
+          <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+            <label for="fontFamily">Font Family</label>
+            <%= f.hidden_field :font_face, :class => "font_face_val", :value => "" %>
+            <select name="fontFamily" id="fontFamily" class="fonts">
+              <option value="Montserrat">Montserrat</option>
+              <option value="Asap">Asap</option>
+              <option value="Chivo">Chivo</option>
+              <option value="Rosario">Rosario</option>
+              <option value="Sansita+One">Sansita One</option>
+              <option value="Unna">Unna</option>
+            </select>
+          <% end %>
+            <hr />
+            
+      	    <% if @user.font_color.present? %>
+      	      <% font_color = @user.font_color %>
+      	    <% else %>
+      	      <% font_color = "000000" %>
+      	    <% end %>
+        	  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+          		<div class="rowfield">
+          			<div class="row fview">
+            	    <%= f.label(:font_color)%>
+            	    <%= f.hidden_field :font_color, :class => "font_color_val", :value => font_color %>
+            	    <div id="colorSelectorFont" class="cpicker"><div style="background-color: #<%= font_color %>"></div></div>
+                </div>
+              </div>
+        	  <% end %>
+
+            <hr />
+            
+      	    <% if @user.font_size.present? %>
+      	      <% font_size = @user.font_size %>
+      	    <% else %>
+      	      <% font_size = 12 %>
+      	    <% end %>
+            <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+              <label for="fontColor">Font Size</label>
+              <div id="slider"></div>
+              <span class="fontSize"><%= font_size %></span>px
+              <%= f.hidden_field :font_size, :class => "font_size_val", :value => font_size %>
+            <% end %>
+
+          
+        </div>
+        
+        
+      </div> <!-- #navSliderPanel -->
+      
+    </div>
+    
+    <h3><a href="#">About</a></h3>
+    <div> <!-- accordion panel start -->
+      Sample About
+    </div> <!-- accordion panel end -->
+
+
+
+    <h3><a href="#">Footer</a></h3>
+    <div> <!-- accordion -->
+      <!-- form_for(:user -->
+	    <% if @user.footer_bg.present? %>
+	      <% footer_bg = @user.footer_bg %>
+	    <% else %>
+	      <% footer_bg = "000000" %>
+	    <% end %>
+      <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+  		<div class="rowfield">
+  			<div class="row fview">
+          	    <%= f.label(:footer_bg, "Footer Background Colour:") %>
+          	    <div id="colorSelectorFooter" class="cpicker"><div style="background-color: #<%= footer_bg %>"></div></div>
+          	    <%= f.hidden_field :footer_bg, :class => "footer_bg_val", :value => footer_bg %>
+        </div>
+      </div>   
+      <% end %>         
+    </div> <!-- accordion panel end -->
+  </div> <!-- #accordion -->
+    
+</div>  <!-- #dialog -->

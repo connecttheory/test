@@ -6,16 +6,7 @@
   <%= javascript_include_tag 'application' %> 
   <%= csrf_meta_tags %>
   <%= yield(:head) %>
-  <!-- 
-  <%= javascript_include_tag 'project_js/jquery.lazyload.min.js' %>
-  <script type="text/javascript">
-    $(function() {
-      //$("#images-container").lazyload(); // lazyload all image on page
-      //$("img").lazyload({ effect : "fadeIn" });
-      //$("img").lazyload({ effect : "fadeIn" });
-    });
-  </script>
-  -->
+
 </head>
 <body>
   <%= yield(:before_body_tag) %>

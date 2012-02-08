@@ -170,7 +170,7 @@
 	position: relative;
 	width: 36px;
 	height: 36px;
-	background: url(images/select.png);
+	/*background: url(images/select.png);*/
 }
 #colorSelector div, 
 #colorSelectorFooter div,

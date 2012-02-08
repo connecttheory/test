@@ -2,9 +2,20 @@
 <% content_for(:head) do %>
 	<%= stylesheet_link_tag "proj_style" %>
 	
-
-	
 	<%= stylesheet_link_tag "porfolio_view" %>
+	
+  <%= stylesheet_link_tag "styles/dark-hive/jquery-ui-1.8.17.custom.css" %> 
+  <%= stylesheet_link_tag "project_js/colorpicker/colorpicker.css" %>
+  <%= stylesheet_link_tag "styles/proj_style_auto.css" %>
+  <%= javascript_include_tag 'project_js/colorpicker/colorpicker.js' %>
+  <%= javascript_include_tag 'project_js/colorpicker/eye.js' %>
+  <%= javascript_include_tag 'project_js/colorpicker/utils.js' %>
+  <%= javascript_include_tag 'project_js/colorpicker/layoutClient.js' %>
+  
+  <%= javascript_include_tag 'project_js/jquery.cycle.lite.js' %>
+  
+  <%= javascript_include_tag 'project_js/formClient' %>
+  <%= javascript_include_tag 'project_js/form' %>
 	
 <% end %>
 
@@ -212,5 +223,14 @@
     <%= render(:partial => 'custom_style' ) %>
   <% end %>
   
+<% end %>
+
+
+
+<% #=================================================== SHOW CONTROLLER PANEL ============================================= %>
+<% if @user.id.to_i == session[:user_id].to_i %>
+  <% content_for(:before_body_tag) do %>
+    <%= render (:partial => 'shared/panel_controller' ); %>
+  <% end %>
 <% end %>
 

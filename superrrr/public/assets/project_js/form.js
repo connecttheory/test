@@ -10,16 +10,12 @@ jQuery.fn.center = function () {
 }
 
 $(document).ready(function() { 
-  
-  $('.showhide').click(function() {
-    $("#header").hoverFlow(e.type, {
-      'height': 'show',
-      'marginTop': 'show',
-      'marginBottom': 'show',
-      'paddingTop': 'show',
-      'paddingBottom': 'show' 
-    });
-  });
+	function doRefreshPage( bDoReload ) {
+	  if ( bDoReload ) {
+	   setTimeout(function() { window.location.reload(); }, 1500);
+    }
+	  //window.location.reload();
+	}
   
   
 	//form interger for set as default
@@ -29,8 +25,7 @@ $(document).ready(function() {
 	
 	//fb
 	$('.fb-like-form').submit(function() {
-		$.post($(this).attr("action"), $(this).serialize(), null, "script");
-		
+		$.post($(this).attr("action"), $(this).serialize(), null, "script");		
 		return false;
 	});
 
@@ -52,33 +47,39 @@ $(document).ready(function() {
 	  $(this).parent().find('.layoutVal').val(1);
 	  $(this).before('<div class="fnotice_js">Saved</div>').prev().fadeOut(2000);
 	  $(this).parents('.form_imgselect').submit();
+	  doRefreshPage($(this).hasClass("doReload"));
 	});
 	
 	$('.layout2').click(function() {
 	  $(this).parent().find('.layoutVal').val(2);
 	  $(this).before('<div class="fnotice_js">Saved</div>').prev().fadeOut(2000);
 	  $(this).parents('.form_imgselect').submit();
+	  doRefreshPage($(this).hasClass("doReload"));
 	});
 		
 	$('.layout3').click(function() {
 	  $(this).parent().find('.layoutVal').val(3);
 	  $(this).before('<div class="fnotice_js">Saved</div>').prev().fadeOut(2000);
 	  $(this).parents('.form_imgselect').submit();
+	  doRefreshPage($(this).hasClass("doReload"));
 	});
 	$('.layout4').click(function() {
 	  $(this).parent().find('.layoutVal').val(4);
 	  $(this).before('<div class="fnotice_js">Saved</div>').prev().fadeOut(2000);
 	  $(this).parents('.form_imgselect').submit();
+	  doRefreshPage($(this).hasClass("doReload"));
 	});
 	$('.layout5').click(function() {
 	  $(this).parent().find('.layoutVal').val(5);
 	  $(this).before('<div class="fnotice_js">Saved</div>').prev().fadeOut(2000);
 	  $(this).parents('.form_imgselect').submit();
+	  doRefreshPage($(this).hasClass("doReload"));
 	});
+
 	// end layout form setup
 	
 	$('.form_imgselect').submit(function() {
-		$.post($(this).attr("action"), $(this).serialize(), null, "script");
+		$.post($(this).attr("action"), $(this).serialize(), null, "script");		
 		return false;
 	});
 	

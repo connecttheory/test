@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131190730) do
+ActiveRecord::Schema.define(:version => 20120207232445) do
 
   create_table "images", :force => true do |t|
     t.integer  "project_id"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(:version => 20120131190730) do
     t.datetime "password_reset_sent_at"
     t.string   "auth_token"
     t.integer  "color_scheme"
-    t.integer  "font_face"
+    t.string   "font_face"
     t.integer  "image_size"
     t.string   "header_title"
     t.string   "logo"
@@ -84,6 +84,10 @@ ActiveRecord::Schema.define(:version => 20120131190730) do
     t.string   "linkedin_sm"
     t.string   "portfolio_bg"
     t.integer  "portfolio_layout"
+    t.string   "font_color"
+    t.integer  "font_size"
+    t.string   "footer_bg"
+    t.string   "background_image"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username"

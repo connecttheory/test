@@ -68,12 +68,12 @@
 			},
 			onHide: function (colpkr) {
 				$(colpkr).fadeOut(500);
-				//$("#colorSelector").parents('.form_imgselect').submit();
+				$("#colorSelectorFooter").parents('.form_imgselect').submit();
 				return false;
 			},
 			onChange: function (hsb, hex, rgb) {
 				$('#colorSelectorFooter div').css('backgroundColor', '#' + hex);
-				//$("#colorSelector").parents('.form_imgselect').find('.project_bg_val').val(hex);
+				$("#colorSelectorFooter").parents('.form_imgselect').find('.footer_bg_val').val(hex);
 				$('#footer_sm').css('backgroundColor', '#' + hex);
 			},
         	onSubmit: function (hsb, hex, rgb, el) {
@@ -91,11 +91,12 @@
 			},
 			onHide: function (colpkr) {
 				$(colpkr).fadeOut(500);
+				$("#colorSelectorFont").parents('.form_imgselect').submit();
 				return false;
 			},
 			onChange: function (hsb, hex, rgb) {
 				$('#colorSelectorFont div').css('backgroundColor', '#' + hex);
-				//$("#colorSelector").parents('.form_imgselect').find('.project_bg_val').val(hex);
+				$("#colorSelectorFont").parents('.form_imgselect').find('.font_color_val').val(hex);
 				$('body, navigation a, .porfolio-nav li a').css('color', '#' + hex);
 			},
         	onSubmit: function (hsb, hex, rgb, el) {
