@@ -6,7 +6,7 @@
 }
 .box {
   float: left;
-  padding: 10px;
+  margin: 0 10px 10px 0;
 }
 #container {
   width: 100%;

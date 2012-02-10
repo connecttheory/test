@@ -57,7 +57,7 @@
 .ui-widget .ui-widget { font-size: 1em; }
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Verdana, Arial, sans-serif; font-size: 1em; }
 .ui-widget-content { border: 1px solid #555555; background: none no-repeat scroll 0 0 #24272A; color: #ffffff; }
-.ui-widget-content a { color: #ffffff; }
+.ui-widget-content a { color: #03AEEB; }
 .ui-widget-header a { color: #ffffff; }
 
 /* Interaction states

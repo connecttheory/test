@@ -1,12 +1,41 @@
 $(document).ready(function() {
+  
+
+  
   //font cycle
+  function onAfterSub(curr, next, opts, fwd) {
+    var $ht = $(this).height();
+    $(this).parents('#layoutSub').css({height: $ht});
+    var $htsa = $(this).parents('.slideArea').height();
+    $('#navSliderPanel').height($htsa);
+    $('#navSliderPanel').parent().animate({height: $htsa});
+  }
+  
+  $('#layoutSub').cycle({
+   fx: 'scrollHorz',
+   timeout: 0,
+   fit: true,
+   width: 270,
+   after: onAfterSub,
+   speed: 250
+  });
+  $('.available').click(function() {
+    $('#layoutSub').cycle(0);
+    return false;
+  });
+  $('.options').click(function() {
+    $('#layoutSub').cycle(1);
+    return false;
+  });
+
   function onAfter(curr, next, opts, fwd) {
     var $ht = $(this).height();
     //set the container's height to that of the current slide
     $(this).parent().css({height: $ht});
     $(this).parent().parent().animate({height: $ht});
+    
+
   }
-  
   $('#navSliderPanel').cycle({
    fx: 'scrollHorz',
    timeout: 0,
@@ -36,7 +65,35 @@ $(document).ready(function() {
     $('#navSliderPanel').cycle(0);
     return false;
   });
- 
+  
+  //sub layout options
+  $( ".marginSlider.bottom" ).slider({
+    min: 0,
+    max: 100,
+    value: 12,
+    change: function(event, ui) {
+      $('.marginBottomValue').text(ui.value);
+      $('.image-block').css('marginBottom', ui.value + "px");
+    }
+  });
+  $( "#marginSliderTop" ).slider({
+    min: 0,
+    max: 100,
+    value: 12,
+    change: function(event, ui) {
+      $('.marginTopValue').text(ui.value);
+      $('.image-block').css('marginTop', ui.value + "px");
+    }
+  });
+  $( "#marginSliderBottom" ).slider({
+    min: 0,
+    max: 100,
+    value: 12,
+    change: function(event, ui) {
+      $('.marginBottomValue').text(ui.value);
+      $('.image-block').css('marginBottom', ui.value + "px");
+    }
+  });
 
 
   
@@ -72,11 +129,16 @@ $(document).ready(function() {
     //clearStyle: true,
     collapsible: true
     //active: 0,
+    //create: function(event, ui) { 
+    //  $nsp = $('#navSliderPanel').find('div:first').height();
+    //  $('#navSliderPanel').height($nsp);
+    //  $('#navSliderPanel').parent().css({ height: $nsp});
+    //}
   });
    
   $( "#dialog" ).hide();
   $.fx.speeds._default = 250;
-  $(function() {
+
   	$("#dialog").dialog({
   		autoOpen: false,
   		show: "fade",
@@ -95,7 +157,7 @@ $(document).ready(function() {
   		$(this).fadeOut('fast');
   		return false;
   	});
-  });
+
   
   $('.showhide').click(function() {
     $('#header').toggle();

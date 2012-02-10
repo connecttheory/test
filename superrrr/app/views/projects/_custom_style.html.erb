@@ -1,6 +1,20 @@
 <!-- custom bgcolor -->
 <style type="text/css">
+
   body {
+
       background-color: #<%= @user.portfolio_bg %>;
+      font-family: <%= @user.font_face %>, helvetica, sans-serif, serif;
+
+  }     
+  body, navigation a, .porfolio-nav li a {
+    color: #<%= @user.font_color %>
   }
+  #sidebar .porfolio-nav li a {
+    font-size: <%= @user.font_size %>px;
+  }
+  #footer_sm {
+    background: #<%= @user.footer_bg %>;
+  }
+
 </style>

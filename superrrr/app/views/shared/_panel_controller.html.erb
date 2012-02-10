@@ -1,4 +1,4 @@
-<button id="controlPanelOpen">Open the dialog</button>
+<button id="controlPanelOpen">Design</button>
 <div id="dialog" title="Theme Options">
   <div id="accordion">
     
@@ -8,58 +8,108 @@
       <div id="navSliderPanel">
         
         <div class="slideArea">
-          <ul>
-            <li><a href="#" class="layoutsNavPanel">Layouts</a></li>
-            <li><a href="#" class="backgroundsNavPanel">Backgrounds</a></li>
-            <li><a href="#" class="logosNavPanel">Logos</a></li>
-            <li><a href="#" class="fontsNavPanel">Fonts</a></li>
-          </ul>
+          <div class="panel-menu layoutsNavPanel">
+            <div class="panel-icon layout-icon">&nbsp;</div>
+            <a href="#" >Layouts</a>
+            <p class="controller-panel-nav-description">Select a page structure</p>
+          </div>
+          <div class="panel-menu backgroundsNavPanel">
+            <div class="panel-icon background-icon">&nbsp;</div>
+            <a href="#">Backgrounds</a>
+            <p class="controller-panel-nav-description">Customize your portfolio background</p>
+          </div>
+          <div class="panel-menu logosNavPanel">
+            <div class="panel-icon logo-icon">&nbsp;</div>
+            <a href="#">Logos</a>
+            <p class="controller-panel-nav-description">Upload your custom logo</p>
+          </div>
+          <div class="panel-menu fontsNavPanel">
+            <div class="panel-icon font-icon">&nbsp;</div>
+            <a href="#">Fonts</a>
+            <p class="controller-panel-nav-description">Choose different font</p>
+          </div>
+
         </div>
         
         <div class="slideArea">
-          <a href="#" class="backNavSliderPanel">Back</a>
-      		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
-      		<div class="rowfield">
-      			<div class="row fview">
-      			  <% if @user.layout_name == "Default" %>
-      			    <%= image_tag 'img/layouts/default.png', :class=> 'defaultLayout layoutIcon current' %>
-      			  <% else %>
-      			    <%= image_tag 'img/layouts/default.png', :class=> 'defaultLayout layoutIcon doReload' %>
-      			  <% end %>
-      			  
-      			  <% if @user.layout_name == "Layout 2" %>
-      				  <%= image_tag 'img/layouts/layout-2.png', :class=> 'layout2 layoutIcon current' %>
-      				<% else %>
-      				  <%= image_tag 'img/layouts/layout-2.png', :class=> 'layout2 layoutIcon doReload' %>
-      				<% end %>
-      				
-      				<% if @user.layout_name == "Layout 3" %>
-      				  <%= image_tag 'img/layouts/layout-3.png', :class=> 'layout3 layoutIcon current' %>
-      				<% else %>
-      				  <%= image_tag 'img/layouts/layout-3.png', :class=> 'layout3 layoutIcon doReload' %>
-      				<% end %>
-      				
-      				<% if @user.layout_name == "Layout 4" %>
-      				  <%= image_tag 'img/layouts/layout-4.png', :class=> 'layout4 layoutIcon current' %>
-      				<% else %>
-      				  <%= image_tag 'img/layouts/layout-4.png', :class=> 'layout4 layoutIcon doReload' %>
-      				<% end %>
-      				
-      				<% if @user.layout_name == "Layout 5" %>
-        				<%= image_tag 'img/layouts/layout-5.png', :class=> 'layout5 layoutIcon current' %>
-        			<% else%>
-        				<%= image_tag 'img/layouts/layout-5.png', :class=> 'layout5 layoutIcon doReload' %>
-        			<% end %>
-        			
-      				<%= f.hidden_field :portfolio_layout, :class=> 'isvisible layoutVal' %>
-      				<br class="clear" />
-      			</div>
-      		</div>
-      		<% end %>
+          <div class="panel-back backNavSliderPanel">
+            <div class="panel-icon">&nbsp;</div>
+            <a href="#" class="backNavSliderPanel">Layouts</a>
+            <p class="controller-panel-nav-description">Select a page structure</p>
+          </div>
+          
+          <div href="#" class="available subPanelButton">Available</div>
+          <div href="#" class="options subPanelButton">Options</div>
+          
+          <div id="layoutSub" class="subPanel">
+            <div> <!-- subPanel 1-->
+          		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+            		<div class="rowfield">
+            			<div class="row fview">
+            			  <% if @user.layout_name == "Default" %>
+            			    <%= image_tag 'img/layouts/default.png', :class=> 'defaultLayout layoutIcon current' %>
+            			  <% else %>
+            			    <%= image_tag 'img/layouts/default.png', :class=> 'defaultLayout layoutIcon doReload' %>
+            			  <% end %>
+            			  
+            			  <% if @user.layout_name == "Layout 2" %>
+            				  <%= image_tag 'img/layouts/layout-2.png', :class=> 'layout2 layoutIcon current' %>
+            				<% else %>
+            				  <%= image_tag 'img/layouts/layout-2.png', :class=> 'layout2 layoutIcon doReload' %>
+            				<% end %>
+            				
+            				<% if @user.layout_name == "Layout 3" %>
+            				  <%= image_tag 'img/layouts/layout-3.png', :class=> 'layout3 layoutIcon current' %>
+            				<% else %>
+            				  <%= image_tag 'img/layouts/layout-3.png', :class=> 'layout3 layoutIcon doReload' %>
+            				<% end %>
+            				
+            				<% if @user.layout_name == "Layout 4" %>
+            				  <%= image_tag 'img/layouts/layout-4.png', :class=> 'layout4 layoutIcon current' %>
+            				<% else %>
+            				  <%= image_tag 'img/layouts/layout-4.png', :class=> 'layout4 layoutIcon doReload' %>
+            				<% end %>
+            				
+            				<% if @user.layout_name == "Layout 5" %>
+              				<%= image_tag 'img/layouts/layout-5.png', :class=> 'layout5 layoutIcon current' %>
+              			<% else%>
+              				<%= image_tag 'img/layouts/layout-5.png', :class=> 'layout5 layoutIcon doReload' %>
+              			<% end %>
+              			
+            				<%= f.hidden_field :portfolio_layout, :class=> 'isvisible layoutVal' %>
+            				<br class="clear" />
+            			</div>
+            		</div>
+          		<% end %>
+      		  </div> <!-- subPanel 1 end-->
+      		  <div> <!-- subPanel 2-->
+      		    <div class="panel-menu">
+        		    <h3 class="subMenuTitle">Margin Top</h3>
+                <label>Font Size</label>
+                <div id="marginSliderTop" class="slider marginSlider"></div>
+                <span class="marginTopValue">12</span>px
+                
+        		    <h3 class="subMenuTitle">Margin Bottom</h3>
+                <label>Font Size</label>
+                <div id="marginSliderBottom" class="slider marginSlider"></div>
+                <span class="marginBottomValue">12</span>px
+              </div>
+              <div class="panel-menu">
+                 <h3 class="subMenuTitle">Project Description</h3>
+                 <textarea class="wysiwyg" name="input">Write your content here.</textarea>
+              </div>
+      		  </div> <!-- subPanel 2 end-->
+      		</div> <!-- .subPanel -->
+      		
         </div>
         
         <div class="slideArea">
-          <a href="#" class="backNavSliderPanel">Back</a>
+          <div class="panel-back backNavSliderPanel">
+            <div class="panel-icon">&nbsp;</div>
+            <a href="#" class="backNavSliderPanel">Backgrounds</a>
+            <p class="controller-panel-nav-description">Customize your portfolio background</p>
+          </div>
+          
     	    <% if @user.portfolio_bg.present? %>
     	      <% portfolio_bg = @user.portfolio_bg %>
     	    <% else %>
@@ -77,7 +127,11 @@
         </div>
         
         <div class="slideArea">
-          <a href="#" class="backNavSliderPanel">Back</a>
+          <div class="panel-back backNavSliderPanel">
+            <div class="panel-icon">&nbsp;</div>
+            <a href="#" class="backNavSliderPanel">Logos</a>
+            <p class="controller-panel-nav-description">Upload your custom logo</p>
+          </div>
           <!-- LOGO FOR THE PORTFOLIO -->	
           <% if @user.logo.url.nil? #if user logo is not set %>
             <p class="label tiny">Upload Image: tempo for logo</p>
@@ -109,21 +163,28 @@
         </div>
         
         <div class="slideArea">
-          <a href="#" class="backNavSliderPanel">Back</a>
-          <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
-            <label for="fontFamily">Font Family</label>
-            <%= f.hidden_field :font_face, :class => "font_face_val", :value => "" %>
-            <select name="fontFamily" id="fontFamily" class="fonts">
-              <option value="Montserrat">Montserrat</option>
-              <option value="Asap">Asap</option>
-              <option value="Chivo">Chivo</option>
-              <option value="Rosario">Rosario</option>
-              <option value="Sansita+One">Sansita One</option>
-              <option value="Unna">Unna</option>
-            </select>
-          <% end %>
-            <hr />
-            
+          <div class="panel-back backNavSliderPanel">
+            <div class="panel-icon">&nbsp;</div>
+            <a href="#" class="backNavSliderPanel">Fonts</a>
+            <p class="controller-panel-nav-description">Choose different font</p>
+          </div>
+          
+          <div class="panel-menu">
+            <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+              <label for="fontFamily">Font Family</label>
+              <%= f.hidden_field :font_face, :class => "font_face_val", :value => "" %>
+              <select name="fontFamily" id="fontFamily" class="fonts">
+                <option value="Montserrat">Montserrat</option>
+                <option value="Asap">Asap</option>
+                <option value="Chivo">Chivo</option>
+                <option value="Rosario">Rosario</option>
+                <option value="Sansita+One">Sansita One</option>
+                <option value="Unna">Unna</option>
+              </select>
+            <% end %>
+          </div>
+          
+          <div class="panel-menu">
       	    <% if @user.font_color.present? %>
       	      <% font_color = @user.font_color %>
       	    <% else %>
@@ -138,21 +199,21 @@
                 </div>
               </div>
         	  <% end %>
-
-            <hr />
-            
+          </div>
+          
+          <div class="panel-menu">
       	    <% if @user.font_size.present? %>
       	      <% font_size = @user.font_size %>
       	    <% else %>
       	      <% font_size = 12 %>
       	    <% end %>
             <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
-              <label for="fontColor">Font Size</label>
+              <label>Font Size</label>
               <div id="slider"></div>
               <span class="fontSize"><%= font_size %></span>px
               <%= f.hidden_field :font_size, :class => "font_size_val", :value => font_size %>
             <% end %>
-
+          </div>
           
         </div>
         
@@ -163,7 +224,8 @@
     
     <h3><a href="#">About</a></h3>
     <div> <!-- accordion panel start -->
-      Sample About
+      <h3>About</h3>
+      <textarea class="wysiwyg" name="input">Write your content here.</textarea>
     </div> <!-- accordion panel end -->
 
 

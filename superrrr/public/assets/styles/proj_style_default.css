@@ -51,7 +51,6 @@ h1#porfolio-home {
 }
 .image-block img {
   display: inline;
-  margin: 0 0 28px 0;
 }
 
 /*project-description*/
@@ -112,3 +111,4 @@ body {
   background: none no-repeat scroll 0 0 #EEEEEE;
   overflow-y: scroll;
   overflow-x: hidden;
+}

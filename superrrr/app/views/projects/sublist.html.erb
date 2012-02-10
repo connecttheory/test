@@ -1,7 +1,7 @@
 <% @page_title = "View Project: #{@project.title}" %>
 
 <% content_for(:head) do %>
-
+<% #@list %>
 <link href='http://fonts.googleapis.com/css?family=Asap|Chivo|Rosario|Sansita+One|Unna' rel='stylesheet' type='text/css'>
 
 <%= stylesheet_link_tag "proj_style" %>
@@ -16,10 +16,37 @@
   <%= javascript_include_tag 'project_js/colorpicker/utils.js' %>
   <%= javascript_include_tag 'project_js/colorpicker/layoutClient.js' %>
   
+  <%= stylesheet_link_tag "project_js/cleditor/jquery.cleditor.css" %>
+  <%= javascript_include_tag 'project_js/cleditor/jquery.cleditor.min.js' %>
+
+  
   <%= javascript_include_tag 'project_js/jquery.cycle.lite.js' %>
   
   <%= javascript_include_tag 'project_js/formClient' %>
   <%= javascript_include_tag 'project_js/form' %>
+  
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $.cleditor.defaultOptions.controls = "bold italic underline strikethrough";
+    $(".wysiwyg").cleditor( {
+          width:        260, // width not including margins, borders or padding
+          height:       200, // height not including margins, borders or padding
+          controls:     // controls to add to the toolbar
+                        "bold italic underline style bullets numbering link unlink ", 
+          styles:       // styles in the style popup
+                        [["Paragraph", "<p>"], ["Header 2", "<h2>"],
+                        ["Header 3", "<h3>"],  ["Header 4","<h4>"],  ["Header 5","<h5>"],
+                        ["Header 6","<h6>"]],
+          useCSS:       false, // use CSS to style HTML when possible (not supported in ie)
+          docType:      // Document type contained within the editor
+                        '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">',
+          docCSSFile:   // CSS file used to style the document contained within the editor
+                        "", 
+          bodyStyle:    // style to assign to document body contained within the editor
+                        "margin:4px; font:10pt Arial,Verdana; cursor:text"
+        } );
+  });
+  </script>
 
 
 
@@ -291,9 +318,11 @@
 
             <a href="https://twitter.com/share" class="twitter-share-button" data-via="ngtv2" data-lang="en" data-count="none">Tweet</a>
 
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <script type="text/javasript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
             </div>
+
+
 
             <div class="fleft smBlock">
 
@@ -775,7 +804,7 @@
 
        <div class="box">
 
-         <a class="group1" href="<%= image.carimage_url.to_s %>" ><%= image_tag(image.carimage_url.to_s, :width => 300) %></a>
+         <a class="group1" href="<%= image.carimage_url.to_s %>" ><%= image_tag(image.carimage_url.to_s, :width => 190) %></a>
 
        </div>
 
@@ -836,9 +865,9 @@
    
 
   <% content_for(:in_header_wrap) do %>
-
+  
     <%= render(:partial => 'in_header_wrap_l5' ) %>
-
+  
   <% end %>
 
    
@@ -848,7 +877,7 @@
     
   <% #=================================================== SHOW CONTROLLER PANEL ============================================= %>
   <% if @user.id.to_i == session[:user_id].to_i %>
-    <% content_for(:before_body_tag) do %>
+    <% content_for(:foot) do %>
       <%= render (:partial => 'shared/panel_controller' ); %>
     <% end %>
   <% end %>
