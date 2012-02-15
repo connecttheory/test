@@ -78,14 +78,14 @@ class User < ActiveRecord::Base
 	server = Lumberg::Whm::Server.new(:host => '184.154.137.146', :user => 'connectt', :hash => 'dmm12w99', :basic_auth => true)
 	
 	
-result = server.account.create(
-  :username => 'kingpang',
-  :domain   => 'kingpangilinan.com',
-  :password => 'thesuperpassword123',
-  :plan => 'connectt_connect1'
-)
+  result = server.account.create(
+    :username => 'kingpang',
+    :domain   => 'kingpangilinan.com',
+    :password => 'thesuperpassword123',
+    :plan => 'connectt_connect1'
+  )
 
-return result.inspect
+  return result.inspect
 	
   end
   

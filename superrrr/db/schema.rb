@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120207232445) do
+ActiveRecord::Schema.define(:version => 20120215052202) do
 
   create_table "images", :force => true do |t|
     t.integer  "project_id"
@@ -88,6 +88,10 @@ ActiveRecord::Schema.define(:version => 20120207232445) do
     t.integer  "font_size"
     t.string   "footer_bg"
     t.string   "background_image"
+    t.string   "background_repeat"
+    t.string   "background_pos_h"
+    t.string   "background_pos_v"
+    t.string   "background_attachment"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username"

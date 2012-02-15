@@ -1,11 +1,44 @@
 <!-- custom bgcolor -->
+<% if @user.background_image.present? %>
+  <% bgimg = @user.background_image %>
+<% else %>
+  <% bgimg = "none" %>
+<% end %>
+
+<% if @user.background_repeat.present? %>
+  <% bgrepeat = @user.background_repeat %>
+<% else %>
+  <% bgrepeat = "repeat" %>
+<% end %>
+
+<% if @user.background_pos_h.present? %>
+  <% bgpos_h = @user.background_pos_h %>
+<% else %>
+  <% bgpos_h = "left" %>
+<% end %>
+
+<% if @user.background_pos_v.present? %>
+  <% bgpos_v = @user.background_pos_v %>
+<% else %>
+  <% bgpos_v = "top" %>
+<% end %>
+
+<% if @user.background_attachment.present? %>
+  <% bgattachment = @user.background_attachment %>
+<% else %>
+  <% bgattachment = "fixed" %>
+<% end %>
+
+
 <style type="text/css">
 
   body {
-
-      background-color: #<%= @user.portfolio_bg %>;
-      font-family: <%= @user.font_face %>, helvetica, sans-serif, serif;
-
+    background-color: #<%= @user.portfolio_bg %>;
+    font-family: <%= @user.font_face %>, helvetica, sans-serif, serif;
+    background-image: url(/assets/styles/patterns/<%= @user.background_image %>);
+    background-repeat: <%= bgrepeat %>;
+    background-attachment: <%= bgattachment %>;
+    background-position: <%= bgpos_h %> <%= bgpos_v %>;
   }     
   body, navigation a, .porfolio-nav li a {
     color: #<%= @user.font_color %>

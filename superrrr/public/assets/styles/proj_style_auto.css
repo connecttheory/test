@@ -49,7 +49,7 @@ h2.project-title {
 .ui-accordion .ui-accordion-header:hover a {
   text-decoration: underline;
 }
-.ui-slider-handle.ui-state-default.ui-corner-all {
+.ui-slider-horizontal .ui-slider-handle.ui-state-default.ui-corner-all {
   background: none repeat scroll 0 0 #4F575E;
   border-radius: 2px 2px 2px 2px;
   cursor: pointer;
@@ -57,6 +57,21 @@ h2.project-title {
   width: 18px;
   top: -3px;
 }
+#sliderThemeThumb.ui-slider-vertical {
+  width: 5px;
+  position: absolute;
+  right: 15px;
+  top: 5px;
+  height: 120px;
+}
+.ui-slider-vertical .ui-slider-handle.ui-state-default.ui-corner-all {
+  background: none repeat scroll 0 0 #4F575E;
+  border-radius: 2px 2px 2px 2px;
+  cursor: pointer;
+  height: 9px;
+  width: 11px;
+}
+
 
 /* dialog */
 #dialog {

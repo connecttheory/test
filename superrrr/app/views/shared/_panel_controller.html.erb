@@ -2,7 +2,7 @@
 <div id="dialog" title="Theme Options">
   <div id="accordion">
     
-    <h3><a href="#">Design</a></h3>
+    <a href="#designPanel" title="design panel" name="" class="design accordionH3">Design</a>
     <div>
       
       <div id="navSliderPanel">
@@ -10,22 +10,22 @@
         <div class="slideArea">
           <div class="panel-menu layoutsNavPanel">
             <div class="panel-icon layout-icon">&nbsp;</div>
-            <a href="#" >Layouts</a>
+            <a href="#layouts" >Layouts</a>
             <p class="controller-panel-nav-description">Select a page structure</p>
           </div>
           <div class="panel-menu backgroundsNavPanel">
             <div class="panel-icon background-icon">&nbsp;</div>
-            <a href="#">Backgrounds</a>
+            <a href="#backgrounds">Backgrounds</a>
             <p class="controller-panel-nav-description">Customize your portfolio background</p>
           </div>
           <div class="panel-menu logosNavPanel">
             <div class="panel-icon logo-icon">&nbsp;</div>
-            <a href="#">Logos</a>
+            <a href="#logos">Logos</a>
             <p class="controller-panel-nav-description">Upload your custom logo</p>
           </div>
           <div class="panel-menu fontsNavPanel">
             <div class="panel-icon font-icon">&nbsp;</div>
-            <a href="#">Fonts</a>
+            <a href="#fonts">Fonts</a>
             <p class="controller-panel-nav-description">Choose different font</p>
           </div>
 
@@ -75,8 +75,8 @@
               			<% else%>
               				<%= image_tag 'img/layouts/layout-5.png', :class=> 'layout5 layoutIcon doReload' %>
               			<% end %>
-              			
             				<%= f.hidden_field :portfolio_layout, :class=> 'isvisible layoutVal' %>
+            				
             				<br class="clear" />
             			</div>
             		</div>
@@ -110,20 +110,172 @@
             <p class="controller-panel-nav-description">Customize your portfolio background</p>
           </div>
           
-    	    <% if @user.portfolio_bg.present? %>
-    	      <% portfolio_bg = @user.portfolio_bg %>
-    	    <% else %>
-    	      <% portfolio_bg = "ffffff" %>
-    	    <% end %>
-      	  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect", :id => "form_idimgselect" }) do |f| %>
-        		<div class="rowfield">
-        			<div class="row fview">
-          	    <%= content_tag(:p, "Color:", :class => "tiny label") %>
-          	    <%= f.hidden_field :portfolio_bg, :class => "project_bg_val", :value => portfolio_bg %>
-          	    <div id="colorSelector" class="cpicker"><div style="background-color: #<%= portfolio_bg %>"></div></div>            	
+          <div class="panel-menu">
+      	    <% if @user.portfolio_bg.present? %>
+      	      <% portfolio_bg = @user.portfolio_bg %>
+      	    <% else %>
+      	      <% portfolio_bg = "ffffff" %>
+      	    <% end %>
+        	  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect" }) do |f| %>
+          		<div class="rowfield">
+          			<div class="row fview">
+            	    <%= content_tag(:p, "Color:", :class => "tiny label") %>
+            	    <%= f.hidden_field :portfolio_bg, :class => "project_bg_val", :value => portfolio_bg %>
+            	    <div id="colorSelector" class="cpicker"><div style="background-color: #<%= portfolio_bg %>"></div></div>            	
+                </div>
               </div>
-            </div>
-      	  <% end %>
+        	  <% end %>
+      	  </div>
+      	  
+    	    <div class="panel-menu">
+            <label>Image:</label>
+            <div id="backgroundTexturesScrollableP" class="backgroundTextures">
+              <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect themeBgImg" }) do |f| %>
+                <%= f.hidden_field :background_image, :class => "background_image_val", :value => "" %>
+              <% end %>
+              <div id="sliderThemeThumb"></div> 
+              <div id="texturesContent">
+                <div class="backgroundTexture wrap" id="tileable_wood_texture.png" >
+                  <img src="/assets/styles/patterns/tileable_wood_texture.png" alt="wooden" class="woodBg textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap" id="dark_geometric.png">
+                  <img src="/assets/styles/patterns/dark_geometric.png" alt="dark geometric" class="darkBg textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap" id="ice_age.png">
+                  <img src="/assets/styles/patterns/ice_age.png" alt="ice age" class="ice_age textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap" id="perforated_white_leather.png">
+                  <img src="/assets/styles/patterns/perforated_white_leather.png" alt="perforated white leather" class="perforated_white_leather textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap" id="white_leather.png">
+                  <img src="/assets/styles/patterns/white_leather.png" alt="white leather" class="white_leather textureThumb" />
+                </div> <!-- 5 -->
+                
+                <div class="backgroundTexture wrap" id="blu_stripes.png">
+                  <img src="/assets/styles/patterns/blu_stripes.png" alt="blu stripes" class="blu_stripes textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap" id="classy_fabric.png">
+                  <img src="/assets/styles/patterns/classy_fabric.png" alt="classy fabric" class="classy_fabric textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap cutcube" id="cutcube.png">
+                  <img src="/assets/styles/patterns/cutcube.png" alt="cutcube" class="cutcube textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap fake_luxury" id="fake_luxury.png">
+                  <img src="/assets/styles/patterns/fake_luxury.png" alt="fake luxury" class="fake_luxury textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap farmer" id="farmer.png">
+                  <img src="/assets/styles/patterns/farmer.png" alt="farmer" class="farmer textureThumb" />
+                </div> <!-- 10 -->
+                
+                <div class="backgroundTexture wrap grey_sandbag" id="grey_sandbag.png">
+                  <img src="/assets/styles/patterns/grey_sandbag.png" alt="grey sandbag" class="grey_sandbag textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap paper" id="paper.png">
+                  <img src="/assets/styles/patterns/paper.png" alt="paper" class="paper textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap soft_pad" id="soft_pad.png">
+                  <img src="/assets/styles/patterns/soft_pad.png" alt="soft pad" class="soft_pad textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap subtle_zebra_3d" id="subtle_zebra_3d.png">
+                  <img src="/assets/styles/patterns/subtle_zebra_3d.png" alt="subtle zebra 3d" class="subtle_zebra_3d textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap texturetastic_gray" id="texturetastic_gray.png">
+                  <img src="/assets/styles/patterns/texturetastic_gray.png" alt="texturetastic gray" class="texturetastic_gray textureThumb" />
+                </div> <!-- 15 -->
+                
+                <div class="backgroundTexture wrap black_thread" id="black_thread.png">
+                  <img src="/assets/styles/patterns/black_thread.png" alt="black thread" class="black_thread textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap dark_matter" id="dark_matter.png">
+                  <img src="/assets/styles/patterns/dark_matter.png" alt="dark matter" class="dark_matter textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap darkdenim3" id="darkdenim3.png">
+                  <img src="/assets/styles/patterns/darkdenim3.png" alt="darkdenim3" class="darkdenim3 textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap dvsup" id="dvsup.png">
+                  <img src="/assets/styles/patterns/dvsup.png" alt="dvsup" class="dvsup textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap fabric_plaid" id="fabric_plaid.png">
+                  <img src="/assets/styles/patterns/fabric_plaid.png" alt="fabric plaid" class="fabric_plaid textureThumb" />
+                </div> <!-- 20 -->
+                
+                <div class="backgroundTexture wrap gridme" id="gridme.png">
+                  <img src="/assets/styles/patterns/gridme.png" alt="gridme" class="gridme textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap hixs_pattern_evolution" id="hixs_pattern_evolution.png">
+                  <img src="/assets/styles/patterns/hixs_pattern_evolution.png" alt="hixs pattern evolution" class="hixs_pattern_evolution textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap knitted-netting" id="knitted-netting.png">
+                  <img src="/assets/styles/patterns/knitted-netting.png" alt="knitted netting" class="knitted-netting textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap quilt" id="quilt.png">
+                  <img src="/assets/styles/patterns/quilt.png" alt="quilt" class="quilt textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap vertical_cloth" id="vertical_cloth.png">
+                  <img src="/assets/styles/patterns/vertical_cloth.png" alt="vertical cloth" class="vertical_cloth textureThumb" />
+                </div> <!-- 25 -->
+                
+                <div class="backgroundTexture wrap white_brick_wall" id="white_brick_wall.png">
+                  <img src="/assets/styles/patterns/white_brick_wall.png" alt="white brick wall" class="white_brick_wall textureThumb" />
+                </div>
+                <!-- 
+                <div class="backgroundTexture wrap" id="cutcube.png">
+                  <img src="/assets/styles/patterns/cutcube.png" alt="cutcube" class="cutcube textureThumb" />
+                </div>
+                # -->
+                <br class="clear" />
+              </div> <!-- end #texturesContent -->     
+                      
+            </div> <!-- end #backgroundTexturesScrollerP -->
+          </div> <!-- end .panel-menu -->
+          
+          <div class="panel-menu">
+            <label>Repeat</label>
+            <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect themeBgRepeat" }) do |f| %>
+              <%= f.hidden_field :background_repeat, :class => "background_repeat_val", :value => "" %>
+            <% end %>
+            <select name="backgroundRepeat" id="backgroundRepeat" class="background">
+              <option value="no-repeat">No Repeat</option>
+              <option value="repeat-x">Repeat Horizontal</option>
+              <option value="repeat-y">Repeat Vertical</option>
+              <option value="repeat">Repeat Both</option>
+            </select>
+          </div>
+          
+          <div class="panel-menu">
+            <label>Position</label>
+            <label>Horinzontal Alignment</label>
+            <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect themeBgPositionH" }) do |f| %>
+              <%= f.hidden_field :background_pos_h, :class => "background_positionH_val", :value => "" %>
+            <% end %>
+            <select name="backgroundPositionH" id="backgroundPositionH" class="background position">
+              <option value="left">Left</option>
+              <option value="center">Center</option>
+              <option value="right">Right</option>
+            </select>
+            
+            <label>Vertical Alignment</label>
+           <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect themeBgPositionV" }) do |f| %>
+              <%= f.hidden_field :background_pos_v, :class => "background_positionV_val", :value => "" %>
+            <% end %>
+            <select name="backgroundPositionV" id="backgroundPositionV" class="background position">
+              <option value="top">Top</option>
+              <option value="center">Center</option>
+              <option value="bottom">Bottom</option>
+            </select>
+          </div>
+          
+          <div class="panel-menu">
+            <label>Attachment</label>
+           <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect themeBgAttachment" }) do |f| %>
+              <%= f.hidden_field :background_attachment, :class => "background_attachment_val", :value => "" %>
+            <% end %>
+            <select name="backgroundAttachment" id="backgroundAttachment" class="background">
+              <option value="scroll">Scroll</option>
+              <option value="fixed">Fixed</option>
+            </select>
+          </div>
+          
         </div>
         
         <div class="slideArea">
@@ -222,7 +374,7 @@
       
     </div>
     
-    <h3><a href="#">About</a></h3>
+    <a href="#aboutPanel" title="about panel" name="" class="about accordionH3">About</a>
     <div> <!-- accordion panel start -->
       <h3>About</h3>
       <textarea class="wysiwyg" name="input">Write your content here.</textarea>
@@ -230,7 +382,7 @@
 
 
 
-    <h3><a href="#">Footer</a></h3>
+    <a href="#footerPanel" title="footer panel" name="" class="footer accordionH3">Footer</a>
     <div> <!-- accordion -->
       <!-- form_for(:user -->
 	    <% if @user.footer_bg.present? %>
@@ -251,3 +403,30 @@
   </div> <!-- #accordion -->
     
 </div>  <!-- #dialog -->
+
+<% content_for(:head) do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      
+      var scrollPane = $( "#backgroundTexturesScrollableP" ), scrollContent = $( "#texturesContent" );
+		
+  		//build slider
+  		var scrollbar = $( "#sliderThemeThumb" ).slider({
+  		  orientation: "vertical",
+  		  value: 100,
+  			slide: function( event, ui ) {
+  				if ( scrollContent.height() > scrollPane.height() ) {
+  				  orientation: "vertical",
+  					scrollContent.css( "margin-top", Math.round(
+  						(100 - ui.value) / 100 * ( scrollPane.height() - scrollContent.height() )
+  					) + "px" );
+  				} else {
+  					scrollContent.css( "margin-top", 0 );
+  				}
+  			}
+  		});
+      
+
+		});
+  </script>
+<% end %>

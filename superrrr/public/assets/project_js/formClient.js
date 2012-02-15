@@ -1,5 +1,41 @@
 $(document).ready(function() {
   
+  //background images  
+  $('#backgroundAttachment').change(function() {
+    $selectedVal = $(this).val();
+    $('.form_imgselect.themeBgAttachment').find('.background_attachment_val').val($selectedVal);
+    $("body").css('background-attachment', $selectedVal);
+    $('.form_imgselect.themeBgAttachment').submit();
+  });
+  $('#backgroundPositionH').change(function() {
+    $selectedVal = $(this).val();
+    $('.form_imgselect.themeBgPositionH').find('.background_positionH_val').val($selectedVal);
+    $("body").css('background-position-x', $selectedVal);
+    $('.form_imgselect.themeBgPositionH').submit();
+  });
+  $('#backgroundPositionV').change(function() {
+    $selectedVal = $(this).val();
+    $('.form_imgselect.themeBgPositionV').find('.background_positionV_val').val($selectedVal);
+    $("body").css('background-position-y', $selectedVal);
+    $('.form_imgselect.themeBgPositionV').submit();
+  });
+  
+  $('#backgroundRepeat').change(function() {
+    $selectedVal = $(this).val();
+    $('.form_imgselect.themeBgRepeat').find('.background_repeat_val').val($selectedVal);
+    $("body").css('backgroundRepeat', $selectedVal);
+    $('.form_imgselect.themeBgRepeat').submit();
+  });
+  
+  $('.backgroundTexture').click(function() {
+    var filename = $(this).attr('id');
+    $('.form_imgselect.themeBgImg').find('.background_image_val').val(filename);
+    $('body').css({
+      backgroundImage: "url(/assets/styles/patterns/"+ filename +")",
+      backgroundRepeat: "repeat"
+    });
+    $('.form_imgselect.themeBgImg').submit();
+  });
 
   
   //font cycle
@@ -124,7 +160,9 @@ $(document).ready(function() {
   $( "#accordion" ).accordion({
     header: 'h3',
     autoHeight: false,
-    //navigation: true
+    navigation: true,
+    header: '.accordionH3',
+    clearStyle: true,
     //fillSpace: true
     //clearStyle: true,
     collapsible: true
@@ -135,6 +173,12 @@ $(document).ready(function() {
     //  $('#navSliderPanel').parent().css({ height: $nsp});
     //}
   });
+	$(".accordionH3").click(function(event){
+		  window.location.hash=this.hash;
+	 });	
+	$('.slideArea .panel-menu a').click(function(event){
+		  window.location.hash=this.hash;
+	 });
    
   $( "#dialog" ).hide();
   $.fx.speeds._default = 250;
@@ -146,16 +190,22 @@ $(document).ready(function() {
   		zIndex: 150,
   		resizable: false,
   		maxWidth: 300,
+  		position: ['right','center'],
+  		open: function(event, ui) {
+  		  $( "#controlPanelOpen" ).fadeOut('fast');
+  		  $( "#dialog" ).parent().css({position:"fixed"});
+  		},
   		close: function(event, ui) { 
   		  $( "#controlPanelOpen" ).fadeIn();
   		}
   	});
+  	$("#dialog").dialog('open');
   
   	$( "#controlPanelOpen" ).click(function() {
   		//$( "#dialog" ).dialog( "open" );
   		$( "#dialog" ).parent().css({position:"fixed"}).end().dialog('open');
-  		$(this).fadeOut('fast');
-  		return false;
+  		//$(this).fadeOut('fast');
+  		//return false;
   	});
 
   

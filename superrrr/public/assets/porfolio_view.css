@@ -1,6 +1,48 @@
+/*small img fix*/
+.backgroundTexture.cutcube.wrap { background: url('styles/patterns/cutcube.png') repeat scroll 0 0 transparent; }
+.backgroundTexture.fake_luxury.wrap { background: url('styles/patterns/fake_luxury.png') repeat scroll 0 0 transparent; }
+.backgroundTexture.soft_pad.wrap { background: url('styles/patterns/soft_pad.png') repeat scroll 0 0 transparent; }
+.backgroundTexture.subtle_zebra_3d.wrap { background: url('styles/patterns/subtle_zebra_3d.png') repeat scroll 0 0 transparent; }
+.backgroundTexture.black_thread.wrap { background: url('styles/patterns/black_thread.png') repeat scroll 0 0 transparent; }
+.backgroundTexture.dark_matter.wrap { background: url('styles/patterns/dark_matter.png') repeat scroll 0 0 transparent; }
+.backgroundTexture.dvsup.wrap { background: url('styles/patterns/dvsup.png') repeat scroll 0 0 transparent; }
+.backgroundTexture.gridme.wrap { background: url('styles/patterns/gridme.png') repeat scroll 0 0 transparent; }
+.backgroundTexture.hixs_pattern_evolution.wrap { background: url('styles/patterns/hixs_pattern_evolution.png') repeat scroll 0 0 transparent; }
+.backgroundTexture.knitted-netting.wrap { background: url('styles/patterns/knitted-netting.png') repeat scroll 0 0 transparent; }
+.backgroundTexture.quilt.wrap { background: url('styles/patterns/quilt.png') repeat scroll 0 0 transparent; }
+.backgroundTexture.white_brick_wall.wrap { background: url('styles/patterns/white_brick_wall.png') repeat scroll 0 0 transparent; }
+
+
+/*textures wrap*/
+.backgroundTextures {
+  height: 130px;
+  overflow: hidden;
+  position: relative;
+}
+/*block*/
+.backgroundTexture {
+  width: 68px;
+  height: 53px;
+  overflow: hidden;
+  float: left;
+  margin: 5px;
+  border: 1px solid #e1e1e1;
+  cursor: pointer;
+}
+
+#accordion a.accordionH3 {
+  color: white;
+  font-family: "Lucida Grande",Tahoma;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 10px;
+  text-transform: uppercase;
+  display: block;
+}
 #accordion label {
   font-size: 11px;
   vertical-align: middle;
+  display:block;
 }
 .colorpicker {
   z-index: 1500;
