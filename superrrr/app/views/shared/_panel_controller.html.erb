@@ -84,15 +84,31 @@
       		  </div> <!-- subPanel 1 end-->
       		  <div> <!-- subPanel 2-->
       		    <div class="panel-menu">
-        		    <h3 class="subMenuTitle">Margin Top</h3>
-                <label>Font Size</label>
-                <div id="marginSliderTop" class="slider marginSlider"></div>
-                <span class="marginTopValue">12</span>px
+        		    <h3 class="subMenuTitle">Margins</h3>
+        		    
+                <% if @user.margin_top.present? %>
+                  <% margin_top = @user.margin_top.to_i %>
+                <% else %>
+                  <% margin_top = 12 %>
+                <% end %>
+        		    <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+                  <label>Top</label>
+                  <div id="marginSliderTop" class="slider marginSlider"></div>
+                  <span class="marginTopValue val_setter"><%= margin_top %></span>px
+                  <%= f.hidden_field :margin_top, :class => "margin_top_val input_form_val", :value => :margin_top %>
+                <% end %>
                 
-        		    <h3 class="subMenuTitle">Margin Bottom</h3>
-                <label>Font Size</label>
-                <div id="marginSliderBottom" class="slider marginSlider"></div>
-                <span class="marginBottomValue">12</span>px
+                <% if @user.margin_bottom.present? %>
+                  <% margin_bottom = @user.margin_bottom.to_i %>
+                <% else %>
+                  <% margin_bottom = 12 %>
+                <% end %>
+                <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+                  <label>Bottom</label>
+                  <div id="marginSliderBottom" class="slider marginSlider"></div>
+                  <span class="marginBottomValue"><%= margin_bottom %></span>px
+                  <%= f.hidden_field :margin_bottom, :class => "margin_bottom_val input_form_val", :value => :margin_bottom %>
+                <% end %>
               </div>
               <div class="panel-menu">
                  <h3 class="subMenuTitle">Project Description</h3>
@@ -218,10 +234,120 @@
                 <div class="backgroundTexture wrap white_brick_wall" id="white_brick_wall.png">
                   <img src="/assets/styles/patterns/white_brick_wall.png" alt="white brick wall" class="white_brick_wall textureThumb" />
                 </div>
+                <div class="backgroundTexture wrap foggy_birds" id="foggy_birds.png">
+                  <img src="/assets/styles/patterns/foggy_birds.png" alt="foggy birds" class="foggy_birds textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap foil" id="foil.png">
+                  <img src="/assets/styles/patterns/foil.png" alt="foil" class="foil textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap grilled" id="grilled.png">
+                  <img src="/assets/styles/patterns/grilled.png" alt="grilled" class="grilled textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap groovepaper" id="groovepaper.png">
+                  <img src="/assets/styles/patterns/groovepaper.png" alt="groovepaper" class="groovepaper textureThumb" />
+                </div> <!-- 30 -->
+                
+                <div class="backgroundTexture wrap irongrip" id="irongrip.png">
+                  <img src="/assets/styles/patterns/irongrip.png" alt="irongrip" class="irongrip textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap merely_cubed" id="merely_cubed.png">
+                  <img src="/assets/styles/patterns/merely_cubed.png" alt="merely cubed" class="merely_cubed textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap nami" id="nami.png">
+                  <img src="/assets/styles/patterns/nami.png" alt="nami" class="nami textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap pineapplecut" id="pineapplecut.png">
+                  <img src="/assets/styles/patterns/pineapplecut.png" alt="pineapplecut" class="pineapplecut textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap starring" id="starring.png">
+                  <img src="/assets/styles/patterns/starring.png" alt="starring" class="starring textureThumb" />
+                </div> <!-- 35 -->
+                
+                <div class="backgroundTexture wrap broken_noise" id="broken_noise.png">
+                  <img src="/assets/styles/patterns/broken_noise.png" alt="broken_noise" class="broken_noise textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap denim" id="denim.png">
+                  <img src="/assets/styles/patterns/denim.png" alt="denim" class="denim textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap white_paperboard" id="white_paperboard.png">
+                  <img src="/assets/styles/patterns/white_paperboard.png" alt="white paperboard" class="white_paperboard textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap white_plaster" id="white_plaster.png">
+                  <img src="/assets/styles/patterns/white_plaster.png" alt="white_plaster" class="white_plaster textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap whitediamond" id="whitediamond.png">
+                  <img src="/assets/styles/patterns/whitediamond.png" alt="whitediamond" class="whitediamond textureThumb" />
+                </div> <!-- 40 -->
+                
+                <div class="backgroundTexture wrap wood_pattern" id="wood_pattern.png">
+                  <img src="/assets/styles/patterns/wood_pattern.png" alt="wood pattern" class="wood_pattern textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap batthern" id="batthern.png">
+                  <img src="/assets/styles/patterns/batthern.png" alt="batthern" class="batthern textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap carbon_fibre_big" id="carbon_fibre_big.png">
+                  <img src="/assets/styles/patterns/carbon_fibre_big.png" alt="carbon fibre big" class="carbon_fibre_big textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap checkered_pattern" id="checkered_pattern.png">
+                  <img src="/assets/styles/patterns/checkered_pattern.png" alt="checkered pattern" class="checkered_pattern textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap connect" id="connect.png">
+                  <img src="/assets/styles/patterns/connect.png" alt="connect" class="connect textureThumb" />
+                </div> <!-- 45 -->
+                
+                <div class="backgroundTexture wrap dark_wood" id="dark_wood.png">
+                  <img src="/assets/styles/patterns/dark_wood.png" alt="dark wood" class="dark_wood textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap diagmonds" id="diagmonds.png">
+                  <img src="/assets/styles/patterns/diagmonds.png" alt="diagmonds" class="diagmonds textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap elegant_grid" id="elegant_grid.png">
+                  <img src="/assets/styles/patterns/elegant_grid.png" alt="elegant grid" class="elegant_grid textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap fake_brick" id="fake_brick.png">
+                  <img src="/assets/styles/patterns/fake_brick.png" alt="fake brick" class="fake_brick textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap gun_metal" id="gun_metal.png">
+                  <img src="/assets/styles/patterns/gun_metal.png" alt="gun metal" class="gun_metal textureThumb" />
+                </div> <!-- 50 -->
+                
+                <div class="backgroundTexture wrap light_grey_floral_motif" id="light_grey_floral_motif.png">
+                  <img src="/assets/styles/patterns/light_grey_floral_motif.png" alt="light grey floral motif" class="light_grey_floral_motif textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap lined_paper" id="lined_paper.png">
+                  <img src="/assets/styles/patterns/lined_paper.png" alt="lined_paper" class="lined_paper textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap old_wall" id="old_wall.png">
+                  <img src="/assets/styles/patterns/old_wall.png" alt="old wall" class="old_wall textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap polonez_car" id="polonez_car.png">
+                  <img src="/assets/styles/patterns/polonez_car.png" alt="polonez car" class="polonez_car textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap px_by_Gre3g" id="px_by_Gre3g.png">
+                  <img src="/assets/styles/patterns/px_by_Gre3g.png" alt="px by Gre3g" class="px_by_Gre3g textureThumb" />
+                </div> <!-- 55 -->
+                
+                <div class="backgroundTexture wrap ravenna" id="ravenna.png">
+                  <img src="/assets/styles/patterns/ravenna.png" alt="ravenna" class="ravenna textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap ricepaper" id="ricepaper.png">
+                  <img src="/assets/styles/patterns/ricepaper.png" alt="ricepaper" class="ricepaper textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap small-crackle-bright" id="small-crackle-bright.png">
+                  <img src="/assets/styles/patterns/small-crackle-bright.png" alt="small crackle bright" class="small-crackle-bright textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap soft_kill" id="soft_kill.png">
+                  <img src="/assets/styles/patterns/soft_kill.png" alt="soft kill" class="soft_kill textureThumb" />
+                </div>
+                <div class="backgroundTexture wrap xv" id="xv.png">
+                  <img src="/assets/styles/patterns/xv.png" alt="xv" class="xv textureThumb" />
+                </div>
+                
                 <!-- 
                 <div class="backgroundTexture wrap" id="cutcube.png">
                   <img src="/assets/styles/patterns/cutcube.png" alt="cutcube" class="cutcube textureThumb" />
                 </div>
+                
                 # -->
                 <br class="clear" />
               </div> <!-- end #texturesContent -->     
@@ -377,7 +503,10 @@
     <a href="#aboutPanel" title="about panel" name="" class="about accordionH3">About</a>
     <div> <!-- accordion panel start -->
       <h3>About</h3>
-      <textarea class="wysiwyg" name="input">Write your content here.</textarea>
+      <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+        <%= f.text_area(:about_user, :class => 'wysiwyg' ) %>
+        <%= f.submit %>
+      <% end %>
     </div> <!-- accordion panel end -->
 
 

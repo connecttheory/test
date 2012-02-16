@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120215052202) do
+ActiveRecord::Schema.define(:version => 20120216041003) do
 
   create_table "images", :force => true do |t|
     t.integer  "project_id"
@@ -92,6 +92,10 @@ ActiveRecord::Schema.define(:version => 20120215052202) do
     t.string   "background_pos_h"
     t.string   "background_pos_v"
     t.string   "background_attachment"
+    t.integer  "margin_top"
+    t.integer  "margin_bottom"
+    t.integer  "logo_left"
+    t.integer  "logo_top"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username"

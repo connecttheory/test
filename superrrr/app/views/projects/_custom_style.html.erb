@@ -29,6 +29,23 @@
   <% bgattachment = "fixed" %>
 <% end %>
 
+<% if @user.margin_top.present? %>
+  <% margin_top = @user.margin_top.to_i %>
+<% else %>
+  <% margin_top = 12 %>
+<% end %>
+
+<% if @user.margin_bottom.present? %>
+  <% margin_bottom = @user.margin_bottom.to_i %>
+<% else %>
+  <% margin_bottom = 12 %>
+<% end %>
+
+<% if @user.logo_top.present? && @user.logo_top < 0 %>
+  <% logo_top = 0 %>
+<% else %>
+  <% logo_top = @user.logo_top %>
+<% end %>
 
 <style type="text/css">
 
@@ -49,5 +66,12 @@
   #footer_sm {
     background: #<%= @user.footer_bg %>;
   }
-
+  .image-block {
+    margin-top: <%= margin_top %>px;
+    margin-bottom: <%= margin_bottom %>px;
+  }
+  h1#porfolio-home {
+    left: <%= @user.logo_left %>px;
+    top: <%= @user.logo_top %>px;
+  }
 </style>

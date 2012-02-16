@@ -1,4 +1,18 @@
 $(document).ready(function() {
+  //unanimous function that will submit the form margin top/bottom
+  $( "#porfolio-home" ).draggable({
+    cursor: 'move',
+    scroll: false,
+    //containtment: $(document),
+    // Find position where image is dropped.
+    stop: function(event, ui) {
+        // Show dropped position.
+        var Stoppos = $(this).position();
+        $('.form_imgselect.logoXYPos').find('.logo_left_pos_val').val(Stoppos.left);
+        $('.form_imgselect.logoXYPos').find('.logo_top_pos_val').val(Stoppos.top);
+        $('.form_imgselect.logoXYPos').submit();
+    }
+  });
   
   //background images  
   $('#backgroundAttachment').change(function() {
@@ -115,19 +129,23 @@ $(document).ready(function() {
   $( "#marginSliderTop" ).slider({
     min: 0,
     max: 100,
-    value: 12,
+    value: parseInt($('.marginTopValue').text()),
     change: function(event, ui) {
       $('.marginTopValue').text(ui.value);
+      $('.margin_top_val').val(ui.value);
       $('.image-block').css('marginTop', ui.value + "px");
+      $('.margin_top_val').parents('.form_imgselect').submit();
     }
   });
   $( "#marginSliderBottom" ).slider({
     min: 0,
     max: 100,
-    value: 12,
+    value: parseInt($('.marginBottomValue').text()),
     change: function(event, ui) {
       $('.marginBottomValue').text(ui.value);
+      $('.margin_bottom_val').val(ui.value);
       $('.image-block').css('marginBottom', ui.value + "px");
+      $('.margin_bottom_val').parents('.form_imgselect').submit();
     }
   });
 
@@ -182,33 +200,30 @@ $(document).ready(function() {
    
   $( "#dialog" ).hide();
   $.fx.speeds._default = 250;
+	$("#dialog").dialog({
+		autoOpen: false,
+		show: "fade",
+		hide: "fade",
+		zIndex: 150,
+		resizable: false,
+		maxWidth: 300,
+		position: ['right','center'],
+		open: function(event, ui) {
+		  $( "#controlPanelOpen" ).fadeOut('fast');
+		  $( "#dialog" ).parent().css({position:"fixed"});
+		},
+		close: function(event, ui) { 
+		  $( "#controlPanelOpen" ).fadeIn();
+		}
+	});
+	$("#dialog").dialog('open');
 
-  	$("#dialog").dialog({
-  		autoOpen: false,
-  		show: "fade",
-  		hide: "fade",
-  		zIndex: 150,
-  		resizable: false,
-  		maxWidth: 300,
-  		position: ['right','center'],
-  		open: function(event, ui) {
-  		  $( "#controlPanelOpen" ).fadeOut('fast');
-  		  $( "#dialog" ).parent().css({position:"fixed"});
-  		},
-  		close: function(event, ui) { 
-  		  $( "#controlPanelOpen" ).fadeIn();
-  		}
-  	});
-  	$("#dialog").dialog('open');
-  
-  	$( "#controlPanelOpen" ).click(function() {
-  		//$( "#dialog" ).dialog( "open" );
-  		$( "#dialog" ).parent().css({position:"fixed"}).end().dialog('open');
-  		//$(this).fadeOut('fast');
-  		//return false;
-  	});
-
-  
+	$( "#controlPanelOpen" ).click(function() {
+		//$( "#dialog" ).dialog( "open" );
+		$( "#dialog" ).parent().css({position:"fixed"}).end().dialog('open');
+		//$(this).fadeOut('fast');
+		//return false;
+	});
   $('.showhide').click(function() {
     $('#header').toggle();
   });

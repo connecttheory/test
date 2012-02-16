@@ -38,25 +38,24 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
       flash[:notice] = 'User updated.'
-        session[:dialog_open] = "open"
-      #if params[:user][:avatar].present?
-      #	# the logo params is there then send it to crop avatar
-      #  render :action => "crop"
-      #elsif params[:user][:logo].present?
-      #	# the logo params is there then send it to crop logo
-      #	render :action => "crop_logo"        
-      #elsif params[:logo].to_i == 1 || params[:user][:portfolio_bg].present? || params[:user][:portfolio_layout].present?
-      #	#redirect depending on edit situation
-	    #  respond_to do |format|
-		  #    format.html { redirect_to(:controller => 'personalize', :action => 'index') }
-		  #    format.js
-		  #  end		  
-	    #else
-		  #  respond_to do |format|
-			#    format.html { redirect_to(:controller => 'about', :action => 'index') }
-			#    format.js
-			#  end
-      #end #if params[:user][:avatar].present?
+      if params[:user][:avatar].present?
+      	# the logo params is there then send it to crop avatar
+        render :action => "crop"
+      elsif params[:user][:logo].present?
+      	# the logo params is there then send it to crop logo
+      	render :action => "crop_logo"        
+      elsif params[:logo].to_i == 1 || params[:user][:portfolio_bg].present? || params[:user][:portfolio_layout].present?
+      	#redirect depending on edit situation
+	      respond_to do |format|
+		      format.html { redirect_to(:controller => 'personalize', :action => 'index') }
+		      format.js
+		    end		  
+	    else
+		    respond_to do |format|
+			    format.html { redirect_to(:controller => 'about', :action => 'index') }
+			    format.js
+			  end
+      end #if params[:user][:avatar].present?
 
     else #if failed to update user record
       render("edit")
