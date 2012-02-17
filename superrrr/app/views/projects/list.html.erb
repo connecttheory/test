@@ -7,44 +7,51 @@
 	
 	<%= stylesheet_link_tag "porfolio_view" %>
 	
-  <%= stylesheet_link_tag "styles/dark-hive/jquery-ui-1.8.17.custom.css" %> 
-  <%= stylesheet_link_tag "project_js/colorpicker/colorpicker.css" %>
-  <%= stylesheet_link_tag "styles/proj_style_auto.css" %>
-  <%= javascript_include_tag 'project_js/colorpicker/colorpicker.js' %>
-  <%= javascript_include_tag 'project_js/colorpicker/eye.js' %>
-  <%= javascript_include_tag 'project_js/colorpicker/utils.js' %>
-  <%= javascript_include_tag 'project_js/colorpicker/layoutClient.js' %>
-
-  <%= stylesheet_link_tag "project_js/cleditor/jquery.cleditor.css" %>
-  <%= javascript_include_tag 'project_js/cleditor/jquery.cleditor.min.js' %>
-
-  <%= javascript_include_tag 'project_js/jquery.cycle.lite.js' %>
+	<%= javascript_include_tag 'project_js/clientscriptpublic' %>
+	
+  <% if @user.id.to_i == session[:user_id].to_i %>
+    <%= stylesheet_link_tag "styles/dark-hive/jquery-ui-1.8.17.custom.css" %> 
+    <%= stylesheet_link_tag "project_js/colorpicker/colorpicker.css" %>
+    <%= stylesheet_link_tag "styles/proj_style_auto.css" %>
+    <%= javascript_include_tag 'project_js/colorpicker/colorpicker.js' %>
+    <%= javascript_include_tag 'project_js/colorpicker/eye.js' %>
+    <%= javascript_include_tag 'project_js/colorpicker/utils.js' %>
+    <%= javascript_include_tag 'project_js/colorpicker/layoutClient.js' %>
   
-  <%= javascript_include_tag 'project_js/formClient' %>
-  <%= javascript_include_tag 'project_js/form' %>
+    <%= stylesheet_link_tag "project_js/cleditor/jquery.cleditor.css" %>
+    <%= javascript_include_tag 'project_js/cleditor/jquery.cleditor.min.js' %>
   
-  <script type="text/javascript">
-  $(document).ready(function() {
-    $.cleditor.defaultOptions.controls = "bold italic underline strikethrough";
-    $(".wysiwyg").cleditor( {
-          width:        260, // width not including margins, borders or padding
-          height:       200, // height not including margins, borders or padding
-          controls:     // controls to add to the toolbar
-                        "bold italic underline style bullets numbering link unlink ", 
-          styles:       // styles in the style popup
-                        [["Paragraph", "<p>"], ["Header 2", "<h2>"],
-                        ["Header 3", "<h3>"],  ["Header 4","<h4>"],  ["Header 5","<h5>"],
-                        ["Header 6","<h6>"]],
-          useCSS:       false, // use CSS to style HTML when possible (not supported in ie)
-          docType:      // Document type contained within the editor
-                        '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">',
-          docCSSFile:   // CSS file used to style the document contained within the editor
-                        "", 
-          bodyStyle:    // style to assign to document body contained within the editor
-                        "margin:4px; font:10pt Arial,Verdana; cursor:text"
-        } );
-  });
-  </script>
+    <%= javascript_include_tag 'project_js/jquery.cycle.lite.js' %>
+    
+    <%= javascript_include_tag 'project_js/assetLoader' %>
+
+    <%= javascript_include_tag 'project_js/formClient' %>
+    <%= javascript_include_tag 'project_js/form' %>
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.cleditor.defaultOptions.controls = "bold italic underline strikethrough";
+      $(".wysiwyg").cleditor( {
+            width:        260, // width not including margins, borders or padding
+            height:       200, // height not including margins, borders or padding
+            controls:     // controls to add to the toolbar
+                          "bold italic underline style bullets numbering link unlink ", 
+            styles:       // styles in the style popup
+                          [["Paragraph", "<p>"], ["Header 2", "<h2>"],
+                          ["Header 3", "<h3>"],  ["Header 4","<h4>"],  ["Header 5","<h5>"],
+                          ["Header 6","<h6>"]],
+            useCSS:       false, // use CSS to style HTML when possible (not supported in ie)
+            docType:      // Document type contained within the editor
+                          '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">',
+            docCSSFile:   // CSS file used to style the document contained within the editor
+                          "", 
+            bodyStyle:    // style to assign to document body contained within the editor
+                          "margin:4px; font:10pt Arial,Verdana; cursor:text"
+          } );
+    });
+    </script>
+    
+	<% end %>
 	
 <% end %>
 

@@ -14,7 +14,7 @@ div#header {
   display: none;
 }
 #sidebar {
-  width: 202px;
+  /* width: 202px; */
   position: fixed;
   left: 32px;
   top: 52px;

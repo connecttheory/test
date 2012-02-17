@@ -80,6 +80,28 @@
         	    $(el).ColorPickerHide();
 			}
 		});
+		//Footer Font color
+		$('#colorSelectorFooterFontColor').ColorPicker({
+			color: '#0000ff',
+			livePreview: false,
+			onShow: function (colpkr) {
+				$(colpkr).fadeIn(500);
+				return false;
+			},
+			onHide: function (colpkr) {
+				$(colpkr).fadeOut(500);
+				$("#colorSelectorFooterFontColor").parents('.form_imgselect').submit();
+				return false;
+			},
+			onChange: function (hsb, hex, rgb) {
+				$('#colorSelectorFooterFontColor div').css('backgroundColor', '#' + hex);
+				$("#colorSelectorFooterFontColor").parents('.form_imgselect').find('.font_color_footer_val').val(hex);
+				$('#footer_sm a').css('color', '#' + hex);
+			},
+      onSubmit: function (hsb, hex, rgb, el) {
+        	    $(el).ColorPickerHide();
+			}
+		});
 		
 		//font color
 		$('#colorSelectorFont').ColorPicker({

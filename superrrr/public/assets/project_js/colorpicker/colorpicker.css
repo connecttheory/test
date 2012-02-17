@@ -166,6 +166,7 @@
 
 #colorSelector, 
 #colorSelectorFooter,
+#colorSelectorFooterFontColor,
 #colorSelectorFont {
 	position: relative;
 	width: 36px;
@@ -174,6 +175,7 @@
 }
 #colorSelector div, 
 #colorSelectorFooter div,
+#colorSelectorFooterFontColor div,
 #colorSelectorFont div {
 	position: absolute;
 	top: 3px;

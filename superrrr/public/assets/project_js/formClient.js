@@ -1,4 +1,18 @@
 $(document).ready(function() {
+  //reset logo position
+  $('.resetLogoPos').click(function(e) {
+    e.preventDefault();
+    console.log('clicked reset logo position');
+    
+    $('#porfolio-home').css({
+      position: 'relative',
+      left: 0,
+      top: 0
+    });
+    $('.form_imgselect.logoXYPos').find('.logo_left_pos_val').val(0);
+    $('.form_imgselect.logoXYPos').find('.logo_top_pos_val').val(0);
+    $('.form_imgselect.logoXYPos').submit();
+  });
   //unanimous function that will submit the form margin top/bottom
   $( "#porfolio-home" ).draggable({
     cursor: 'move',
@@ -158,8 +172,8 @@ $(document).ready(function() {
   
   $( "#slider" ).slider({
     min: 0,
-    max: 35,
-    value: 12,
+    max: 98,
+    value: parseInt($('.fontSize').text()),
     change: function(event, ui) {
       $('.fontSize').text(ui.value);
       $(this).parents('.form_imgselect').find('.font_size_val').val(ui.value);

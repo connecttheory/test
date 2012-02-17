@@ -43,11 +43,12 @@ class UsersController < ApplicationController
         render :action => "crop"
       elsif params[:user][:logo].present?
       	# the logo params is there then send it to crop logo
-      	render :action => "crop_logo"        
+      #	render :action => "crop_logo" 
+      redirect_to("/")       
       elsif params[:logo].to_i == 1 || params[:user][:portfolio_bg].present? || params[:user][:portfolio_layout].present?
       	#redirect depending on edit situation
 	      respond_to do |format|
-		      format.html { redirect_to(:controller => 'personalize', :action => 'index') }
+		      format.html { redirect_to("/") }
 		      format.js
 		    end		  
 	    else

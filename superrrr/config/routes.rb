@@ -9,7 +9,6 @@ Activedesigns::Application.routes.draw do
   #match '/' => 'access#profile', :constraints => { :subdomain => /my/}
   get "mine" => "access#profile", :as => "mine"
   
-  
   resources :password_resets
   #resources :users
   #resources :projects

@@ -420,11 +420,11 @@
             	</p>
             <% end %>
           <% else #if user logo is set %>
+            <button class="resetLogoPos">Reset Position</button>
             <div class="form-wrap image">
             	<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj_image" }) do |f| %>
             	  <div class="rowfield">
             		<div class="edit-btn">Edit</div>
-            		<p class="label tiny">Custom Logo: </p>
             		<%= image_tag(@user.logo.url(:thumb).to_s, :width => 200) %>
             	  </div>
             	  <div class="row fedit">
@@ -458,6 +458,32 @@
                 <option value="Rosario">Rosario</option>
                 <option value="Sansita+One">Sansita One</option>
                 <option value="Unna">Unna</option>
+                <option value="AllerRegular">Aller</option>
+                <option value="KingthingsPetrockRegular">Kingthings Petrock</option>
+                <option value="BallparkWeiner">Ballpark Weiner</option>
+                <option value="BebasRegular">Bebas</option>
+                <option value="BlackJackRegular">Black Jack Regular</option>
+                <option value="CantarellRegular">Cantarell</option>
+                <option value="ChunkFiveRoman">Chunk Five</option>
+                <option value="ColaborateRegular">Colaborate</option>
+                <option value="DanielRegular">Daniel</option>
+                <option value="DroidSansRegular">DroidSans</option>
+                <option value="ExistenceLight">Existence</option>
+                <option value="FFFTusjBold">FFFTusj</option>
+                <option value="GoodDogRegular">Good Dog</option>
+                <option value="JournalRegular">Journal</option>
+                <option value="LearningCurveProRegular">Learning Curve Pro</option>
+                <option value="Lobster13Regular">Lobster 13</option>
+                <option value="MolotRegular">Molot</option>
+                <option value="NeoRetroDrawRegular">Neo Retro Draw</option>
+                <option value="OstrichSansMedium">Ostrich Sans</option>
+                <option value="PacificoRegular">Pacifico</option>
+                <option value="PincoyablackBlack">Pincoya Black</option>
+                <option value="PTSansCaptionRegular">PT Sans Caption</option>
+                <option value="QuicksandBook">Quicksand Book</option>
+                <option value="SansationRegular">Sansation</option>
+                <option value="TangerineRegular">Tangerine</option>
+                <option value="TitilliumText22LThin">Titillium Text</option>
               </select>
             <% end %>
           </div>
@@ -513,7 +539,8 @@
 
     <a href="#footerPanel" title="footer panel" name="" class="footer accordionH3">Footer</a>
     <div> <!-- accordion -->
-      <!-- form_for(:user -->
+      
+      
 	    <% if @user.footer_bg.present? %>
 	      <% footer_bg = @user.footer_bg %>
 	    <% else %>
@@ -527,7 +554,23 @@
           	    <%= f.hidden_field :footer_bg, :class => "footer_bg_val", :value => footer_bg %>
         </div>
       </div>   
-      <% end %>         
+      <% end %>
+      
+	    <% if @user.font_color_footer.present? %>
+	      <% font_color_footer = @user.font_color_footer %>
+	    <% else %>
+	      <% font_color_footer = "000000" %>
+	    <% end %>
+      <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+  		<div class="rowfield">
+  			<div class="row fview">
+          	    <%= f.label(:font_color_footer, "Footer Font Colour:") %>
+          	    <div id="colorSelectorFooterFontColor" class="cpicker"><div style="background-color: #<%= font_color_footer %>"></div></div>
+          	    <%= f.hidden_field :font_color_footer, :class => "font_color_footer_val", :value => font_color_footer %>
+        </div>
+      </div>   
+      <% end %>
+               
     </div> <!-- accordion panel end -->
   </div> <!-- #accordion -->
     

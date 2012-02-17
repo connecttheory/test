@@ -33,6 +33,7 @@ class LogoUploader < CarrierWave::Uploader::Base
   version :large do
     resize_to_limit(600, 600)
   end
+  
   #
   # def scale(width, height)
   #   # do something
@@ -45,7 +46,7 @@ class LogoUploader < CarrierWave::Uploader::Base
   
   version :thumb do
     process :crop
-    resize_to_fill(260, 70)
+    resize_to_limit(400, 400)
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

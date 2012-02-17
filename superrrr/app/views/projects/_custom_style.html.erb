@@ -1,46 +1,38 @@
-<!-- custom bgcolor -->
 <% if @user.background_image.present? %>
   <% bgimg = @user.background_image %>
 <% else %>
   <% bgimg = "none" %>
 <% end %>
-
 <% if @user.background_repeat.present? %>
   <% bgrepeat = @user.background_repeat %>
 <% else %>
   <% bgrepeat = "repeat" %>
 <% end %>
-
 <% if @user.background_pos_h.present? %>
   <% bgpos_h = @user.background_pos_h %>
 <% else %>
   <% bgpos_h = "left" %>
 <% end %>
-
 <% if @user.background_pos_v.present? %>
   <% bgpos_v = @user.background_pos_v %>
 <% else %>
   <% bgpos_v = "top" %>
 <% end %>
-
 <% if @user.background_attachment.present? %>
   <% bgattachment = @user.background_attachment %>
 <% else %>
   <% bgattachment = "fixed" %>
 <% end %>
-
 <% if @user.margin_top.present? %>
   <% margin_top = @user.margin_top.to_i %>
 <% else %>
   <% margin_top = 12 %>
 <% end %>
-
 <% if @user.margin_bottom.present? %>
   <% margin_bottom = @user.margin_bottom.to_i %>
 <% else %>
   <% margin_bottom = 12 %>
 <% end %>
-
 <% if @user.logo_top.present? && @user.logo_top < 0 %>
   <% logo_top = 0 %>
 <% else %>
@@ -71,7 +63,14 @@
     margin-bottom: <%= margin_bottom %>px;
   }
   h1#porfolio-home {
+    position: relative;
     left: <%= @user.logo_left %>px;
     top: <%= @user.logo_top %>px;
   }
+  <% if @user.font_color_footer.present? %>
+  #footer_sm,
+  #footer_sm a {
+    color: #<%= @user.font_color_footer %>;
+  }
+  <% end %>
 </style>
