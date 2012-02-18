@@ -1,8 +1,3 @@
-<% if @user.background_image.present? %>
-  <% bgimg = @user.background_image %>
-<% else %>
-  <% bgimg = "none" %>
-<% end %>
 <% if @user.background_repeat.present? %>
   <% bgrepeat = @user.background_repeat %>
 <% else %>
@@ -44,7 +39,9 @@
   body {
     background-color: #<%= @user.portfolio_bg %>;
     font-family: <%= @user.font_face %>, helvetica, sans-serif, serif;
+    <% if @user.background_image.present? && @user.enable_background_image? %>
     background-image: url(/assets/styles/patterns/<%= @user.background_image %>);
+    <% end %>
     background-repeat: <%= bgrepeat %>;
     background-attachment: <%= bgattachment %>;
     background-position: <%= bgpos_h %> <%= bgpos_v %>;
@@ -52,7 +49,7 @@
   body, navigation a, .porfolio-nav li a {
     color: #<%= @user.font_color %>
   }
-  #sidebar .porfolio-nav li a {
+  #sidebarNavigation .porfolio-nav li a {
     font-size: <%= @user.font_size %>px;
   }
   #footer_sm {
@@ -62,8 +59,8 @@
     margin-top: <%= margin_top %>px;
     margin-bottom: <%= margin_bottom %>px;
   }
-  h1#porfolio-home {
-    position: relative;
+  #sidebarHeader {
+    position: fixed;
     left: <%= @user.logo_left %>px;
     top: <%= @user.logo_top %>px;
   }
@@ -71,6 +68,15 @@
   #footer_sm,
   #footer_sm a {
     color: #<%= @user.font_color_footer %>;
+  }
+  <% end %>
+  
+  <% if @user.proj_nav_top.present? && @user.proj_nav_left.present? %>
+  #sidebarNavigation {
+    position: fixed;
+    bottom: auto;
+    left: <%= @user.proj_nav_left %>px;
+    top: <%= @user.proj_nav_top %>px;
   }
   <% end %>
 </style>

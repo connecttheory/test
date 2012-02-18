@@ -13,12 +13,20 @@
 div#header {
   display: none;
 }
-#sidebar {
+#sidebarHeader {
   /* width: 202px; */
   position: fixed;
   left: 32px;
   top: 52px;
   background: none repeat scroll 0 0 transparent;
+  z-index: 10;
+}
+#sidebarNavigation {
+  position: fixed;
+  left: 32px;
+  bottom: 52px;
+  background: none repeat scroll 0 0 transparent;
+  z-index: 10;
 }
 .porfolio-nav {
   display: block;

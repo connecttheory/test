@@ -1,29 +1,33 @@
   <!-- IF USER CUSTOM HEADER LOGO IS PRESENT -->
-  
-  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect logoXYPos" }) do |f| %>
-    <%= f.hidden_field :logo_left, :class => "logo_left_pos_val", :value => "" %>
-    <%= f.hidden_field :logo_top, :class => "logo_top_pos_val", :value => "" %>
-  <% end %>
-  <% if @user.logo.url.nil? %>
-    <h1 id="porfolio-home"><a href="/"><%= @user.header_title %></a></h1>
-  <% else %>
-    <h1 id="porfolio-home"><a href="/"><%= image_tag( @user.logo.url(:thumb), :width => 202 ) %></a></h1>
-  <% end %>
-
-  
-
-  <ul class="porfolio-nav">
-
-    <% @projects.each do |project| %>
-
-      <li><%= link_to project.title, Project.subdomain_url(@user.subdomain_name, "/project/?id=#{project.id}"), :class => 'thumbnail' %></li>
-
+  <div id="sidebarHeader">
+    <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect logoXYPos" }) do |f| %>
+      <%= f.hidden_field :logo_left, :class => "logo_left_pos_val", :value => "" %>
+      <%= f.hidden_field :logo_top, :class => "logo_top_pos_val", :value => "" %>
     <% end %>
-
-  </ul>
-
-  <br class="clear" />
-
+    <% if @user.logo.url.nil? %>
+      <h1 id="porfolio-home"><a href="/"><%= @user.header_title %></a></h1>
+    <% else %>
+      <h1 id="porfolio-home"><a href="/"><%= image_tag( @user.logo.url(:thumb), :width => 202 ) %></a></h1>
+    <% end %>
+  </div>
+  
+  <div id="sidebarNavigation">
+    <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect projNavXYPos" }) do |f| %>
+      <%= f.hidden_field :proj_nav_left, :class => "proj_nav_left_pos_val", :value => "" %>
+      <%= f.hidden_field :proj_nav_top, :class => "proj_nav_top_pos_val", :value => "" %>
+    <% end%>
+    <ul class="porfolio-nav">
+  
+      <% @projects.each do |project| %>
+  
+        <li><%= link_to project.title, Project.subdomain_url(@user.subdomain_name, "/project/?id=#{project.id}"), :class => 'thumbnail' %></li>
+  
+      <% end %>
+  
+    </ul>
+  
+    <br class="clear" />
+  </div>
   
 
   

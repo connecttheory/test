@@ -1,11 +1,17 @@
 $(document).ready(function() {
+  //enable background @ panel client
+  $('#enableBackgroundImage').change(function() {
+    $(this).parents('.form_imgselect').find('.enable_background_image_val').val($(this).val());
+    $('body').css({backgroundImage: 'none'});
+    $(this).parents('.form_imgselect').submit();
+  });
   //reset logo position
   $('.resetLogoPos').click(function(e) {
     e.preventDefault();
     console.log('clicked reset logo position');
     
-    $('#porfolio-home').css({
-      position: 'relative',
+    $('#sidebarHeader').css({
+      position: 'fixed',
       left: 0,
       top: 0
     });
@@ -13,18 +19,47 @@ $(document).ready(function() {
     $('.form_imgselect.logoXYPos').find('.logo_top_pos_val').val(0);
     $('.form_imgselect.logoXYPos').submit();
   });
-  //unanimous function that will submit the form margin top/bottom
-  $( "#porfolio-home" ).draggable({
+  
+  //draggables
+  $('#sidebarNavigation').draggable({
+   cursor: 'move',
+    scroll: false,
+    //containtment: $(document),
+    // Find position where image is dropped.
+    stop: function(event, ui) {
+        var Stoppos = $(this).position();
+        $top = $(this).css('top').replace('px', '');
+        $('.form_imgselect.projNavXYPos').find('.proj_nav_left_pos_val').val(Stoppos.left);
+        $('.form_imgselect.projNavXYPos').find('.proj_nav_top_pos_val').val(parseInt($top));
+        $('.form_imgselect.projNavXYPos').submit();
+    }
+  });
+  $( "#sidebarHeader" ).draggable({
     cursor: 'move',
     scroll: false,
     //containtment: $(document),
     // Find position where image is dropped.
     stop: function(event, ui) {
         // Show dropped position.
+        $top = $(this).css('top').replace('px', '');
         var Stoppos = $(this).position();
         $('.form_imgselect.logoXYPos').find('.logo_left_pos_val').val(Stoppos.left);
-        $('.form_imgselect.logoXYPos').find('.logo_top_pos_val').val(Stoppos.top);
-        $('.form_imgselect.logoXYPos').submit();
+        $('.form_imgselect.logoXYPos').find('.logo_top_pos_val').val(parseInt($top));
+        if (Stoppos.top < -100) {
+          alert('invalid value for logo position, not save!');
+          $('#porfolio-home').css({
+            position: 'relative',
+            left: 0,
+            top: 0
+          });
+          $('.form_imgselect.logoXYPos').find('.logo_left_pos_val').val(0);
+          $('.form_imgselect.logoXYPos').find('.logo_top_pos_val').val(0);
+          $('.form_imgselect.logoXYPos').submit();
+        } else {
+          
+          $('.form_imgselect.logoXYPos').submit();
+        }
+        
     }
   });
   
@@ -64,8 +99,35 @@ $(document).ready(function() {
     });
     $('.form_imgselect.themeBgImg').submit();
   });
-
   
+  
+  //background cycle
+  function onAfterSubBG(curr, next, opts, fwd) {
+    var $ht = $(this).height();
+    $(this).parents('#backgroundSub').css({height: $ht});
+    var $htsa = $(this).parents('.slideArea').height();
+    $('#navSliderPanel').height($htsa);
+    $('#navSliderPanel').parent().animate({height: $htsa});
+  }  
+  
+  //sub layout cycle submenu
+  $('#backgroundSub').cycle({
+   fx: 'scrollHorz',
+   timeout: 0,
+   fit: true,
+   width: 270,
+   after: onAfterSubBG,
+   speed: 250
+  });
+  $('.color.subPanelButton').click(function() {
+    $('#backgroundSub').cycle(0);
+    return false;
+  });
+  $('.texture.subPanelButton').click(function() {
+    $('#backgroundSub').cycle(1);
+    return false;
+  });
+
   //font cycle
   function onAfterSub(curr, next, opts, fwd) {
     var $ht = $(this).height();
@@ -74,7 +136,10 @@ $(document).ready(function() {
     $('#navSliderPanel').height($htsa);
     $('#navSliderPanel').parent().animate({height: $htsa});
   }
+
   
+  
+  //sub layout cycle submenu
   $('#layoutSub').cycle({
    fx: 'scrollHorz',
    timeout: 0,
@@ -172,12 +237,12 @@ $(document).ready(function() {
   
   $( "#slider" ).slider({
     min: 0,
-    max: 98,
+    max: 196,
     value: parseInt($('.fontSize').text()),
     change: function(event, ui) {
       $('.fontSize').text(ui.value);
       $(this).parents('.form_imgselect').find('.font_size_val').val(ui.value);
-      $('#sidebar .porfolio-nav li a').css('font-size', ui.value + "px");
+      $('#sidebarNavigation .porfolio-nav li a').css('font-size', ui.value + "px");
       $(this).parents('.form_imgselect').submit();
     }
   });
