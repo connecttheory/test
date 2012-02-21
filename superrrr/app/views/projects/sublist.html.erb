@@ -1,4 +1,6 @@
 <% @page_title = "View Project: #{@project.title}" %>
+<% # identify page for shared/panel_controller %>
+<% @sublist = true %>
 
 <% content_for(:head) do %>
 <% #@list %>
@@ -36,7 +38,7 @@
             width:        260, // width not including margins, borders or padding
             height:       200, // height not including margins, borders or padding
             controls:     // controls to add to the toolbar
-                          "bold italic underline style bullets numbering link unlink ", 
+                          "bold italic underline style bullets numbering link unlink", 
             styles:       // styles in the style popup
                           [["Paragraph", "<p>"], ["Header 2", "<h2>"],
                           ["Header 3", "<h3>"],  ["Header 4","<h4>"],  ["Header 5","<h5>"],
@@ -271,7 +273,16 @@
 
 
   <% if @user.layout_name == 'Default' # only show this area if layout 1/default isset %>
-
+    <% if @project.description.present? %>
+      <%= form_for(:project, :url => {:controller => 'projects', :action => 'update', :id => @project.id, :user_id => @user.id }, :html => { :class => "form_imgselect projDescriptionXYPos" }) do |f| %>
+        <%= f.hidden_field :proj_description_left, :class => "proj_description_left_pos_val left_pos_val", :value => "" %>
+        <%= f.hidden_field :proj_description_top, :class => "proj_description_top_pos_val top_pos_val", :value => "" %>
+      <% end%>
+      <div id="project_description_wrap">
+        <span class="header">About this Project: </span>
+        <%= @project.description.html_safe %>
+      </div>
+    <% end %>
     <% content_for(:foot) do %>
 
      <div id="footer_sm">
@@ -321,9 +332,6 @@
       </div> <!-- end #footer_sm -->
 
     <% end %>
-
-    
-
     
       <!-- sidebar -->
       <%= render(:partial => 'in_header_wrap_ldefault' ) %>

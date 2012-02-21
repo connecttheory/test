@@ -11,7 +11,9 @@ Activedesigns::Application.routes.draw do
   
   resources :password_resets
   #resources :users
-  #resources :projects
+  resources :projects, :only => [:new, :show, :sort]  do
+  	collection { post :sort }
+  end
   resources :images, :only => [:index, :list, :create, :delete, :destroy] 
   
   resources :images do

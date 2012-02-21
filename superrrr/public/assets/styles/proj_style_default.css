@@ -1,3 +1,19 @@
+/************* Description wrap ***********************/
+#project_description_wrap {
+  display: block;
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  padding: 5px;
+  margin: 0;
+  background: #ffffff;
+  width: 250px;
+}
+#project_description_wrap .header {
+  display: block;
+  font-size: 1.5em;
+  text-align: left;
+}
 /************* sidebar ***********************/
 #container {
   width: 100%;

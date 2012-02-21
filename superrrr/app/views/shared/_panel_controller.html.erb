@@ -549,6 +549,27 @@
       
     </div>
     
+    <% if @sublist %>
+    <a href="#Content" title="content panel" name="" class="content accordionH3">Content</a>
+    <div> <!-- accordion panel start -->
+      <h3>Content for this project</h3>
+        <div class="panel-menu content">              
+          <%= form_for(:project, :url => {:controller => 'projects', :action => 'update', :id => @project.id, :user_id => @user.id }, :html => { :class => "form_imgselect" }) do |f| %>
+            <%= f.text_area(:description, :class => 'wysiwyg' ) %>
+            <%= f.submit %>
+          <% end %>
+        </div>
+        <div class="panel-menu options">
+        <%= form_for(:project, :url => {:controller => 'projects', :action => 'update', :id => @project.id, :user_id => @user.id }, :html => { :class => "form_imgselect" }) do |f| %>
+    	    <%= f.label(:bg_color_description, "Background Color:") %>
+    	    <div id="colorSelectorBgDescription" class="cpicker"><div style="background-color: #ffffff"></div></div>
+    	    <%= f.hidden_field :bg_color_description, :class => "bg_color_description_val", :value => "" %>
+        <% end %>
+        </div>
+        
+    </div> <!-- accordion panel end -->
+    <% end %>
+    
     <a href="#aboutPanel" title="about panel" name="" class="about accordionH3">About</a>
     <div> <!-- accordion panel start -->
       <h3>About</h3>
@@ -572,9 +593,9 @@
       <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
   		<div class="rowfield">
   			<div class="row fview">
-          	    <%= f.label(:footer_bg, "Footer Background Colour:") %>
-          	    <div id="colorSelectorFooter" class="cpicker"><div style="background-color: #<%= footer_bg %>"></div></div>
-          	    <%= f.hidden_field :footer_bg, :class => "footer_bg_val", :value => footer_bg %>
+    	    <%= f.label(:footer_bg, "Footer Background Colour:") %>
+    	    <div id="colorSelectorFooter" class="cpicker"><div style="background-color: #<%= footer_bg %>"></div></div>
+    	    <%= f.hidden_field :footer_bg, :class => "footer_bg_val", :value => footer_bg %>
         </div>
       </div>   
       <% end %>

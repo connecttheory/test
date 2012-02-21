@@ -21,7 +21,7 @@ class AccessController < ApplicationController
   def profile
     # show user profile
     @user = User.find(session[:user_id])
-    @projects = @user.projects.order("projects.created_at ASC")
+    @projects = @user.projects.order("projects.position ASC")
     @images = @user.images
     #@project_thumb = Project.lastest(@projects)
     #@cpanel_test = User.create_cpanel_acct

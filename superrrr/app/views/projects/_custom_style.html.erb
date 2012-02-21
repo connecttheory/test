@@ -79,4 +79,18 @@
     top: <%= @user.proj_nav_top %>px;
   }
   <% end %>
+  
+  
+  #project_description_wrap {
+    <% if @sublist.present? && @project.proj_description_left.present? && @project.proj_description_top.present? %>
+    position: fixed;
+    left: <%= @project.proj_description_left %>px;
+    top: <%= @project.proj_description_top %>px;
+    width: 250px;
+    <% end %>
+    <% if @sublist.present? && @project.bg_color_description.present? %>
+    background-color: #<%= @project.bg_color_description %>;
+    <% end %>
+  }
+  
 </style>

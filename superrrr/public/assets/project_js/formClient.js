@@ -21,8 +21,23 @@ $(document).ready(function() {
   });
   
   //draggables
+  $('#project_description_wrap').draggable({
+    cursor: 'move',
+    zIndex: 5,
+    scroll: false,
+    // Find position where image is dropped.
+    stop: function(event, ui) {
+        //var Stoppos = $(this).position();
+        $top = $(this).css('top').replace('px', '');
+        $left = $(this).css('left').replace('px', '');
+        $('.form_imgselect.projDescriptionXYPos').find('.left_pos_val').val(parseInt($left));
+        $('.form_imgselect.projDescriptionXYPos').find('.top_pos_val').val(parseInt($top));
+        $('.form_imgselect.projDescriptionXYPos').submit();
+    }
+  });
   $('#sidebarNavigation').draggable({
-   cursor: 'move',
+    cursor: 'move',
+    zIndex: 10,
     scroll: false,
     //containtment: $(document),
     // Find position where image is dropped.
@@ -36,6 +51,7 @@ $(document).ready(function() {
   });
   $( "#sidebarHeader" ).draggable({
     cursor: 'move',
+    zIndex: 20,
     scroll: false,
     //containtment: $(document),
     // Find position where image is dropped.
@@ -127,6 +143,34 @@ $(document).ready(function() {
     $('#backgroundSub').cycle(1);
     return false;
   });
+  
+  //  //content cycle
+  //  function onAfterSubContent(curr, next, opts, fwd) {
+  //    var $ht = $(this).height();
+  //    $(this).parents('#contentDescSlider').animate({height: $ht});
+  //    var $htsa = $(this).parents('.slideArea').height();
+  //    $('#navSliderPanel').height($htsa);
+  //    $('#navSliderPanel').parent().animate({height: $htsa});
+  //  }  
+  //  
+  //  //sub content cycle submenu
+  //  $('#contentDescSlider').cycle({
+  //   fx: 'scrollHorz',
+  //   timeout: 0,
+  //   fit: true,
+  //   width: 270,
+  //   after: onAfterSubContent,
+  //   speed: 250
+  //  });
+  //  $('.content.subPanelButton').click(function() {
+  //    $('#contentDescSlider').cycle(0);
+  //    return false;
+  //  });
+  //  $('.content_options.subPanelButton').click(function() {
+  //    $('#contentDescSlider').cycle(1);
+  //    return false;
+  //  });
+  
 
   //font cycle
   function onAfterSub(curr, next, opts, fwd) {

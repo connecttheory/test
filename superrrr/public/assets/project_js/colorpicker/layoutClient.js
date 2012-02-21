@@ -34,6 +34,29 @@
 		.bind('keyup', function(){
 			$(this).ColorPickerSetColor(this.value);
 		});
+
+		//BG color Description Wrap
+		$('#colorSelectorBgDescription').ColorPicker({
+			color: '#0000ff',
+			livePreview: false,
+			onShow: function (colpkr) {
+				$(colpkr).fadeIn(500);
+				return false;
+			},
+			onHide: function (colpkr) {
+				$(colpkr).fadeOut(500);
+				$("#colorSelectorBgDescription").parents('.form_imgselect').submit();
+				return false;
+			},
+			onChange: function (hsb, hex, rgb) {
+				$('#colorSelectorBgDescription div').css('backgroundColor', '#' + hex);
+				$("#colorSelectorBgDescription").parents('.form_imgselect').find('.bg_color_description_val').val(hex);
+				$('#project_description_wrap').css('backgroundColor', '#' + hex);
+			},
+        	onSubmit: function (hsb, hex, rgb, el) {
+        	    $(el).ColorPickerHide();
+			}
+		});
 		
 		//BG color
 		$('#colorSelector').ColorPicker({

@@ -9,6 +9,7 @@
   <%= javascript_include_tag 'project_js/facebook/jquery.easing.js' %>
   <%= javascript_include_tag 'project_js/facebook/jquery.friendChooser.js' %>
   <%= stylesheet_link_tag 'project_js/facebook/friendChooserDefault.css' %>
+  <%= javascript_include_tag 'project_js/form' %>
 <% end %>
 
 
@@ -39,9 +40,9 @@
 <p class="sm-fb">Like us on facebook and get extra 10 images uploads</p>
 <br />
 <br style="clear:both;" />
-<div class="info-wrap">
+<div id="project_thumb_wrap" data-update-url="<%= sort_projects_url %>" class="info-wrap">
   <% @projects.each do |project| %>
-  	<div class="project-thumb curve">
+  	<div id="project_<%= project.id %>" class="project-thumb curve">
   		<%= link_to( image_tag(Project.image_thumbnail(project)), {:controller => 'projects', :action => 'show',   :id => project.id}, :class => 'action show') %>
   		<%= %><br />
   		<p class="project-cap"><%= link_to( project.title, 

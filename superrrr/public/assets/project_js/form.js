@@ -10,6 +10,15 @@ jQuery.fn.center = function () {
 }
 
 $(document).ready(function() { 
+  
+  $('#project_thumb_wrap').sortable({
+    update: function() {
+      //alert('update');
+    	$.post($(this).data('update-url'), $(this).sortable('serialize'))
+    }
+  });
+  
+  // layout form setup auto reload after select
 	function doRefreshPage( bDoReload ) {
 	  if ( bDoReload ) {
 	   setTimeout(function() { window.location.reload(); }, 1500);

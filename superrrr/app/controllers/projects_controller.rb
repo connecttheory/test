@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
   	if @user.blank?
   	  redirect_to( '/404.html')
   	else
-      @projects = @user.projects.order("projects.created_at ASC").visible
+      @projects = @user.projects.order("projects.position").visible
     end
   end
   
@@ -83,6 +83,13 @@ class ProjectsController < ApplicationController
     Project.find(params[:id]).destroy
     flash[:notice] = "Project deleted."
     redirect_to(:controller => 'access', :action => 'profile')
+  end
+  
+  def sort
+    params[:project].each_with_index do |id, index| 
+      Project.update_all({:position => index+1}, {:id => id})
+    end
+    render :nothing => true
   end
   
   def preview
