@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221033856) do
+ActiveRecord::Schema.define(:version => 20120222015453) do
 
   create_table "images", :force => true do |t|
     t.integer  "project_id"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(:version => 20120221033856) do
     t.integer  "proj_description_top"
     t.string   "bg_color_description"
     t.string   "font_color_description"
+    t.integer  "description_width"
+    t.integer  "description_height"
   end
 
   add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
@@ -105,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20120221033856) do
     t.boolean  "enable_background_image"
     t.integer  "proj_nav_top"
     t.integer  "proj_nav_left"
+    t.string   "background"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username"

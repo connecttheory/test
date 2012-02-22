@@ -128,6 +128,7 @@
           
           <div href="#" class="color subPanelButton">Color</div>
           <div href="#" class="texture subPanelButton">Texture</div>
+          <div href="#" class="upload subPanelButton">Upload</div>
           
           <div id="backgroundSub" class="subPanel">
             <div> <!-- subPanel 1-->
@@ -375,7 +376,7 @@
                           
                 </div> <!-- end #backgroundTexturesScrollerP -->
               </div> <!-- end .panel-menu -->
-              
+              <!-- 
               <div class="panel-menu">
                 <label>Repeat</label>
                 <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect themeBgRepeat" }) do |f| %>
@@ -422,7 +423,56 @@
                   <option value="fixed">Fixed</option>
                 </select>
               </div>
+              -->
       		  </div> <!-- subPanel 2 end-->
+      		  <div> <!-- subPanel 3-->
+        	    <div class="panel-menu">
+        	      
+                <label>Upload Image:</label>
+                <!-- LOGO FOR THE PORTFOLIO -->	
+                <% if @user.background.url.nil? #if user logo is not set %>
+                  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj_image" }) do |f| %>
+                    <%= f.file_field :background %>
+                    	<p class="action">
+                  	  <%= submit_tag("Save", :class => 'save')  %>
+                  	</p>
+                  <% end %>
+                <% else #if user logo is set %>
+                  <div class="form-wrap image">
+                  	<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj_image" }) do |f| %>
+                  	  <div class="rowfield">
+                  		<div class="edit-btn">Edit</div>
+                  		<%= image_tag(@user.background.url.to_s, :width => 200, :id => 'img_bg_val') %>
+                  	  </div>
+                  	  <div class="row fedit">
+                  	  	<%= content_tag(:p, "Custom Background Image /", :class => "tiny") %>
+                  		<%= f.file_field :background %>
+                  		<p class="action">
+                  		  <%= submit_tag("Save", :class => 'save')  %>
+                  		  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+                  		</p>
+                  	  </div>
+                  	<% end %>
+                  </div> <!-- END .form-wrap -->
+                  <div class="panel-menu">
+                    <label>Scaling</label>
+                    <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect themeBgRepeat img" }) do |f| %>
+                      <%= f.hidden_field :background_repeat, :class => "background_repeat_val", :value => "" %>
+                    <% end %>
+                    <input type="radio" name="repeat" id="noRepeat" value="no-repeat" class="backgroundR" />
+                    <label for="noRepeat" class="inline">Normal</label>
+                    <input type="radio" name="repeat" id="repeatXY" value="repeat" class="backgroundR" />
+                    <label for="repeatXY" class="inline">Repeat</label>
+                    <input type="radio" name="repeat" id="fullscreen" value="fullscreen" class="backgroundR" />
+                    <label for="fullscreen" class="inline">Fullscreen</label>
+                  </div>
+                  <div class="panel-menu">
+                    <button id="set_background_image">Use as Background Image</button>
+                  </div>
+                <% end # end of if @user.background.url.nil?%>
+                
+              </div> <!-- end .panel-menu -->
+            </div> <!-- end subPanel 3-->
       		</div> <!-- .subPanel -->
                   
         </div>
@@ -554,17 +604,36 @@
     <div> <!-- accordion panel start -->
       <h3>Content for this project</h3>
         <div class="panel-menu content">              
-          <%= form_for(:project, :url => {:controller => 'projects', :action => 'update', :id => @project.id, :user_id => @user.id }, :html => { :class => "form_imgselect" }) do |f| %>
+          <%= form_for(:project, :url => {:controller => 'projects', :action => 'update', :id => @project.id, :user_id => @user.id }, :html => { :class => "form_imgselect description" }) do |f| %>
             <%= f.text_area(:description, :class => 'wysiwyg' ) %>
             <%= f.submit %>
           <% end %>
         </div>
+        
         <div class="panel-menu options">
-        <%= form_for(:project, :url => {:controller => 'projects', :action => 'update', :id => @project.id, :user_id => @user.id }, :html => { :class => "form_imgselect" }) do |f| %>
-    	    <%= f.label(:bg_color_description, "Background Color:") %>
-    	    <div id="colorSelectorBgDescription" class="cpicker"><div style="background-color: #ffffff"></div></div>
-    	    <%= f.hidden_field :bg_color_description, :class => "bg_color_description_val", :value => "" %>
-        <% end %>
+    	    <% if @project.bg_color_description.present? %>
+    	      <% bg_color_description = @project.bg_color_description %>
+    	    <% else %>
+    	      <% bg_color_description = "000000" %>
+    	    <% end %>
+          <%= form_for(:project, :url => {:controller => 'projects', :action => 'update', :id => @project.id, :user_id => @user.id }, :html => { :class => "form_imgselect" }) do |f| %>
+      	    <%= f.label(:bg_color_description, "Background Color:") %>
+      	    <div id="colorSelectorBgDescription" class="cpicker"><div style="background-color: #<%= bg_color_description %>"></div></div>
+      	    <%= f.hidden_field :bg_color_description, :class => "bg_color_description_val", :value => "" %>
+          <% end %>
+        </div>
+        
+        <div class="panel-menu options">
+    	    <% if @project.font_color_description.present? %>
+    	      <% font_color_description = @project.font_color_description %>
+    	    <% else %>
+    	      <% font_color_description = "000000" %>
+    	    <% end %>
+          <%= form_for(:project, :url => {:controller => 'projects', :action => 'update', :id => @project.id, :user_id => @user.id }, :html => { :class => "form_imgselect" }) do |f| %>
+      	    <%= f.label(:font_color_description, "Font Color:") %>
+      	    <div id="colorSelectorFColorDescription" class="cpicker"><div style="background-color: #<%= font_color_description %>"></div></div>
+      	    <%= f.hidden_field :font_color_description, :class => "font_color_description_val", :value => "" %>
+          <% end %>
         </div>
         
     </div> <!-- accordion panel end -->
@@ -579,11 +648,8 @@
       <% end %>
     </div> <!-- accordion panel end -->
 
-
-
     <a href="#footerPanel" title="footer panel" name="" class="footer accordionH3">Footer</a>
     <div> <!-- accordion -->
-      
       
 	    <% if @user.footer_bg.present? %>
 	      <% footer_bg = @user.footer_bg %>

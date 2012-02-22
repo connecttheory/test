@@ -26,7 +26,11 @@
 
 /*.backgroundTexture.white_brick_wall.wrap { background: url('styles/patterns/white_brick_wall.png') repeat scroll 0 0 transparent; }*/
 
+/*radio buttons*/
 
+#accordion label.inline {
+  display: inline;
+}
 
 
 /*textures wrap*/

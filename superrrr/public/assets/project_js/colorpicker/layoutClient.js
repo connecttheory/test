@@ -58,6 +58,29 @@
 			}
 		});
 		
+		//Font color Description Wrap
+		$('#colorSelectorFColorDescription').ColorPicker({
+			color: '#0000ff',
+			livePreview: false,
+			onShow: function (colpkr) {
+				$(colpkr).fadeIn(500);
+				return false;
+			},
+			onHide: function (colpkr) {
+				$(colpkr).fadeOut(500);
+				$("#colorSelectorFColorDescription").parents('.form_imgselect').submit();
+				return false;
+			},
+			onChange: function (hsb, hex, rgb) {
+				$('#colorSelectorFColorDescription div').css('backgroundColor', '#' + hex);
+				$("#colorSelectorFColorDescription").parents('.form_imgselect').find('.font_color_description_val').val(hex);
+				$('#project_description_wrap').css('color', '#' + hex);
+			},
+        	onSubmit: function (hsb, hex, rgb, el) {
+        	    $(el).ColorPickerHide();
+			}
+		});
+		
 		//BG color
 		$('#colorSelector').ColorPicker({
 			color: '#0000ff',

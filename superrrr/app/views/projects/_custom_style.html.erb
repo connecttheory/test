@@ -40,11 +40,11 @@
     background-color: #<%= @user.portfolio_bg %>;
     font-family: <%= @user.font_face %>, helvetica, sans-serif, serif;
     <% if @user.background_image.present? && @user.enable_background_image? %>
-    background-image: url(/assets/styles/patterns/<%= @user.background_image %>);
+    background-image: url(<%= @user.background_image %>);
     <% end %>
-    background-repeat: <%= bgrepeat %>;
-    background-attachment: <%= bgattachment %>;
-    background-position: <%= bgpos_h %> <%= bgpos_v %>;
+    background-repeat: repeat<% bgrepeat %>;
+    background-attachment: fixed<% bgattachment %>;
+    background-position: left top<% bgpos_h %> <% bgpos_v %>;
   }     
   body, navigation a, .porfolio-nav li a {
     color: #<%= @user.font_color %>
@@ -80,17 +80,26 @@
   }
   <% end %>
   
-  
+  <% if @sublist %>
   #project_description_wrap {
-    <% if @sublist.present? && @project.proj_description_left.present? && @project.proj_description_top.present? %>
+    <% if @project.proj_description_left.present? && @project.proj_description_top.present? %>
     position: fixed;
     left: <%= @project.proj_description_left %>px;
     top: <%= @project.proj_description_top %>px;
     width: 250px;
     <% end %>
-    <% if @sublist.present? && @project.bg_color_description.present? %>
+    <% if@project.bg_color_description.present? %>
     background-color: #<%= @project.bg_color_description %>;
     <% end %>
+    <% if @project.font_color_description.present? %>
+    color: #<%= @project.font_color_description %>;
+    <% end %>
+    <% if @project.description_width.present? %>
+    width: <%= @project.description_width %>px;
+    <% end %>
+    <% if @project.description_height.present? %>
+    height:  <%= @project.description_height %>px;
+    <% end %>
   }
-  
+  <% end %>
 </style>

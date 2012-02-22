@@ -168,7 +168,8 @@
 #colorSelectorFooter,
 #colorSelectorFooterFontColor,
 #colorSelectorFont,
-#colorSelectorBgDescription {
+#colorSelectorBgDescription,
+#colorSelectorFColorDescription {
 	position: relative;
 	width: 36px;
 	height: 36px;
@@ -178,7 +179,8 @@
 #colorSelectorFooter div,
 #colorSelectorFooterFontColor div,
 #colorSelectorFont div,
-#colorSelectorBgDescription div {
+#colorSelectorBgDescription div,
+#colorSelectorFColorDescription div {
 	position: absolute;
 	top: 3px;
 	left: 3px;

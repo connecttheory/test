@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   
   mount_uploader :avatar, AvatarUploader
   mount_uploader :logo, LogoUploader
+  mount_uploader :background, BackgroundUploader
   
   #paperclip 
   #has_attached_file :photo, :styles => { 

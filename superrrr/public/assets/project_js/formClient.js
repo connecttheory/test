@@ -1,4 +1,23 @@
 $(document).ready(function() {
+  $('.backgroundR').change(function() {
+    var $btnClicked = $(this);
+    $('.form_imgselect.themeBgRepeat.img').find('.background_repeat_val').val($btnClicked.val());
+    if ($btnClicked.val() == "fullscreen") {
+      var $imgSrc = $('#img_bg_val').attr('src');
+      //$('body').append('<img src="'+ $imgSrc +'" />);
+      $.backstretch($imgSrc);
+      $('#backstretch').show();
+    } else {
+      $('#backstretch').hide();
+      $("body").css('backgroundRepeat', $btnClicked.val());
+    }
+  });
+  // on submit upldate for description content
+  $('.form_imgselect.description').submit(function() {
+    var $htmlContent = $('.form_imgselect.description').find('.wysiwyg').val()
+    console.log( $htmlContent );
+    $('#project_description_wrap').html($htmlContent);
+  });
   //enable background @ panel client
   $('#enableBackgroundImage').change(function() {
     $(this).parents('.form_imgselect').find('.enable_background_image_val').val($(this).val());
@@ -20,21 +39,39 @@ $(document).ready(function() {
     $('.form_imgselect.logoXYPos').submit();
   });
   
-  //draggables
-  $('#project_description_wrap').draggable({
-    cursor: 'move',
-    zIndex: 5,
-    scroll: false,
-    // Find position where image is dropped.
-    stop: function(event, ui) {
-        //var Stoppos = $(this).position();
-        $top = $(this).css('top').replace('px', '');
-        $left = $(this).css('left').replace('px', '');
-        $('.form_imgselect.projDescriptionXYPos').find('.left_pos_val').val(parseInt($left));
-        $('.form_imgselect.projDescriptionXYPos').find('.top_pos_val').val(parseInt($top));
-        $('.form_imgselect.projDescriptionXYPos').submit();
-    }
-  });
+
+  //draggables //resize able
+  $('#project_description_wrap')
+    .draggable({
+      cursor: 'move',
+      zIndex: 5,
+      //scroll: false,
+      // Find position where image is dropped.
+      stop: function(event, ui) {
+          //var Stoppos = $(this).position();
+          $top = $(this).css('top').replace('px', '');
+          $left = $(this).css('left').replace('px', '');
+          $('.form_imgselect.projDescriptionXYPos').find('.left_pos_val').val(parseInt($left));
+          $('.form_imgselect.projDescriptionXYPos').find('.top_pos_val').val(parseInt($top));
+          $('.form_imgselect.projDescriptionXYPos').submit();
+      }
+    })
+    .resizable({
+      resize: function(event, ui) {
+        var topVal = parseInt($top);
+        $('#project_description_wrap').css({
+          position: 'fixed',
+          top: topVal
+        });
+      },
+      stop: function(event, ui) {
+        var height = ui.size.height;
+        var width = ui.size.width;
+        $('.form_imgselect.projDescriptionXYSize').find('.width_size_val').val(width);
+        $('.form_imgselect.projDescriptionXYSize').find('.height_size_val').val(height);
+        $('.form_imgselect.projDescriptionXYSize').submit();
+      }
+    });
   $('#sidebarNavigation').draggable({
     cursor: 'move',
     zIndex: 10,
@@ -105,10 +142,19 @@ $(document).ready(function() {
     $("body").css('backgroundRepeat', $selectedVal);
     $('.form_imgselect.themeBgRepeat').submit();
   });
-  
+  //background image click event
+  $('#set_background_image').click(function() {
+    var $bgval = $('#img_bg_val').attr('src');
+    $('.form_imgselect.themeBgImg').find('.background_image_val').val($bgval);
+    $('body').css({
+      backgroundImage: "url("+ $bgval +")"
+    });
+    $('.form_imgselect.themeBgImg').submit();
+  });
+  //background texture click event
   $('.backgroundTexture').click(function() {
     var filename = $(this).attr('id');
-    $('.form_imgselect.themeBgImg').find('.background_image_val').val(filename);
+    $('.form_imgselect.themeBgImg').find('.background_image_val').val("/assets/styles/patterns/" + filename);
     $('body').css({
       backgroundImage: "url(/assets/styles/patterns/"+ filename +")",
       backgroundRepeat: "repeat"
@@ -141,6 +187,10 @@ $(document).ready(function() {
   });
   $('.texture.subPanelButton').click(function() {
     $('#backgroundSub').cycle(1);
+    return false;
+  });
+  $('.upload.subPanelButton').click(function() {
+    $('#backgroundSub').cycle(2);
     return false;
   });
   
