@@ -148,21 +148,24 @@
                   </div>
             	  <% end %>
           	  </div>
-          	  <div class="panel-menu">
-          	    <p>Enable Image:</p>
-            	  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect" }) do |f| %>
-                  <%= f.hidden_field :enable_background_image, :class => "enable_background_image_val", :value => "" %>
-                  <select name="enable_background" id="enableBackgroundImage" class="background">
-                    <% if @user.enable_background_image? %>
-                      <option value="1" selected="selected">Yes</option>
-                      <option value="0">No</option>
-                    <% else %>
-                      <option value="1">Yes</option>
-                      <option value="0" selected="selected">No</option>
-                    <% end %>
-                  </select>
-          	    <% end %>
-          	  </div>
+          	  
+          	  <!-- <p>Enable Image:</p> -->
+          	  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_imgselect" }) do |f| %>
+                <%= f.hidden_field :enable_background_image, :class => "enable_background_image_val", :value => "" %>
+                <!--
+                <select name="enable_background" id="enableBackgroundImage" class="background">
+                  <% if @user.enable_background_image? %>
+                    <option value="1" selected="selected">Yes</option>
+                    <option value="0">No</option>
+                  <% else %>
+                    <option value="1">Yes</option>
+                    <option value="0" selected="selected">No</option>
+                  <% end %>
+                </select>
+                -->
+        	    <% end %>
+          	  
+          	  
       		  </div> <!-- subPanel 1 end-->
       		  <div> <!-- subPanel 2-->
         	    <div class="panel-menu">
@@ -611,28 +614,28 @@
         </div>
         
         <div class="panel-menu options">
-    	    <% if @project.bg_color_description.present? %>
-    	      <% bg_color_description = @project.bg_color_description %>
+    	    <% if @user.description_bg_color.present? %>
+    	      <% description_bg_color = @user.description_bg_color %>
     	    <% else %>
-    	      <% bg_color_description = "000000" %>
+    	      <% description_bg_color = "000000" %>
     	    <% end %>
-          <%= form_for(:project, :url => {:controller => 'projects', :action => 'update', :id => @project.id, :user_id => @user.id }, :html => { :class => "form_imgselect" }) do |f| %>
-      	    <%= f.label(:bg_color_description, "Background Color:") %>
-      	    <div id="colorSelectorBgDescription" class="cpicker"><div style="background-color: #<%= bg_color_description %>"></div></div>
-      	    <%= f.hidden_field :bg_color_description, :class => "bg_color_description_val", :value => "" %>
+          <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+      	    <%= f.label(:description_bg_color, "Background Color:") %>
+      	    <div id="colorSelectorBgDescription" class="cpicker"><div style="background-color: #<%= description_bg_color %>"></div></div>
+      	    <%= f.hidden_field :description_bg_color, :class => "bg_color_description_val", :value => "" %>
           <% end %>
         </div>
         
         <div class="panel-menu options">
-    	    <% if @project.font_color_description.present? %>
-    	      <% font_color_description = @project.font_color_description %>
+    	    <% if @user.description_font_color.present? %>
+    	      <% description_font_color = @user.description_font_color %>
     	    <% else %>
-    	      <% font_color_description = "000000" %>
+    	      <% description_font_color = "000000" %>
     	    <% end %>
-          <%= form_for(:project, :url => {:controller => 'projects', :action => 'update', :id => @project.id, :user_id => @user.id }, :html => { :class => "form_imgselect" }) do |f| %>
-      	    <%= f.label(:font_color_description, "Font Color:") %>
-      	    <div id="colorSelectorFColorDescription" class="cpicker"><div style="background-color: #<%= font_color_description %>"></div></div>
-      	    <%= f.hidden_field :font_color_description, :class => "font_color_description_val", :value => "" %>
+          <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+      	    <%= f.label(:description_font_color, "Font Color:") %>
+      	    <div id="colorSelectorFColorDescription" class="cpicker"><div style="background-color: #<%= description_font_color %>"></div></div>
+      	    <%= f.hidden_field :description_font_color, :class => "font_color_description_val", :value => "" %>
           <% end %>
         </div>
         

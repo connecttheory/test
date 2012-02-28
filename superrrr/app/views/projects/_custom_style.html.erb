@@ -41,8 +41,10 @@
     font-family: <%= @user.font_face %>, helvetica, sans-serif, serif;
     <% if @user.background_image.present? && @user.enable_background_image? %>
     background-image: url(<%= @user.background_image %>);
+    <% else %>
+    background-image: none;
     <% end %>
-    background-repeat: repeat<% bgrepeat %>;
+    background-repeat: <%= bgrepeat %>;
     background-attachment: fixed<% bgattachment %>;
     background-position: left top<% bgpos_h %> <% bgpos_v %>;
   }     
@@ -82,23 +84,23 @@
   
   <% if @sublist %>
   #project_description_wrap {
-    <% if @project.proj_description_left.present? && @project.proj_description_top.present? %>
+    <% if @user.description_left.present? && @user.description_top.present? %>
     position: fixed;
-    left: <%= @project.proj_description_left %>px;
-    top: <%= @project.proj_description_top %>px;
+    left: <%= @user.description_left %>px;
+    top: <%= @user.description_top %>px;
     width: 250px;
     <% end %>
-    <% if@project.bg_color_description.present? %>
-    background-color: #<%= @project.bg_color_description %>;
+    <% if @user.description_bg_color.present? %>
+    background-color: #<%= @user.description_bg_color %>;
     <% end %>
-    <% if @project.font_color_description.present? %>
-    color: #<%= @project.font_color_description %>;
+    <% if @user.description_font_color.present? %>
+    color: #<%= @user.description_font_color %>;
     <% end %>
-    <% if @project.description_width.present? %>
-    width: <%= @project.description_width %>px;
+    <% if @user.description_width.present? %>
+    width: <%= @user.description_width %>px;
     <% end %>
-    <% if @project.description_height.present? %>
-    height:  <%= @project.description_height %>px;
+    <% if @user.description_height.present? %>
+    height:  <%= @user.description_height %>px;
     <% end %>
   }
   <% end %>

@@ -17,6 +17,8 @@
     <%= javascript_include_tag 'project_js/colorpicker/eye.js' %>
     <%= javascript_include_tag 'project_js/colorpicker/utils.js' %>
     <%= javascript_include_tag 'project_js/colorpicker/layoutClient.js' %>
+    
+    <%= stylesheet_link_tag "project_css/edit" %>
   
     <%= stylesheet_link_tag "project_js/cleditor/jquery.cleditor.css" %>
     <%= javascript_include_tag 'project_js/cleditor/jquery.cleditor.min.js' %>
@@ -283,4 +285,28 @@
     <%= render (:partial => 'shared/panel_controller' ); %>
   <% end %>
 <% end %>
+
+  <% if @user.background_repeat.present? && @user.background_repeat == "fullscreen" %>
+  
+    <% content_for(:before_body_tag) do %>
+      <img src="<%= @user.background_image %>" style="position: fixed; left: 0; top: 0; z-index: -1;" class="imgBGCustom" alt="imgBGCustom" />
+    <% end %>
+    
+    <% content_for(:before_body_tag) do %>
+      <%= javascript_tag do %>
+        var bgImgW = $('.imgBGCustom').width();
+        var bgImgH = $('.imgBGCustom').height();
+        if (bgImgW > bgImgH) {
+          $('.imgBGCustom').css({
+            width: "100%"
+          });
+        } else {
+          $('.imgBGCustom').css({
+            height: "100%"
+          });
+        }
+      <% end %>
+    <% end %>
+    
+  <% end %>
 

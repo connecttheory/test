@@ -91,13 +91,18 @@
 			},
 			onHide: function (colpkr) {
 				$(colpkr).fadeOut(500);
+        submitFrmEnableImage(0);
 				$("#colorSelector").parents('.form_imgselect').submit();
 				return false;
 			},
 			onChange: function (hsb, hex, rgb) {
 				$('#colorSelector div').css('backgroundColor', '#' + hex);
 				$("#colorSelector").parents('.form_imgselect').find('.project_bg_val').val(hex);
-				$('body').css('backgroundColor', '#' + hex);
+				$('.imgBGCustom').hide();
+				$('body').css({
+				  backgroundColor: '#' + hex,
+				  backgroundImage: 'none'
+			  });
 			},
         	onSubmit: function (hsb, hex, rgb, el) {
         	    $(el).ColorPickerHide();

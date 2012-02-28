@@ -21,6 +21,8 @@
     <%= javascript_include_tag 'project_js/colorpicker/utils.js' %>
     <%= javascript_include_tag 'project_js/colorpicker/layoutClient.js' %>
     
+    <%= stylesheet_link_tag "project_css/edit" %>
+    
     <%= stylesheet_link_tag "project_js/cleditor/jquery.cleditor.css" %>
     <%= javascript_include_tag 'project_js/cleditor/jquery.cleditor.min.js' %>
   
@@ -275,15 +277,19 @@
 
   <% if @user.layout_name == 'Default' # only show this area if layout 1/default isset %>
     <% if @project.description.present? %>
-      <%= form_for(:project, :url => {:controller => 'projects', :action => 'update', :id => @project.id, :user_id => @user.id }, :html => { :class => "form_imgselect projDescriptionXYPos" }) do |f| %>
-        <%= f.hidden_field :proj_description_left, :class => "proj_description_left_pos_val left_pos_val", :value => "" %>
-        <%= f.hidden_field :proj_description_top, :class => "proj_description_top_pos_val top_pos_val", :value => "" %>
-      <% end%>
-      <%= form_for(:project, :url => {:controller => 'projects', :action => 'update', :id => @project.id, :user_id => @user.id }, :html => { :class => "form_imgselect projDescriptionXYSize" }) do |f| %>
+      <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect projDescriptionXYPos" }) do |f| %>
+        <%= f.hidden_field :description_left, :class => "proj_description_left_pos_val left_pos_val", :value => "" %>
+        <%= f.hidden_field :description_top, :class => "proj_description_top_pos_val top_pos_val", :value => "" %>
+      <% end%>      
+      <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect projDescriptionXYSize" }) do |f| %>
         <%= f.hidden_field :description_width, :class => "description_width_val width_size_val", :value => "" %>
         <%= f.hidden_field :description_height, :class => "description_height_val height_size_val", :value => "" %>
       <% end%>
-      <div id="project_description_wrap">
+      <div id="project_description_wrap" class="draggable">
+        <div class="resize-ne resize-dot">&nbsp;</div>
+        <div class="resize-se resize-dot">&nbsp;</div>
+        <div class="resize-nw resize-dot">&nbsp;</div>
+        <div class="resize-sw resize-dot">&nbsp;</div>
         <%= @project.description.html_safe %>
       </div>
     <% end %>
@@ -867,3 +873,29 @@
       <%= render (:partial => 'shared/panel_controller' ); %>
     <% end %>
   <% end %>
+  
+  <% if @user.background_repeat.present? && @user.background_repeat == "fullscreen" %>
+  
+    <% content_for(:before_body_tag) do %>
+      <img src="<%= @user.background_image %>" style="position: fixed; left: 0; top: 0; z-index: -1;" class="imgBGCustom" alt="imgBGCustom" />
+    <% end %>
+    
+    <% content_for(:before_body_tag) do %>
+      <%= javascript_tag do %>
+        var bgImgW = $('.imgBGCustom').width();
+        var bgImgH = $('.imgBGCustom').height();
+        if (bgImgW > bgImgH) {
+          $('.imgBGCustom').css({
+            width: "100%"
+          });
+        } else {
+          $('.imgBGCustom').css({
+            height: "100%"
+          });
+        }
+      <% end %>
+    <% end %>
+    
+  <% end %>
+
+  

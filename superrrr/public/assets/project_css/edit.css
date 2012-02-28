@@ -1,0 +1,50 @@
+#project_description_wrap.draggable {
+  padding: 6px;
+  cursor: move;
+}
+#project_description_wrap.draggable:hover {
+    border: 1px solid #03AEEB;
+    margin: 0;
+    padding: 5px;
+}
+.draggable {
+  padding: 1px;
+}
+.draggable:hover {
+    border: 1px solid #03AEEB;
+    margin: 0;
+    padding: 0;
+}
+
+.draggable a {
+  cursor: pointer;
+}
+.handle {
+  position: absolute;
+  cursor: move;
+  top: 0;
+  right: 0;
+  z-index: 100;
+}
+.resize-dot {
+  background: url(../img/blue-dot.png) no-repeat scroll 0 0 transparent;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+}
+.resize-ne {
+  right: -3px;
+  top: -3px;
+}
+.resize-nw {
+  left: -3px;
+  top: -3px;
+}
+.resize-se {
+  right: -3px;
+  bottom: -3px;
+}
+.resize-sw {
+  left: -3px;
+  bottom: -3px;
+}

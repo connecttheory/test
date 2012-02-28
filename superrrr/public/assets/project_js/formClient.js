@@ -1,15 +1,31 @@
 $(document).ready(function() {
+  
+  $('.resize-dot').hide();
+  $('.draggable').hover(function() {
+    var $curElem = $(this);
+    $curElem.find('.resize-dot').show();
+  }, function() {
+    var $curElem = $(this);
+    $curElem.find('.resize-dot').hide();
+  });
+  
+  //Radio button panel
   $('.backgroundR').change(function() {
+    submitFrmEnableImage(1);
     var $btnClicked = $(this);
     $('.form_imgselect.themeBgRepeat.img').find('.background_repeat_val').val($btnClicked.val());
+    $('.form_imgselect.themeBgRepeat.img').submit();
+    var $imgSrc = $('#img_bg_val').attr('src');
     if ($btnClicked.val() == "fullscreen") {
-      var $imgSrc = $('#img_bg_val').attr('src');
-      //$('body').append('<img src="'+ $imgSrc +'" />);
-      $.backstretch($imgSrc);
-      $('#backstretch').show();
+      $('body').append('<img src="'+ $imgSrc +'" style="position: fixed; left: 0; top: 0; height: 100%; z-index: -1;" class="imgBGCustom" alt="imgBGCustom" />');
+      //$.backstretch($imgSrc);
+      //$('#backstretch').show();
     } else {
-      $('#backstretch').hide();
-      $("body").css('backgroundRepeat', $btnClicked.val());
+      $('#backstretch, .imgBGCustom').hide();
+      $("body").css({
+        backgroundRepeat: $btnClicked.val(),
+        backgroundImage: "url("+ $imgSrc +")"
+      });
     }
   });
   // on submit upldate for description content
@@ -44,6 +60,7 @@ $(document).ready(function() {
   $('#project_description_wrap')
     .draggable({
       cursor: 'move',
+      handles: 'n, e, w, s',
       zIndex: 5,
       //scroll: false,
       // Find position where image is dropped.
@@ -57,8 +74,9 @@ $(document).ready(function() {
       }
     })
     .resizable({
+      handles: "ne, se, sw, nw",
       resize: function(event, ui) {
-        var topVal = parseInt($top);
+        var topVal = parseInt($(this).css('top').replace('px', ''));
         $('#project_description_wrap').css({
           position: 'fixed',
           top: topVal
@@ -72,22 +90,51 @@ $(document).ready(function() {
         $('.form_imgselect.projDescriptionXYSize').submit();
       }
     });
+    function getCurFontSize() {
+      $curFontSize = parseFloat($('#sidebarNavigation ul li a').css('fontSize').replace('px', ''));
+    }
+    getCurFontSize();
   $('#sidebarNavigation').draggable({
     cursor: 'move',
+    handles: 'n, e, w, s',
     zIndex: 10,
     scroll: false,
-    //containtment: $(document),
-    // Find position where image is dropped.
     stop: function(event, ui) {
-        var Stoppos = $(this).position();
+        //var Stoppos = $(this).position();
+        $left = $(this).css('left').replace('px', '');
         $top = $(this).css('top').replace('px', '');
-        $('.form_imgselect.projNavXYPos').find('.proj_nav_left_pos_val').val(Stoppos.left);
+        $('.form_imgselect.projNavXYPos').find('.proj_nav_left_pos_val').val(parseInt($left));
         $('.form_imgselect.projNavXYPos').find('.proj_nav_top_pos_val').val(parseInt($top));
         $('.form_imgselect.projNavXYPos').submit();
     }
-  });
+  }).resizable({
+      handles: "ne, se, sw, nw",
+      resize: function(event, ui) {
+        var topVal = parseInt($("#sidebarHeader").css('top').replace('px', ''));
+        var leftVal = parseInt($("#sidebarHeader").css('left').replace('px', ''));
+        $('#sidebarNavigation').css({
+          position: 'fixed',
+          top: topVal,
+          left: leftVal
+        });
+        $percentageW = (ui.size.width / ui.originalSize.width);
+        $percentageH = (ui.size.height / ui.originalSize.height);
+        $percentage = $percentageH;
+        $fontVal = Math.round($curFontSize * $percentage);
+        console.log( $curFontSize );
+        $('#sidebarNavigation ul li a').css({
+          fontSize: $fontVal
+        });
+      },
+      stop: function(event, ui) {
+        var height = ui.size.height;
+        var width = ui.size.width;
+        getCurFontSize();
+      }
+    });
   $( "#sidebarHeader" ).draggable({
     cursor: 'move',
+    handles: 'n, e, w, s',
     zIndex: 20,
     scroll: false,
     //containtment: $(document),
@@ -114,7 +161,24 @@ $(document).ready(function() {
         }
         
     }
-  });
+  }).resizable({
+      handles: "ne, se, sw, nw",
+      resize: function(event, ui) {
+        var topVal = parseInt($(this).css('top').replace('px', ''));
+        $('#sidebarHeader').css({
+          position: 'fixed',
+          top: topVal
+        });
+        $('#sidebarHeader').find('img').width(ui.size.width);
+      },
+      stop: function(event, ui) {
+        var height = ui.size.height;
+        var width = ui.size.width;
+        //$('.form_imgselect.projDescriptionXYSize').find('.width_size_val').val(width);
+        //$('.form_imgselect.projDescriptionXYSize').find('.height_size_val').val(height);
+        //$('.form_imgselect.projDescriptionXYSize').submit();
+      }
+    });
   
   //background images  
   $('#backgroundAttachment').change(function() {
@@ -144,6 +208,7 @@ $(document).ready(function() {
   });
   //background image click event
   $('#set_background_image').click(function() {
+		submitFrmEnableImage(1);
     var $bgval = $('#img_bg_val').attr('src');
     $('.form_imgselect.themeBgImg').find('.background_image_val').val($bgval);
     $('body').css({
@@ -153,6 +218,12 @@ $(document).ready(function() {
   });
   //background texture click event
   $('.backgroundTexture').click(function() {
+    submitFrmEnableImage(1);
+    
+    $('.form_imgselect.themeBgRepeat.img').find('.background_repeat_val').val("repeat");
+    $('.form_imgselect.themeBgRepeat.img').submit();
+    
+    $('.imgBGCustom').hide();
     var filename = $(this).attr('id');
     $('.form_imgselect.themeBgImg').find('.background_image_val').val("/assets/styles/patterns/" + filename);
     $('body').css({

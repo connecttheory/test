@@ -9,6 +9,12 @@ jQuery.fn.center = function () {
     return this;
 }
 
+function submitFrmEnableImage(x) {
+		var $frmEBI = $('.enable_background_image_val').parents('.form_imgselect');
+		$frmEBI.find('.enable_background_image_val').val(x);
+		$frmEBI.submit();
+}
+
 $(document).ready(function() { 
   
   $('#project_thumb_wrap').sortable({

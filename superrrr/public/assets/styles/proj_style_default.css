@@ -68,6 +68,7 @@ div#header {
 h1#porfolio-home {
   width: auto;
   float: none;
+  position: relative;
 }
 .image-holder-thumb {
   display: block;
