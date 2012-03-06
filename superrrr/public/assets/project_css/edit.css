@@ -1,3 +1,34 @@
+/* blue border for project thumbs*/
+#project_thumb_wrap_holder:hover {
+  border: 1px solid blue;
+}
+
+#images-container-sort {
+  width: 100%;
+}
+#images-container-sort li {
+  display: inline;
+  float: left  ;
+  margin: 0 10px 10px 0;
+  width: auto;
+}
+
+#project_thumb_wrap_sort_panel li {
+  margin: 0 10px 10px 0;
+  display: inline;
+  float: left;
+  width: auto;
+}
+.handleDrag {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  left: -28px;
+  top: -28px;
+  z-index: 20;
+  background: url(../img/move-32.png) no-repeat scroll 0 0 transparent;
+}
+
 #project_description_wrap.draggable {
   padding: 6px;
   cursor: move;

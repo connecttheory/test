@@ -66,6 +66,11 @@
     left: <%= @user.logo_left %>px;
     top: <%= @user.logo_top %>px;
   }
+  <% if @user.logo_width.present? %>
+  #sidebarHeader img {
+    width: <%= @user.logo_width %>px;
+  }
+  <% end %>
   <% if @user.font_color_footer.present? %>
   #footer_sm,
   #footer_sm a {
@@ -80,6 +85,19 @@
     left: <%= @user.proj_nav_left %>px;
     top: <%= @user.proj_nav_top %>px;
   }
+  <% end %>
+  
+  <% if @user.project_thumb_wrap_holder_X.present? || @user.project_thumb_holder_width.present? %>
+    #project_thumb_wrap_holder {
+      position: relative;
+      <% if @user.project_thumb_wrap_holder_X.present? && @user.project_thumb_wrap_holder_Y.present? %>
+      left: <%= @user.project_thumb_wrap_holder_X %>px;
+      top: <%= @user.project_thumb_wrap_holder_Y %>px;
+      <% end %>
+      <% if @user.project_thumb_holder_width.present? %>
+      width: <%= @user.project_thumb_holder_width %>px;
+      <% end %>
+    }
   <% end %>
   
   <% if @sublist %>
@@ -103,5 +121,11 @@
     height:  <%= @user.description_height %>px;
     <% end %>
   }
+    <% if @user.image_container_left.present? %>
+      #images-container {
+        position: relative;
+        left: <%=  @user.image_container_left%>px;
+      }
+    <% end %>
   <% end %>
 </style>

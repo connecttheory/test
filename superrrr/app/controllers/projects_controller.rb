@@ -98,13 +98,14 @@ class ProjectsController < ApplicationController
   
   def sublist
   	@user = User.find_by_subdomain_name(request.subdomain)
-  	@projects = @user.projects.order("projects.created_at ASC").visible
+  	@projects = @user.projects.order("projects.position").visible
   	
   	if @projects.blank?
   	  redirect_to( '/404.html')
   	else
       @project = @projects.find(params[:id])
       @project_images = @project.images.order("images.position ASC")
+      @project_videos = @project.videos.order("videos.created_at DESC")
     end
   end
   

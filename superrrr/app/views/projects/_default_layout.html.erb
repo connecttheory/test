@@ -1,18 +1,59 @@
   <div class="project list">
     <% if @user.id.to_i == session[:user_id].to_i %>
       <span class="edit project"><%= link_to("Edit Projects", "http://ngtv2.info/mine")%></span>
+      
+  	  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect project_thumb_holder_left" }) do |f| %>
+        <%= f.hidden_field :project_thumb_wrap_holder_X, :class => "project_thumb_wrap_holder_X_val input_form_val", :value => "" %>
+        <%= f.hidden_field :project_thumb_wrap_holder_Y, :class => "project_thumb_wrap_holder_Y_val input_form_val", :value => "" %>
+      <% end %>
+      
+  	  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect project_thumb_holder_width" }) do |f| %>
+        <%= f.hidden_field :project_thumb_holder_width, :class => "project_thumb_holder_width_val input_form_val", :value => "" %>
+      <% end %>
     <% end %>
     
-    
-    
-  <br style="clear:both;" />
-  <ul id="project_thumb_wrap" data-update-url="<%= sort_projects_url%>" >
-    <% @projects.each do |project| %>
-    	<li id="project_<%= project.id %>" class="project-thumb">
-    		<%= link_to image_tag(Project.image_thumbnail(project)), Project.subdomain_url(@user.subdomain_name, "/project/?id=#{project.id}"), :class => 'thumbnail' %>
-    		<p style="text-align: center;"><%= project.title %> </p>
-    	</li>
-    <% end %>
     <br style="clear:both;" />
-  </ul>
+    
+    <div id="project_thumb_wrap_holder" class="draggable">
+      <ul id="project_thumb_wrap" data-update-url="<%= sort_projects_url%>" >
+        <% @projects.each do |project| %>
+        	<li id="project_<%= project.id %>" class="project-thumb">
+        		<%= link_to image_tag(Project.image_thumbnail(project)), Project.subdomain_url(@user.subdomain_name, "/project/?id=#{project.id}"), :class => 'thumbnail' %>
+        		<p style="text-align: center;"><%= project.title %> </p>
+        	</li>
+        <% end %>
+        <br style="clear:both;" />
+      </ul>
+      <div class="handleDrag">&nbsp;</div>
+      
+      <div class="resize-ne resize-dot">&nbsp;</div>
+      <div class="resize-se resize-dot">&nbsp;</div>
+      <div class="resize-nw resize-dot">&nbsp;</div>
+      <div class="resize-sw resize-dot">&nbsp;</div>
+    </div>
+    
   </div>
+  
+    <!-- sortable thumb panel for projects -->
+    <% if @user.id.to_i == session[:user_id].to_i %>
+    <div id="dialogSort" title="Sort Items">        
+        <ul id="project_thumb_wrap_sort_panel" data-update-url="<%= sort_projects_url%>" >
+          <% @projects.each do |project| %>
+          	<li id="project_<%= project.id %>" class="project-thumb">
+          		<%= image_tag(Project.image_thumbnail(project), :width => 80, :class => 'thumbnail') %>
+          	</li>
+          <% end %>
+          <br style="clear:both;" />
+        </ul>
+    </div>
+    <% end %>
+    <!-- END sortable thumb panel for projects -->
+    
+    <script type="text/javascript">
+      $('#project_thumb_wrap_sort_panel').sortable({
+        update: function() {
+          //alert('update');
+        	$.post($(this).data('update-url'), $(this).sortable('serialize'))
+        } 
+      });
+    </script>

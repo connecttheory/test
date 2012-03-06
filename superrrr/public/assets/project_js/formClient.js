@@ -1,12 +1,92 @@
 $(document).ready(function() {
+  // form description panel bground transparent
+  if( $('#desc_trans_bg_color').length ) {
+    $('#desc_trans_bg_color').click(function() {
+      $('.bg_color_description_val').val('none');
+      $('.bg_color_description_val').parents('.form_imgselect').submit();
+      $('#project_description_wrap').css({
+        background: 'none'
+      });
+    });
+  }
+  //iframe z-index fix
+  $("iframe").each(function(){
+      var ifr_source = $(this).attr('src');
+      var wmode = "wmode=transparent";
+      if(ifr_source.indexOf('?') != -1) {
+          var getQString = ifr_source.split('?');
+          var oldString = getQString[1];
+          var newString = getQString[0];
+          $(this).attr('src',newString+'?'+wmode+'&'+oldString);
+      }
+      else $(this).attr('src',ifr_source+'?'+wmode);
+  });
   
+  //sort function dialog
+	    $('#images-container-sort').sortable({
+	      update: function() {
+	      	$.post($(this).data('update-url'), $(this).sortable('serialize'))
+	      }
+	    });
+  //dialog sort
+  $( "#dialogSort" ).hide();
+  $.fx.speeds._default = 250;
+	$("#dialogSort").dialog({
+		autoOpen: false,
+		show: "fade",
+		hide: "fade",
+		zIndex: 550,
+		width: 400,
+		height: 400,
+		resizable: false,
+		modal: true,
+		//maxWidth: 300,
+		position: ['center','center']
+		//open: function(event, ui) {
+		//  $( "#controlPanelOpen" ).fadeOut('fast');
+		//  $( "#dialog" ).parent().css({position:"fixed"});
+		//},
+		//close: function(event, ui) { 
+		//  $( "#controlPanelOpen" ).fadeIn();
+		//}
+	});
+	$(".sort.accordionH3").click(function() {
+	  $("#dialogSort").dialog('open');
+  });
+  
+  
+  //drag project thumbs
+  if ( $('#project_thumb_wrap_holder').length ) {
+    $('#project_thumb_wrap_holder').draggable({
+      handle: ".handleDrag",
+      //axis: 'x',
+      stop: function (event, ui) {
+        $left = $('#project_thumb_wrap_holder').css('left').replace('px', '');
+        $top = $('#project_thumb_wrap_holder').css('top').replace('px', '');
+        $('.project_thumb_wrap_holder_X_val').val($left);
+        $('.project_thumb_wrap_holder_Y_val').val($top);
+        $('.project_thumb_wrap_holder_X_val').parents('.form_imgselect').submit();
+      }
+    }).resizable({
+      handles: "ne, se, sw, nw, n, e, w, s",
+      stop: function(event, ui) {
+        $width = ui.size.width;
+        $('.project_thumb_holder_width_val').val($width);
+        $('.project_thumb_holder_width_val').parents('.form_imgselect').submit();
+      }
+    });
+  }
+  //hover dots blue
   $('.resize-dot').hide();
+  $('.handleDrag').hide();
   $('.draggable').hover(function() {
     var $curElem = $(this);
     $curElem.find('.resize-dot').show();
+    $curElem.find('.handleDrag').show();
   }, function() {
     var $curElem = $(this);
     $curElem.find('.resize-dot').hide();
+    $curElem.find('.handleDrag').hide();
   });
   
   //Radio button panel
@@ -17,9 +97,9 @@ $(document).ready(function() {
     $('.form_imgselect.themeBgRepeat.img').submit();
     var $imgSrc = $('#img_bg_val').attr('src');
     if ($btnClicked.val() == "fullscreen") {
-      $('body').append('<img src="'+ $imgSrc +'" style="position: fixed; left: 0; top: 0; height: 100%; z-index: -1;" class="imgBGCustom" alt="imgBGCustom" />');
-      //$.backstretch($imgSrc);
-      //$('#backstretch').show();
+      //$('body').append('<img src="'+ $imgSrc +'" style="position: fixed; left: 0; top: 0; height: 100%; z-index: -1;" class="imgBGCustom" alt="imgBGCustom" />');
+      $.backstretch($imgSrc);
+      $('#backstretch').show();
     } else {
       $('#backstretch, .imgBGCustom').hide();
       $("body").css({
@@ -55,31 +135,52 @@ $(document).ready(function() {
     $('.form_imgselect.logoXYPos').submit();
   });
   
-
+    function getCurTopVal(selector) {
+      if ($(selector).length) {
+        return parseFloat( $(selector).css('top').replace('px', '') );
+      }
+    }
+    $curTopValPD = getCurTopVal('#project_description_wrap');
   //draggables //resize able
+  $('#images-container').draggable({
+    axis: 'x',
+    cursor: 'move',
+    zIndex: 5,
+    stop: function (envent, ui) {
+      $left = $(this).css('left').replace('px', '');
+      $('.form_imgselect.imagesContainerXYPos').find('.image_container_left_val').val(parseInt($left));
+      $('.form_imgselect.imagesContainerXYPos').submit();
+    }
+  });
   $('#project_description_wrap')
     .draggable({
       cursor: 'move',
       handles: 'n, e, w, s',
-      zIndex: 5,
+      zIndex: 15,
       //scroll: false,
       // Find position where image is dropped.
       stop: function(event, ui) {
+          $('#project_description_wrap').css({ zIndex: 15 });
           //var Stoppos = $(this).position();
           $top = $(this).css('top').replace('px', '');
           $left = $(this).css('left').replace('px', '');
+          // refresh top val
+          $curTopValPD = getCurTopVal('#project_description_wrap');
           $('.form_imgselect.projDescriptionXYPos').find('.left_pos_val').val(parseInt($left));
           $('.form_imgselect.projDescriptionXYPos').find('.top_pos_val').val(parseInt($top));
           $('.form_imgselect.projDescriptionXYPos').submit();
+          
       }
     })
     .resizable({
       handles: "ne, se, sw, nw",
+      zIndex: 15,
       resize: function(event, ui) {
-        var topVal = parseInt($(this).css('top').replace('px', ''));
+        //var topVal = parseInt( $(this).css('top').replace('px', '') );
         $('#project_description_wrap').css({
           position: 'fixed',
-          top: topVal
+          // use top val
+          top: $curTopValPD + 'px'
         });
       },
       stop: function(event, ui) {
@@ -88,21 +189,28 @@ $(document).ready(function() {
         $('.form_imgselect.projDescriptionXYSize').find('.width_size_val').val(width);
         $('.form_imgselect.projDescriptionXYSize').find('.height_size_val').val(height);
         $('.form_imgselect.projDescriptionXYSize').submit();
+        // refresh top val
+        $curTopValPD = getCurTopVal('#project_description_wrap');
       }
     });
     function getCurFontSize() {
-      $curFontSize = parseFloat($('#sidebarNavigation ul li a').css('fontSize').replace('px', ''));
+      if ( $('#sidebarNavigation ul li a').length ) {
+        $curFontSize = parseFloat( $('#sidebarNavigation ul li a').css('fontSize').replace('px', '') );
+      }
     }
     getCurFontSize();
+    $curTopValSN = getCurTopVal('#sidebarNavigation');
   $('#sidebarNavigation').draggable({
     cursor: 'move',
     handles: 'n, e, w, s',
-    zIndex: 10,
+    zIndex: 20,
     scroll: false,
     stop: function(event, ui) {
         //var Stoppos = $(this).position();
         $left = $(this).css('left').replace('px', '');
         $top = $(this).css('top').replace('px', '');
+        // refresh top val of nav
+        $curTopValSN = getCurTopVal('#sidebarNavigation');
         $('.form_imgselect.projNavXYPos').find('.proj_nav_left_pos_val').val(parseInt($left));
         $('.form_imgselect.projNavXYPos').find('.proj_nav_top_pos_val').val(parseInt($top));
         $('.form_imgselect.projNavXYPos').submit();
@@ -110,12 +218,10 @@ $(document).ready(function() {
   }).resizable({
       handles: "ne, se, sw, nw",
       resize: function(event, ui) {
-        var topVal = parseInt($("#sidebarHeader").css('top').replace('px', ''));
-        var leftVal = parseInt($("#sidebarHeader").css('left').replace('px', ''));
         $('#sidebarNavigation').css({
           position: 'fixed',
-          top: topVal,
-          left: leftVal
+          // use top val
+          top: $curTopValSN + "px"
         });
         $percentageW = (ui.size.width / ui.originalSize.width);
         $percentageH = (ui.size.height / ui.originalSize.height);
@@ -130,17 +236,23 @@ $(document).ready(function() {
         var height = ui.size.height;
         var width = ui.size.width;
         getCurFontSize();
+        // refresh top val
+        $curTopValSN = getCurTopVal('#sidebarNavigation');
+      $('.form_imgselect.font_size_frm').find('.font_size_val').val($fontVal);
+      $('.form_imgselect.font_size_frm').submit();
       }
     });
+  $curTopValSH = getCurTopVal('#sidebarHeader');
   $( "#sidebarHeader" ).draggable({
     cursor: 'move',
     handles: 'n, e, w, s',
-    zIndex: 20,
+    zIndex: 10,
     scroll: false,
     //containtment: $(document),
     // Find position where image is dropped.
     stop: function(event, ui) {
         // Show dropped position.
+        $curTopValSH = getCurTopVal('#sidebarHeader');
         $top = $(this).css('top').replace('px', '');
         var Stoppos = $(this).position();
         $('.form_imgselect.logoXYPos').find('.logo_left_pos_val').val(Stoppos.left);
@@ -164,19 +276,19 @@ $(document).ready(function() {
   }).resizable({
       handles: "ne, se, sw, nw",
       resize: function(event, ui) {
-        var topVal = parseInt($(this).css('top').replace('px', ''));
         $('#sidebarHeader').css({
           position: 'fixed',
-          top: topVal
+          top: $curTopValSH + "px"
         });
         $('#sidebarHeader').find('img').width(ui.size.width);
       },
       stop: function(event, ui) {
         var height = ui.size.height;
         var width = ui.size.width;
-        //$('.form_imgselect.projDescriptionXYSize').find('.width_size_val').val(width);
-        //$('.form_imgselect.projDescriptionXYSize').find('.height_size_val').val(height);
-        //$('.form_imgselect.projDescriptionXYSize').submit();
+        $curTopValSH = getCurTopVal('#sidebarHeader');
+        
+        $('.form_imgselect.logoWidth').find('.logo_width_val').val(ui.size.width);
+        $('.form_imgselect.logoWidth').submit();
       }
     });
   
@@ -216,9 +328,20 @@ $(document).ready(function() {
     });
     $('.form_imgselect.themeBgImg').submit();
   });
+  //background color click event
+  $('#colorSelector.cpicker').click(function() {
+    //bug fix for backstretch
+    $('#backstretch, .imgBGCustom').hide();
+    submitFrmEnableImage(1);
+    $('body').css({
+      backgroundImage: 'none'
+    });
+  });
+  
   //background texture click event
   $('.backgroundTexture').click(function() {
-    submitFrmEnableImage(1);
+    //bug fix for backstretch
+    $('#backstretch, .imgBGCustom').hide();
     
     $('.form_imgselect.themeBgRepeat.img').find('.background_repeat_val').val("repeat");
     $('.form_imgselect.themeBgRepeat.img').submit();

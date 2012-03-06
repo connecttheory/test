@@ -98,7 +98,8 @@
 			onChange: function (hsb, hex, rgb) {
 				$('#colorSelector div').css('backgroundColor', '#' + hex);
 				$("#colorSelector").parents('.form_imgselect').find('.project_bg_val').val(hex);
-				$('.imgBGCustom').hide();
+				//$('.imgBGCustom').hide();
+        // goto $('#colorSelector.cpicker').click @ client.js
 				$('body').css({
 				  backgroundColor: '#' + hex,
 				  backgroundImage: 'none'

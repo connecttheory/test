@@ -279,32 +279,19 @@
 
 
 
-<% #=================================================== SHOW CONTROLLER PANEL ============================================= %>
-<% if @user.id.to_i == session[:user_id].to_i %>
-  <% content_for(:before_body_tag) do %>
-    <%= render (:partial => 'shared/panel_controller' ); %>
-  <% end %>
-<% end %>
-
-  <% if @user.background_repeat.present? && @user.background_repeat == "fullscreen" %>
-  
+  <% #=================================================== SHOW CONTROLLER PANEL ============================================= %>
+  <% if @user.id.to_i == session[:user_id].to_i %>
     <% content_for(:before_body_tag) do %>
-      <img src="<%= @user.background_image %>" style="position: fixed; left: 0; top: 0; z-index: -1;" class="imgBGCustom" alt="imgBGCustom" />
+      <%= render (:partial => 'shared/panel_controller' ); %>
     <% end %>
+  <% end %>
+
+  <% #=================================================== SHOW BG STRECH ============================================= %>
+  <% if @user.background_repeat.present? && @user.background_repeat == "fullscreen" && @user.background_image.present? && @user.enable_background_image? %>
     
     <% content_for(:before_body_tag) do %>
       <%= javascript_tag do %>
-        var bgImgW = $('.imgBGCustom').width();
-        var bgImgH = $('.imgBGCustom').height();
-        if (bgImgW > bgImgH) {
-          $('.imgBGCustom').css({
-            width: "100%"
-          });
-        } else {
-          $('.imgBGCustom').css({
-            height: "100%"
-          });
-        }
+        $.backstretch('<%= @user.background_image %>');
       <% end %>
     <% end %>
     

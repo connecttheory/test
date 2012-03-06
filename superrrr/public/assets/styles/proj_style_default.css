@@ -1,3 +1,8 @@
+/*project list thumb style*/
+#project_thumb_wrap_holder {
+  position: relative;
+}
+
 /************* Description wrap ***********************/
 #project_description_wrap {
   display: block;
@@ -6,8 +11,8 @@
   top: 10px;
   padding: 5px;
   margin: 0;
-  background: #ffffff;
   width: 250px;
+  z-index: 5;
 }
 #project_description_wrap .header {
   display: block;
@@ -16,14 +21,15 @@
 }
 /************* sidebar ***********************/
 #container {
-  width: 100%;
+  width: 960px;
   position: relative;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
 }
 #images-container {
   /*width: 780px;*/
-  margin: 52px 0 0 266px;
+  /*margin: 52px 0 0 266px;*/
+  margin: 0 auto;
   width: 850px;
 }
 div#header {
@@ -35,7 +41,7 @@ div#header {
   left: 32px;
   top: 52px;
   background: none repeat scroll 0 0 transparent;
-  z-index: 10;
+  z-index: 15;
 }
 #sidebarNavigation {
   position: fixed;
@@ -129,7 +135,7 @@ h1#porfolio-home {
 }
 .project {
   width: 100%;
-  margin: 52px 0 0 266px;
+  margin: 0;
   padding: 0;
 }
 body {

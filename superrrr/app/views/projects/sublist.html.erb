@@ -276,6 +276,22 @@
 
 
   <% if @user.layout_name == 'Default' # only show this area if layout 1/default isset %>
+  
+    <!-- sortable thumb panel for images -->
+    <% if @user.id.to_i == session[:user_id].to_i %>
+    <div id="dialogSort" title="Sort Items">        
+        <ul id="images-container-sort" data-update-url="<%= sort_images_url %>" >
+          <% @project_images.each do |image| %>
+          	<li id="image_<%= image.id %>" class="image-block-small">
+          	  <%= image_tag( image.carimage_url(:thumb).to_s, :width => 80, :class => 'thumbnail') %>
+          	</li>
+          <% end %>
+          <br style="clear:both;" />
+        </ul>
+    </div>
+    <% end %>
+    <!-- END sortable thumb panel for images -->
+    
     <% if @project.description.present? %>
       <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect projDescriptionXYPos" }) do |f| %>
         <%= f.hidden_field :description_left, :class => "proj_description_left_pos_val left_pos_val", :value => "" %>
@@ -286,10 +302,12 @@
         <%= f.hidden_field :description_height, :class => "description_height_val height_size_val", :value => "" %>
       <% end%>
       <div id="project_description_wrap" class="draggable">
-        <div class="resize-ne resize-dot">&nbsp;</div>
-        <div class="resize-se resize-dot">&nbsp;</div>
-        <div class="resize-nw resize-dot">&nbsp;</div>
-        <div class="resize-sw resize-dot">&nbsp;</div>
+        <% if @user.id.to_i == session[:user_id].to_i %>
+          <div class="resize-ne resize-dot">&nbsp;</div>
+          <div class="resize-se resize-dot">&nbsp;</div>
+          <div class="resize-nw resize-dot">&nbsp;</div>
+          <div class="resize-sw resize-dot">&nbsp;</div>
+        <% end %>
         <%= @project.description.html_safe %>
       </div>
     <% end %>
@@ -348,26 +366,36 @@
 
 
 
-    <div id="images-container">
-
-    	<% @project_images.each do |image| %>
-
-    	  <div class="image-block">
-
-    	  	<div class="image-holder-thumb">
-
-    	  		<%= image_tag( image.carimage_url.to_s ) %>
-
-    	  	</div>
-
-    	  	<%= image.caption %>
-
-    	  </div>
-
-    	<% end %>
-
+    <div id="images-container" class="draggable">
+      <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect imagesContainerXYPos" }) do |f| %>
+        <%= f.hidden_field :image_container_left, :class => "image_container_left_val width_size_val", :value => "" %>
+      <% end%>
+        
+      <% if @project.project_type == "video" %>
+        <% @project_videos.each do |video| %>
+        <div class="image-block video">
+          <%= sanitize(video.video_embed, :tags => %W(iframe OBJECT PARAM EMBED ), :attributes => %W(width height src NAME TYPE ShowControls ShowStatusBar ShowDisplay autostart id class style)) %>
+        </div>
+        <% end %>
+        
+    	<% else %>
+    	
+      	<% @project_images.each do |image| %>
+      	  <div class="image-block">
+      	  	<div class="image-holder-thumb">
+      	  		<%= image_tag( image.carimage_url.to_s ) %>
+      	  	</div>
+      	  	<%= image.caption %>
+      	  </div>
+      	<% end %>
+        
+    	<% end %> 
+    	
     	<br style="clear: both;" />
-
+      <div class="resize-ne resize-dot">&nbsp;</div>
+      <div class="resize-se resize-dot">&nbsp;</div>
+      <div class="resize-nw resize-dot">&nbsp;</div>
+      <div class="resize-sw resize-dot">&nbsp;</div>
     </div>
 
     
@@ -874,28 +902,14 @@
     <% end %>
   <% end %>
   
-  <% if @user.background_repeat.present? && @user.background_repeat == "fullscreen" %>
-  
-    <% content_for(:before_body_tag) do %>
-      <img src="<%= @user.background_image %>" style="position: fixed; left: 0; top: 0; z-index: -1;" class="imgBGCustom" alt="imgBGCustom" />
-    <% end %>
+  <% #=================================================== SHOW BG STRECH ============================================= %>
+  <% if @user.background_repeat.present? && @user.background_repeat == "fullscreen" && @user.background_image.present? && @user.enable_background_image? %>
     
     <% content_for(:before_body_tag) do %>
       <%= javascript_tag do %>
-        var bgImgW = $('.imgBGCustom').width();
-        var bgImgH = $('.imgBGCustom').height();
-        if (bgImgW > bgImgH) {
-          $('.imgBGCustom').css({
-            width: "100%"
-          });
-        } else {
-          $('.imgBGCustom').css({
-            height: "100%"
-          });
-        }
+        $.backstretch('<%= @user.background_image %>');
       <% end %>
     <% end %>
     
   <% end %>
-
   

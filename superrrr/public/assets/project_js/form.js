@@ -20,7 +20,9 @@ $(document).ready(function() {
   $('#project_thumb_wrap').sortable({
     update: function() {
       //alert('update');
-    	$.post($(this).data('update-url'), $(this).sortable('serialize'))
+      $('#ajaxLoad').hide();
+      $('#ajaxLoad').show();
+    	$.post($(this).data('update-url'), $(this).sortable('serialize'), function () { $('#ajaxLoad').hide() })
     }
   });
   
@@ -92,9 +94,12 @@ $(document).ready(function() {
 	});
 
 	// end layout form setup
-	
+		//var $loader = $('');
+		//$('body').append($loader);
 	$('.form_imgselect').submit(function() {
-		$.post($(this).attr("action"), $(this).serialize(), null, "script");		
+		$.post($(this).attr("action"), $(this).serialize(), null, "script");
+		$("#ajaxLoad").show();
+		setTimeout ( "$('#ajaxLoad').hide()", 1000 );
 		return false;
 	});
 	

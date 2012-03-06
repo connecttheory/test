@@ -587,7 +587,7 @@
       	    <% else %>
       	      <% font_size = 12 %>
       	    <% end %>
-            <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+            <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect font_size_frm" }) do |f| %>
               <label>Font Size</label>
               <div id="slider"></div>
               <span class="fontSize"><%= font_size %></span>px
@@ -624,6 +624,7 @@
       	    <div id="colorSelectorBgDescription" class="cpicker"><div style="background-color: #<%= description_bg_color %>"></div></div>
       	    <%= f.hidden_field :description_bg_color, :class => "bg_color_description_val", :value => "" %>
           <% end %>
+          <button id="desc_trans_bg_color" class="transparent_bg_color">Transparent</button>
         </div>
         
         <div class="panel-menu options">
@@ -685,6 +686,7 @@
       <% end %>
                
     </div> <!-- accordion panel end -->
+    <a href="#sortPanel" title="sort panel" name="" class="sort accordionH3">Sort</a>
   </div> <!-- #accordion -->
     
 </div>  <!-- #dialog -->

@@ -1,3 +1,9 @@
+<% if @project.project_type == "video"%>
+  <%= render(:partial => 'template_video_show' ); %>
+<% else %>
+
+
+
 <% @page_title = "View Project: #{@project.title}" %>
 <% content_for(:head) do %>
 	<%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" %>
@@ -8,13 +14,7 @@
 	<%= stylesheet_link_tag "proj_style" %>
 	<% #sortable images %>
 	<script type="text/javascript">
-	  $(document).ready(function() {
-	    $('#images-container').sortable({
-	      update: function() {
-	      	$.post($(this).data('update-url'), $(this).sortable('serialize'))
-	      }
-	    });
-	  });
+
     </script>
     
     
@@ -66,7 +66,7 @@
 	</div>
 	
   <br />
-  <!-- embed video -->
+  <!-- embed video 
   <%= form_for(:video, :url => {:controller => 'videos', :action => 'create', :id => @project.id, :user_id => session[:user_id] }) do |f| %>
     
     Enter the embed code here: <br />
@@ -79,7 +79,7 @@
   <% @project_videos.each do |video| %>
     <%= sanitize(video.video_embed, :tags => %W(iframe OBJECT PARAM EMBED ), :attributes => %W(width height src NAME TYPE ShowControls ShowStatusBar ShowDisplay autostart id class style)) %>
   <% end %>
-  
+  -->
   
   <ul id="images-container" data-update-url="<%= sort_images_url %>">
   	<% @project_images.each do |image| %>
@@ -266,3 +266,5 @@
     });
   </script>
 <% end %>
+
+<% end # else video %>
